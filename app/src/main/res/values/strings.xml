@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Kickly</string>
+
+    <string name="profile">Player profile</string>
+    <string name="manage">Manage</string>
+    <string name="watching">Watching</string>
+    <string name="example_profile_name">John Doe</string>
+
+</resources>

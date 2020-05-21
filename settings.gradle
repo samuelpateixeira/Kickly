@@ -1,0 +1,2 @@
+rootProject.name='Kickly'
+include ':app'

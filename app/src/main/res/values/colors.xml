@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#00B50D</color>
+    <color name="colorAccent">#00B50D</color>
+    <color name="colorPrimaryDark">#008400</color>
+    <color name="colorPrimaryLight">#5CE84B</color>
+    <color name="error">#B50000</color>
+    <color name="surface">#222222</color>
+    <color name="background">#111111</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="onError">#FFFFFF</color>
+    <color name="onSurface">#FFFFFF</color>
+    <color name="onBackground">#FFFFFF</color>
+    <color name="onBackground2">#999999 </color>
+    <color name="tie">#C6CD00</color>
+
+    <!--    <color name="colorAccent">#00B50D</color>   -->
+
+</resources>
