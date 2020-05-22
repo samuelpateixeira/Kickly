@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainMenu"
+    android:background="@color/background"
+    >
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/example_profile"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/example_profile_name"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/onBackground"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="16dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Body 2"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/onBackground2"
+        android:textSize="14sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/onBackground2"
+        />
+
+    <ListView
+        android:id="@+id/lvButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#ffffff00"
+        />
+
+</LinearLayout>
