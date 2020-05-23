@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile">Perfil de jogador</string>
+    <string name="manage">Gerir</string>
+    <string name="watching">A assistir</string>
+    <string name="example_profile_name">João Maria</string>
+    <string name="previous_match">jogo anterior</string>
+    <string name="next_match">jogo seguinte</string>
+    <string name="daysLeft">em %1$d dias</string>
+    <string name="hoursLeft">em %1$d horas</string>
+    <string name="minutesLeft">em %1$d minutos</string>
+    <string name="matches">jogos</string>
+    <string name="now">agora</string>
+    <string name="teams">equipas</string>
+    <string name="group_stage">fase de grupos</string>
+    <string name="knockout_stage">fase eliminatória</string>
+</resources>

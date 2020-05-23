@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kickly</string>
+    <string name="app_name" translatable="false">Kickly</string>
 
     <string name="profile">Player profile</string>
     <string name="manage">Manage</string>
@@ -10,8 +10,10 @@
     <string name="daysLeft">in %1$d days</string>
     <string name="hoursLeft">in %1$d hours</string>
     <string name="minutesLeft">in %1$d minutes</string>
+    <string name="matches">matches</string>
     <string name="now">now</string>
-
-
+    <string name="teams">teams</string>
+    <string name="group_stage">group stage</string>
+    <string name="knockout_stage">knockout stage</string>
 
 </resources>

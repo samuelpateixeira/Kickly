@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.WatchingActivities.TournamentActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:layout_margin="32dp"
+        >
+
+        <ImageView
+            android:id="@+id/imgTournamentIcon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/icon_user_circle_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
+
+            <TextView
+                android:id="@+id/tvTournamentName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tournament name"
+                android:textColor="@color/onSurface"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif-medium"
+                />
+
+            <TextView
+                android:id="@+id/tvCurrentStage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="current stage"
+                android:textColor="@color/onSurface"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/onBackground2"
+        />
+
+    <ListView
+        android:id="@+id/lvTournament"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

@@ -3,7 +3,7 @@ package com.example.kickly
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class Profile : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

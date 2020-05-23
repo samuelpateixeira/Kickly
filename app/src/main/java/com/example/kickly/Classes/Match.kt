@@ -5,6 +5,7 @@ import java.util.*
 
 class Match(team1: Team, team2 : Team, dateTime: LocalDateTime) {
 
+    //region properties
     var team1 : Team? = team1
     var team2 : Team? = team2
     var dateTime : LocalDateTime? = dateTime
@@ -12,20 +13,26 @@ class Match(team1: Team, team2 : Team, dateTime: LocalDateTime) {
     private var _team1Score : Int? = null
     var team1Score : Int? = null
         get() {
+            // throw exception if the game isn't finished
             if (isFinished) {return _team1Score}
             else throw(Exception("game isn't finished. It's expected to happen on " + dateTime.toString()))
         }
     private var _team2Score : Int? = null
     var team2Score : Int? = null
         get() {
+            // throw exception if the game isn't finished
             if (isFinished) {return _team2Score}
             else throw(Exception("game isn't finished. It's expected to happen on " + dateTime.toString()))
         }
+    //endregion
 
+    // check if the game is a tie
     fun isTie() : Boolean? {
         var tie : Boolean? = null
 
+        // if game isn't finished, return null
         if (!isFinished) { tie = null }
+        // else, return tie or not tie
         else tie = _team1Score == _team2Score
 
         return tie
@@ -34,28 +41,32 @@ class Match(team1: Team, team2 : Team, dateTime: LocalDateTime) {
     // to know which team is the winner
     fun winner() : Team? {
         var winner : Team? = null
-        if (isFinished) {
-            //tie
-            if (team1Score == team2Score) { throw(Exception("It's a tie. There's no winner.")) }
-            //team 1
-            else if (team1Score!! > team2Score!!) { winner = team1!! }
-            //team 2
-            else { winner = team2!! }
-        }
+
+        //if the game isn't finished
+        if (!isFinished) { throw(Exception("game isn't finished. It's expected to happen on " + dateTime.toString())) }
+        //tie
+        else if (team1Score == team2Score) { throw(Exception("It's a tie. There's no winner. You should have used isTie() to know if it's a tie")) }
+        //team 1
+        else if (team1Score!! > team2Score!!) { winner = team1!! }
+        //team 2
+        else { winner = team2!! }
+
         return winner
     }
 
-    // to know which team is the winner
+    // to know which team is the looser
     fun looser() : Team? {
         var looser : Team? = null
-        if (isFinished) {
-            //tie
-            if (team1Score == team2Score) { throw(Exception("It's a tie. There's no winner.")) }
-            //team 1
-            else if (team1Score!! < team2Score!!) { looser = team1!! }
-            //team 2
-            else { looser = team2!! }
-        }
+
+        //if the game isn't finished
+        if (isFinished) { throw(Exception("game isn't finished. It's expected to happen on " + dateTime.toString())) }
+        //tie
+        else if (team1Score == team2Score) { throw(Exception("It's a tie. There's no winner.")) }
+        //team 1
+        else if (team1Score!! < team2Score!!) { looser = team1!! }
+        //team 2
+        else { looser = team2!! }
+
         return looser
     }
 
