@@ -6,4 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".Activities.WatchingActivities.TournamentActivities.TeamsActivity">
 
+
+    <ListView
+        android:id="@+id/lvGroups"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
