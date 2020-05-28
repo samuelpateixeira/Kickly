@@ -59,8 +59,8 @@ class KicklyTools {
 
         }
 
-
     }
+
     class Adapters {
 
         class TournamentSummary(context: Context, objects : ArrayList<Tournament>) : ArrayAdapter<Tournament>(context, R.layout.tournament_summary, objects) {
@@ -166,10 +166,10 @@ class KicklyTools {
 
             }
 
-
         }
 
     }
+
     class Generate {
 
         companion object {
@@ -245,6 +245,7 @@ class KicklyTools {
 
                 // finish the previous match
                 tournamentList[0].previousMatch!!.finish(1, 3)
+                tournamentList[0].registeredTeams = teams(context)
 
                 //endregion
 
@@ -286,8 +287,92 @@ class KicklyTools {
                 return tournamentList
             }
 
-        }
+            fun teams(context: Context) : ArrayList<Team>
+            {
+                var teams = ArrayList<Team>()
 
+                //region adding teams
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.gabon),"Gabon"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.georgia),"Georgia"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.gambia),"Gambia"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.germany),"Germany"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.ghana),"Ghana"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.gibraltar),"Gibraltar"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.greece),"Greece"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.greenland),"Greenland"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.grenada),"Grenada"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.guam),"Guam"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.guatemala),"Guatemala"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.guernsey),"Guernsey"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.guinea),"Guinea"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.guyana),"Guyana"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.haiti),"Haiti"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.hawaii),"Hawaii"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.honduras),"Honduras"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.hungary),"Hungary"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.iceland),"Iceland"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.india),"India"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.indonesia),"Indonesia"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.iran),"Iran"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.iraq),"Iraq"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.ireland),"Ireland"))
+
+                teams.add(Team(Icon.createWithResource(
+                    context, R.drawable.israel),"Israel"))
+
+                //endregion
+
+                return teams
+            }
+        }
 
     }
 }

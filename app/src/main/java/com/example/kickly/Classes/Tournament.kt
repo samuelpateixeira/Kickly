@@ -11,6 +11,9 @@ class Tournament(icon : Icon, name: String, currentStage : Stage, previousMatch 
     var currentStage : Stage? = currentStage
     var previousMatch : Match? = previousMatch
     var nextMatch : Match? = nextMatch
+    var registeredTeams = ArrayList<Team>()
+
+
     //endregion
 
 }
