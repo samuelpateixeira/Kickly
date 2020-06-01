@@ -2,6 +2,7 @@ package com.example.kickly
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import android.widget.TextView
 import com.example.kickly.Activities.WatchingActivities.TournamentActivity
 import com.example.kickly.Classes.Stage
 import kotlinx.android.synthetic.main.activity_main_list_item.view.*
+import kotlinx.android.synthetic.main.list_view_groups_item.view.*
+import kotlinx.android.synthetic.main.team_points_item.view.*
 import java.time.LocalDateTime
 import java.time.Month
 import java.time.ZoneOffset
@@ -22,9 +25,9 @@ class KicklyTools {
 
         // returns a string with the time left to the input date
         // example: in 5 days / in 3 hours / in 46 minutes / now
-        fun timeLeft(futureTime : LocalDateTime, context: Context) : String {
+        fun timeLeft(futureTime: LocalDateTime, context: Context): String {
 
-            var timeLeftString : String?
+            var timeLeftString: String?
 
             // get times and the times in EpochMilli (milliseconds since 1970)
             var currentTime = LocalDateTime.now()
@@ -63,7 +66,8 @@ class KicklyTools {
 
     class Adapters {
 
-        class TournamentSummary(context: Context, objects : ArrayList<Tournament>) : ArrayAdapter<Tournament>(context, R.layout.tournament_summary, objects) {
+        class TournamentSummary(context: Context, objects: ArrayList<Tournament>) :
+            ArrayAdapter<Tournament>(context, R.layout.tournament_summary, objects) {
 
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -83,15 +87,24 @@ class KicklyTools {
 
 
                 //region find views
-                var imgTournamentIcon = tournamentSummaryView!!.findViewById<ImageView>(R.id.imgTournamentIcon)
-                var tvTournamentName = tournamentSummaryView.findViewById<TextView>(R.id.tvTournamentName)
-                var tvCurrentStage = tournamentSummaryView.findViewById<TextView>(R.id.tvCurrentStage)
-                var tvPreviousMatchResults = tournamentSummaryView.findViewById<TextView>(R.id.tvPreviousMatchResults)
-                var imgPreviousMatchTeam1Icon = tournamentSummaryView.findViewById<ImageView>(R.id.imgPreviousMatchTeam1Icon)
-                var imgPreviousMatchTeam2Icon = tournamentSummaryView.findViewById<ImageView>(R.id.imgPreviousMatchTeam2Icon)
-                var imgNextMatchTeam1Icon = tournamentSummaryView.findViewById<ImageView>(R.id.imgNextMatchTeam1Icon)
-                var imgNextMatchTeam2Icon = tournamentSummaryView.findViewById<ImageView>(R.id.imgNextMatchTeam2Icon)
-                var tvNextMatchTimeLeft = tournamentSummaryView.findViewById<TextView>(R.id.tvNextMatchTimeLeft)
+                var imgTournamentIcon =
+                    tournamentSummaryView!!.findViewById<ImageView>(R.id.imgTournamentIcon)
+                var tvTournamentName =
+                    tournamentSummaryView.findViewById<TextView>(R.id.tvTournamentName)
+                var tvCurrentStage =
+                    tournamentSummaryView.findViewById<TextView>(R.id.tvCurrentStage)
+                var tvPreviousMatchResults =
+                    tournamentSummaryView.findViewById<TextView>(R.id.tvPreviousMatchResults)
+                var imgPreviousMatchTeam1Icon =
+                    tournamentSummaryView.findViewById<ImageView>(R.id.imgPreviousMatchTeam1Icon)
+                var imgPreviousMatchTeam2Icon =
+                    tournamentSummaryView.findViewById<ImageView>(R.id.imgPreviousMatchTeam2Icon)
+                var imgNextMatchTeam1Icon =
+                    tournamentSummaryView.findViewById<ImageView>(R.id.imgNextMatchTeam1Icon)
+                var imgNextMatchTeam2Icon =
+                    tournamentSummaryView.findViewById<ImageView>(R.id.imgNextMatchTeam2Icon)
+                var tvNextMatchTimeLeft =
+                    tournamentSummaryView.findViewById<TextView>(R.id.tvNextMatchTimeLeft)
                 //endregion
 
                 //region populate the views
@@ -99,27 +112,31 @@ class KicklyTools {
                 imgTournamentIcon.setImageIcon(currentTournament!!.icon)
                 tvTournamentName.text = currentTournament.name
                 tvCurrentStage.text = currentTournament.currentStage.toString()
-                tvPreviousMatchResults.text = currentTournament.previousMatch!!.team1Score.toString() + " - " + currentTournament.previousMatch!!.team2Score.toString()
-                imgPreviousMatchTeam1Icon.background = currentTournament.previousMatch!!.team1!!.icon.loadDrawable(context)
-                imgPreviousMatchTeam2Icon.background = currentTournament.previousMatch!!.team2!!.icon.loadDrawable(context)
+                tvPreviousMatchResults.text =
+                    currentTournament.previousMatch!!.team1Score.toString() + " - " + currentTournament.previousMatch!!.team2Score.toString()
+                imgPreviousMatchTeam1Icon.background =
+                    currentTournament.previousMatch!!.team1!!.icon.loadDrawable(context)
+                imgPreviousMatchTeam2Icon.background =
+                    currentTournament.previousMatch!!.team2!!.icon.loadDrawable(context)
                 imgNextMatchTeam1Icon.setImageIcon(currentTournament.nextMatch!!.team1!!.icon)
                 imgNextMatchTeam2Icon.setImageIcon(currentTournament.nextMatch!!.team2!!.icon)
-                tvNextMatchTimeLeft.text = KicklyTools.timeLeft(currentTournament.nextMatch!!.dateTime!!, context)
+                tvNextMatchTimeLeft.text =
+                    KicklyTools.timeLeft(currentTournament.nextMatch!!.dateTime!!, context)
 
                 //set strokes according to winner/looser or tie
                 // tie
                 if (currentTournament.previousMatch!!.isTie()!!) {
-                    imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable( R.drawable.stroke_yellow ))
-                    imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable( R.drawable.stroke_yellow ))
+                    imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
+                    imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
                 } else
                 // team 1 winner
                     if (currentTournament.previousMatch!!.winner() == currentTournament.previousMatch!!.team1) {
-                        imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable( R.drawable.stroke_green ))
-                        imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable( R.drawable.stroke_red ))
+                        imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_green))
+                        imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_red))
                         // team 2 winner
                     } else if (currentTournament.previousMatch!!.winner() == currentTournament.previousMatch!!.team2) {
-                        imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable( R.drawable.stroke_red ))
-                        imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable( R.drawable.stroke_green ))
+                        imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_red))
+                        imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_green))
                     } else {
                         throw(Exception("nothing makes sense. There is no tie and no winner."))
                     }
@@ -141,13 +158,22 @@ class KicklyTools {
 
 
         }
-        class IconTextActivity(context: Context, objects : ArrayList<com.example.kickly.IconTextActivity>) : ArrayAdapter<com.example.kickly.IconTextActivity>(context, R.layout.activity_main_list_item, objects) {
+
+        class IconTextActivity(
+            context: Context,
+            objects: ArrayList<com.example.kickly.IconTextActivity>
+        ) : ArrayAdapter<com.example.kickly.IconTextActivity>(
+            context,
+            R.layout.activity_main_list_item,
+            objects
+        ) {
 
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
                 // inflate the view
                 var thisButton =
-                    LayoutInflater.from(context).inflate(R.layout.activity_main_list_item, parent, false)
+                    LayoutInflater.from(context)
+                        .inflate(R.layout.activity_main_list_item, parent, false)
 
                 // get current list item
                 var currentIconTextActivity = getItem(position)!!
@@ -168,98 +194,300 @@ class KicklyTools {
 
         }
 
-    }
+        class GroupsTeams(context: Context, objects: ArrayList<Tournament.Group>) :
+            ArrayAdapter<Tournament.Group>(context, R.layout.list_view_groups_item, objects) {
 
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+
+                // get recycled view
+                var view = convertView
+
+                // Check if the existing view is being reused
+                if (view == null) {
+                    // otherwise inflate the view
+                    view = LayoutInflater.from(context).inflate(
+                        R.layout.list_view_groups_item, parent, false
+                    )
+                }
+
+                // get item
+                var currentGroup = getItem(position)!!
+
+                var tvGroup = view!!.findViewById<TextView>(R.id.tvGroup)
+
+                tvGroup.text = context.getString(R.string.group_x, currentGroup.group)
+
+                view.lvTeams.adapter = TeamPoints(context, currentGroup.teams)
+
+
+
+                return view
+            }
+
+        }
+
+        class TeamPoints(context: Context, objects: ArrayList<Tournament.RegisteredTeam>) :
+            ArrayAdapter<Tournament.RegisteredTeam>(context, R.layout.team_points_item, objects) {
+
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+
+                // get recycled view
+                var view = convertView!!
+
+                // Check if the existing view is being reused
+                if (view == null) {
+                    // otherwise inflate the view
+                    view = LayoutInflater.from(context).inflate(
+                        R.layout.team_points_item, parent, false
+                    )
+                }
+
+                // get item
+                var currentTeam = getItem(position)!!
+
+                view.tvMatches.text = currentTeam.matches.toString()
+                view.tvPoints.text = currentTeam.points.toString()
+                view.tvGoalsScored.text = currentTeam.goalsScored.toString()
+                view.tvGoalsConceded.text = currentTeam.goalsConceded.toString()
+                view.tvGoalsDifference.text = currentTeam.goalsDifference().toString()
+
+                if ( currentTeam.goalsDifference() > 0 ) {
+                    view.tvGoalsDifference.background = context.getDrawable(R.drawable.rounded_corners_background)!!.setTint(context.getColor(R.color.colorPrimary)) as Drawable
+                } else if (currentTeam.goalsDifference() < 0) {
+                    view.tvGoalsDifference.background = context.getDrawable(R.drawable.rounded_corners_background)!!.setTint(context.getColor(R.color.error)) as Drawable
+                } else if (currentTeam.goalsDifference() == 0)  {
+                    view.tvGoalsDifference.background = context.getDrawable(R.drawable.rounded_corners_background)!!.setTint(context.getColor(R.color.tie)) as Drawable
+                }
+
+                return view
+
+            }
+
+        }
+
+    }
     class Generate {
 
         companion object {
 
-            fun tournamentList(context: Context) : ArrayList<Tournament>  {
+            fun tournamentList(context: Context): ArrayList<Tournament> {
                 var tournamentList = ArrayList<Tournament>()
                 var teams = ArrayList<Team>()
 
                 //region add teams
 
                 // Drunk fighters
-                teams.add(Team(
-                    Icon.createWithResource(
-                        context, R.drawable.drunk_fighters),
-                    "Drunk fighters"
-                ))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.drunk_fighters
+                        ),
+                        "Drunk fighters"
+                    )
+                )
 
                 // Kissers
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.kissers),
-                    "Kissers"
-                ))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.kissers
+                        ),
+                        "Kissers"
+                    )
+                )
 
                 // Microsoft Windows
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.microsoft_windows),
-                    "Microsoft Windows"
-                ))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.microsoft_windows
+                        ),
+                        "Microsoft Windows"
+                    )
+                )
 
                 // Android
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.android),
-                    "Android"
-                ))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.android
+                        ),
+                        "Android"
+                    )
+                )
 
                 // Spotify
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.spotify),
-                    "Spotify"
-                ))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.spotify
+                        ),
+                        "Spotify"
+                    )
+                )
 
                 // Apple
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.apple),
-                    "Apple"
-                ))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.apple
+                        ),
+                        "Apple"
+                    )
+                )
 
                 // PayPal
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.paypal),
-                    "PayPal"
-                ))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.paypal
+                        ),
+                        "PayPal"
+                    )
+                )
 
                 // Youtube
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.youtube),
-                    "Youtube"
-                ))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.youtube
+                        ),
+                        "Youtube"
+                    )
+                )
 
                 //endregion
 
                 //region create tournament Kickly 2020
 
                 // create the tournament
-                tournamentList.add(Tournament(
-                    Icon.createWithResource(context, R.drawable.futebol),
-                    "Kickly 2020",
-                    Stage.GROUPSTAGE,
-                    Match( teams[0], teams[1], LocalDateTime.of(2020, Month.MAY, 18, 20, 45, 0, 0) ),
-                    Match( teams[2], teams[3], LocalDateTime.of(2020, Month.MAY, 27, 19, 45, 0, 0) )
-                )
+                tournamentList.add(
+                    Tournament(
+                        Icon.createWithResource(context, R.drawable.futebol),
+                        "Kickly 2020",
+                        Stage.GROUPSTAGE,
+                        Match(
+                            teams[0],
+                            teams[1],
+                            LocalDateTime.of(2020, Month.MAY, 18, 20, 45, 0, 0)
+                        ),
+                        Match(
+                            teams[2],
+                            teams[3],
+                            LocalDateTime.of(2020, Month.MAY, 27, 19, 45, 0, 0)
+                        )
+                    )
                 )
 
                 // finish the previous match
                 tournamentList[0].previousMatch!!.finish(1, 3)
-                tournamentList[0].registeredTeams = teams(context)
+
+                //region add registered teams
+                tournamentList[0].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.gabon
+                            ), "Gabon"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[0].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.gambia
+                            ), "Gambia"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[0].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.georgia
+                            ), "Georgia"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[0].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.germany
+                            ), "Germany"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[0].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.ghana
+                            ), "Ghana"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[0].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.gibraltar
+                            ), "Gibraltar"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[0].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.greece
+                            ), "Greece"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[0].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.greenland
+                            ), "Greenland"
+                        ), 'B'
+                    )
+                )
+
+                //endregion
 
                 //endregion
 
                 //region create tournament Knight Tournament
 
                 // create the tournament
-                tournamentList.add(Tournament(
-                    Icon.createWithResource(
-                        context, R.drawable.knight_tournament),
-                    "Knight Tournament",
-                    Stage.KNOCKOUTSTAGE,
-                    Match( teams[4], teams[5], LocalDateTime.of(2020, Month.MAY, 1, 21, 45, 0, 0) ),
-                    Match( teams[6], teams[7], LocalDateTime.of(2020, Month.MAY, 23, 22, 30, 0, 0) )
-                )
+                tournamentList.add(
+                    Tournament(
+                        Icon.createWithResource(
+                            context, R.drawable.knight_tournament
+                        ),
+                        "Knight Tournament",
+                        Stage.KNOCKOUTSTAGE,
+                        Match(
+                            teams[4],
+                            teams[5],
+                            LocalDateTime.of(2020, Month.MAY, 1, 21, 45, 0, 0)
+                        ),
+                        Match(
+                            teams[6],
+                            teams[7],
+                            LocalDateTime.of(2020, Month.MAY, 23, 22, 30, 0, 0)
+                        )
+                    )
                 )
 
                 // finish the previous match
@@ -270,13 +498,22 @@ class KicklyTools {
                 //region create Medal of Honor tournament
 
                 // create the tournament
-                tournamentList.add(Tournament(
-                    Icon.createWithResource(context, R.drawable.medal_of_honor),
-                    "Medal of Honor",
-                    Stage.GROUPSTAGE,
-                    Match( teams[2], teams[3], LocalDateTime.of(2020, Month.MAY, 2, 21, 45, 0, 0) ),
-                    Match( teams[7], teams[4], LocalDateTime.of(2020, Month.MAY, 23, 20, 42, 0, 0) )
-                )
+                tournamentList.add(
+                    Tournament(
+                        Icon.createWithResource(context, R.drawable.medal_of_honor),
+                        "Medal of Honor",
+                        Stage.GROUPSTAGE,
+                        Match(
+                            teams[2],
+                            teams[3],
+                            LocalDateTime.of(2020, Month.MAY, 2, 21, 45, 0, 0)
+                        ),
+                        Match(
+                            teams[7],
+                            teams[4],
+                            LocalDateTime.of(2020, Month.MAY, 23, 20, 42, 0, 0)
+                        )
+                    )
                 )
 
                 // finish the previous match
@@ -287,86 +524,210 @@ class KicklyTools {
                 return tournamentList
             }
 
-            fun teams(context: Context) : ArrayList<Team>
-            {
+            fun teams(context: Context): ArrayList<Team> {
                 var teams = ArrayList<Team>()
 
                 //region adding teams
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.gabon),"Gabon"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.gabon
+                        ), "Gabon"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.georgia),"Georgia"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.georgia
+                        ), "Georgia"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.gambia),"Gambia"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.gambia
+                        ), "Gambia"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.germany),"Germany"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.germany
+                        ), "Germany"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.ghana),"Ghana"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.ghana
+                        ), "Ghana"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.gibraltar),"Gibraltar"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.gibraltar
+                        ), "Gibraltar"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.greece),"Greece"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.greece
+                        ), "Greece"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.greenland),"Greenland"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.greenland
+                        ), "Greenland"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.grenada),"Grenada"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.grenada
+                        ), "Grenada"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.guam),"Guam"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.guam
+                        ), "Guam"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.guatemala),"Guatemala"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.guatemala
+                        ), "Guatemala"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.guernsey),"Guernsey"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.guernsey
+                        ), "Guernsey"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.guinea),"Guinea"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.guinea
+                        ), "Guinea"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.guyana),"Guyana"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.guyana
+                        ), "Guyana"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.haiti),"Haiti"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.haiti
+                        ), "Haiti"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.hawaii),"Hawaii"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.hawaii
+                        ), "Hawaii"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.honduras),"Honduras"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.honduras
+                        ), "Honduras"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.hungary),"Hungary"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.hungary
+                        ), "Hungary"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.iceland),"Iceland"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.iceland
+                        ), "Iceland"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.india),"India"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.india
+                        ), "India"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.indonesia),"Indonesia"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.indonesia
+                        ), "Indonesia"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.iran),"Iran"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.iran
+                        ), "Iran"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.iraq),"Iraq"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.iraq
+                        ), "Iraq"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.ireland),"Ireland"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.ireland
+                        ), "Ireland"
+                    )
+                )
 
-                teams.add(Team(Icon.createWithResource(
-                    context, R.drawable.israel),"Israel"))
+                teams.add(
+                    Team(
+                        Icon.createWithResource(
+                            context, R.drawable.israel
+                        ), "Israel"
+                    )
+                )
 
                 //endregion
 
@@ -375,5 +736,6 @@ class KicklyTools {
         }
 
     }
+
 }
 

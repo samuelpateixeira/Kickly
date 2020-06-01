@@ -14,4 +14,5 @@
     <string name="teams">equipas</string>
     <string name="group_stage">fase de grupos</string>
     <string name="knockout_stage">fase eliminatória</string>
+    <string name="group_x">Grupo %1$s</string>
 </resources>

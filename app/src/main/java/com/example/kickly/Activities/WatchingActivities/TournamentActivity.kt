@@ -46,7 +46,7 @@ class TournamentActivity : AppCompatActivity() {
             IconTextActivity(
                 Icon.createWithResource(
                     this, R.drawable.team), getResources().getString(R.string.teams).capitalize(),
-                Intent(this, TeamsActivity::class.java)
+                Intent(this, TeamsActivity::class.java).putExtra("tournamentID", tournamentID)
             )
         )
 
