@@ -111,7 +111,7 @@ class KicklyTools {
 
                 imgTournamentIcon.setImageIcon(currentTournament!!.icon)
                 tvTournamentName.text = currentTournament.name
-                tvCurrentStage.text = currentTournament.currentStage.toString()
+                tvCurrentStage.text = currentTournament.currentStage!!.toString(context)
                 tvPreviousMatchResults.text =
                     currentTournament.previousMatch!!.team1Score.toString() + " - " + currentTournament.previousMatch!!.team2Score.toString()
                 imgPreviousMatchTeam1Icon.background =
@@ -232,7 +232,7 @@ class KicklyTools {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
                 // get recycled view
-                var view = convertView!!
+                var view = convertView
 
                 // Check if the existing view is being reused
                 if (view == null) {
@@ -245,18 +245,32 @@ class KicklyTools {
                 // get item
                 var currentTeam = getItem(position)!!
 
+                view!!
+
                 view.tvMatches.text = currentTeam.matches.toString()
                 view.tvPoints.text = currentTeam.points.toString()
                 view.tvGoalsScored.text = currentTeam.goalsScored.toString()
                 view.tvGoalsConceded.text = currentTeam.goalsConceded.toString()
                 view.tvGoalsDifference.text = currentTeam.goalsDifference().toString()
 
+                var background = context.getDrawable(R.drawable.rounded_corners_background)!!
+
+
                 if ( currentTeam.goalsDifference() > 0 ) {
-                    view.tvGoalsDifference.background = context.getDrawable(R.drawable.rounded_corners_background)!!.setTint(context.getColor(R.color.colorPrimary)) as Drawable
+
+                    background.setTint(context.getColor(R.color.colorPrimary))
+                    view.tvGoalsDifference.background = background
+
                 } else if (currentTeam.goalsDifference() < 0) {
-                    view.tvGoalsDifference.background = context.getDrawable(R.drawable.rounded_corners_background)!!.setTint(context.getColor(R.color.error)) as Drawable
+
+                    background.setTint(context.getColor(R.color.error))
+                    view.tvGoalsDifference.background = background
+
                 } else if (currentTeam.goalsDifference() == 0)  {
-                    view.tvGoalsDifference.background = context.getDrawable(R.drawable.rounded_corners_background)!!.setTint(context.getColor(R.color.tie)) as Drawable
+
+                    background.setTint(context.getColor(R.color.tie))
+                    view.tvGoalsDifference.background = background
+
                 }
 
                 return view
