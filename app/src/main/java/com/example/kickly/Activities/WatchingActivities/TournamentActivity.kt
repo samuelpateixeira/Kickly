@@ -37,7 +37,7 @@ class TournamentActivity : AppCompatActivity() {
         // populate the views
         imgTournamentIcon.setImageIcon(currentTournament.icon)
         tvTournamentName.text = currentTournament.name
-        tvCurrentStage.text = currentTournament.currentStage.toString()
+        tvCurrentStage.text = currentTournament.currentStage!!.toString(this)
 
         //region add the buttons to the list
 
