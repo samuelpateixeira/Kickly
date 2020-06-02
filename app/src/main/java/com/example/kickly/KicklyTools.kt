@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.example.kickly.Activities.WatchingActivities.TournamentActivity
 import com.example.kickly.Classes.Stage
 import kotlinx.android.synthetic.main.activity_main_list_item.view.*
@@ -26,6 +28,7 @@ class KicklyTools {
         // returns a string with the time left to the input date
         // example: in 5 days / in 3 hours / in 46 minutes / now
         fun timeLeft(futureTime: LocalDateTime, context: Context): String {
+// Make sure we're running on Honeycomb or higher to use ActionBar APIs
 
             var timeLeftString: String?
 
@@ -69,6 +72,7 @@ class KicklyTools {
         class TournamentSummary(context: Context, objects: ArrayList<Tournament>) :
             ArrayAdapter<Tournament>(context, R.layout.tournament_summary, objects) {
 
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
                 // get recycled view
@@ -179,7 +183,8 @@ class KicklyTools {
                 var currentIconTextActivity = getItem(position)!!
 
                 // populate the views
-                thisButton.imgIcon.setImageIcon(currentIconTextActivity.icon)
+                var imgIcon = thisButton.findViewById<ImageView>(R.id.imgIcon)
+                imgIcon.setImageIcon(currentIconTextActivity.icon)
                 thisButton.tvText.text = currentIconTextActivity.text
 
                 // set on click listener
@@ -245,7 +250,12 @@ class KicklyTools {
                 // get item
                 var currentTeam = getItem(position)!!
 
+                // region populate the view
                 view!!
+
+                var imgIcon = view.findViewById<ImageView>(R.id.imgIcon)
+                imgIcon.setImageIcon(currentTeam.team.icon)
+                view.tvTeamName.text = currentTeam.team.name
 
                 view.tvMatches.text = currentTeam.matches.toString()
                 view.tvPoints.text = currentTeam.points.toString()
@@ -253,8 +263,11 @@ class KicklyTools {
                 view.tvGoalsConceded.text = currentTeam.goalsConceded.toString()
                 view.tvGoalsDifference.text = currentTeam.goalsDifference().toString()
 
-                var background = context.getDrawable(R.drawable.rounded_corners_background)!!
+                var background = view.tvGoalsDifference.background
 
+                view.tvGoalsDifference.setPadding(5,0,5,0)
+
+                //endregion
 
                 if ( currentTeam.goalsDifference() > 0 ) {
 
@@ -284,6 +297,7 @@ class KicklyTools {
 
         companion object {
 
+            @RequiresApi(Build.VERSION_CODES.O)
             fun tournamentList(context: Context): ArrayList<Tournament> {
                 var tournamentList = ArrayList<Tournament>()
                 var teams = ArrayList<Team>()
@@ -407,6 +421,11 @@ class KicklyTools {
                     )
                 )
 
+                tournamentList[0].registeredTeams[0].matches = 2
+                tournamentList[0].registeredTeams[0].points = 5
+                tournamentList[0].registeredTeams[0].goalsScored = 8
+                tournamentList[0].registeredTeams[0].goalsConceded = 5
+
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
                         Team(
@@ -416,6 +435,11 @@ class KicklyTools {
                         ), 'A'
                     )
                 )
+
+                tournamentList[0].registeredTeams[1].matches = 3
+                tournamentList[0].registeredTeams[1].points = 6
+                tournamentList[0].registeredTeams[1].goalsScored = 10
+                tournamentList[0].registeredTeams[1].goalsConceded = 5
 
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
@@ -427,6 +451,11 @@ class KicklyTools {
                     )
                 )
 
+                tournamentList[0].registeredTeams[2].matches = 3
+                tournamentList[0].registeredTeams[2].points = 4
+                tournamentList[0].registeredTeams[2].goalsScored = 2
+                tournamentList[0].registeredTeams[2].goalsConceded = 5
+
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
                         Team(
@@ -436,6 +465,12 @@ class KicklyTools {
                         ), 'A'
                     )
                 )
+
+                tournamentList[0].registeredTeams[3].matches = 2
+                tournamentList[0].registeredTeams[3].points = 5
+                tournamentList[0].registeredTeams[3].goalsScored = 4
+                tournamentList[0].registeredTeams[3].goalsConceded = 5
+
 
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
@@ -447,6 +482,12 @@ class KicklyTools {
                     )
                 )
 
+                tournamentList[0].registeredTeams[4].matches = 2
+                tournamentList[0].registeredTeams[4].points = 7
+                tournamentList[0].registeredTeams[4].goalsScored = 5
+                tournamentList[0].registeredTeams[4].goalsConceded = 7
+
+
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
                         Team(
@@ -456,6 +497,14 @@ class KicklyTools {
                         ), 'B'
                     )
                 )
+
+
+                tournamentList[0].registeredTeams[5].matches = 4
+                tournamentList[0].registeredTeams[5].points = 12
+                tournamentList[0].registeredTeams[5].goalsScored = 9
+                tournamentList[0].registeredTeams[5].goalsConceded = 13
+
+
 
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
@@ -467,6 +516,15 @@ class KicklyTools {
                     )
                 )
 
+
+
+                tournamentList[0].registeredTeams[6].matches = 4
+                tournamentList[0].registeredTeams[6].points = 11
+                tournamentList[0].registeredTeams[6].goalsScored = 10
+                tournamentList[0].registeredTeams[6].goalsConceded = 12
+
+
+
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
                         Team(
@@ -476,6 +534,13 @@ class KicklyTools {
                         ), 'B'
                     )
                 )
+
+
+                tournamentList[0].registeredTeams[7].matches = 4
+                tournamentList[0].registeredTeams[7].points = 14
+                tournamentList[0].registeredTeams[7].goalsScored = 16
+                tournamentList[0].registeredTeams[7].goalsConceded = 12
+
 
                 //endregion
 
