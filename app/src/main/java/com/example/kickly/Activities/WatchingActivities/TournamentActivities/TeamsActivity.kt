@@ -2,6 +2,8 @@ package com.example.kickly.Activities.WatchingActivities.TournamentActivities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
 import kotlinx.android.synthetic.main.activity_teams.*
@@ -17,6 +19,7 @@ class TeamsActivity : AppCompatActivity() {
 
         var tournamentList = KicklyTools.Generate.tournamentList(this)
 
-        lvGroups.adapter = KicklyTools.Adapters.GroupsTeams(this, tournamentList[tournamentID].groupsArray())
+        lvGroups.adapter = KicklyTools.Adapters.RecycleGroupsTeams(this, tournamentList[tournamentID].groupsArray())
+        lvGroups.layoutManager = LinearLayoutManager(this)
     }
 }

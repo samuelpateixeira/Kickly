@@ -2,7 +2,6 @@ package com.example.kickly
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.view.LayoutInflater
@@ -12,9 +11,12 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.kickly.Activities.WatchingActivities.TournamentActivity
 import com.example.kickly.Classes.Stage
 import kotlinx.android.synthetic.main.activity_main_list_item.view.*
+import kotlinx.android.synthetic.main.activity_teams.*
 import kotlinx.android.synthetic.main.list_view_groups_item.view.*
 import kotlinx.android.synthetic.main.team_points_item.view.*
 import java.time.LocalDateTime
@@ -125,7 +127,7 @@ class KicklyTools {
                 imgNextMatchTeam1Icon.setImageIcon(currentTournament.nextMatch!!.team1!!.icon)
                 imgNextMatchTeam2Icon.setImageIcon(currentTournament.nextMatch!!.team2!!.icon)
                 tvNextMatchTimeLeft.text =
-                    KicklyTools.timeLeft(currentTournament.nextMatch!!.dateTime!!, context)
+                    timeLeft(currentTournament.nextMatch!!.dateTime!!, context)
 
                 //set strokes according to winner/looser or tie
                 // tie
@@ -156,7 +158,7 @@ class KicklyTools {
                     context.startActivity(intent)
                 }
 
-                return tournamentSummaryView!!
+                return tournamentSummaryView
 
             }
 
@@ -199,94 +201,96 @@ class KicklyTools {
 
         }
 
-        class GroupsTeams(context: Context, objects: ArrayList<Tournament.Group>) :
-            ArrayAdapter<Tournament.Group>(context, R.layout.list_view_groups_item, objects) {
 
-            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        class RecycleGroupsTeams(var context: Context, var groups: ArrayList<Tournament.Group>) : RecyclerView.Adapter<RecycleGroupsTeams.ItemViewHolder>() {
 
-                // get recycled view
-                var view = convertView
-
-                // Check if the existing view is being reused
-                if (view == null) {
-                    // otherwise inflate the view
-                    view = LayoutInflater.from(context).inflate(
-                        R.layout.list_view_groups_item, parent, false
-                    )
-                }
-
-                // get item
-                var currentGroup = getItem(position)!!
-
-                var tvGroup = view!!.findViewById<TextView>(R.id.tvGroup)
-
-                tvGroup.text = context.getString(R.string.group_x, currentGroup.group)
-
-                view.lvTeams.adapter = TeamPoints(context, currentGroup.teams)
-
-
-
-                return view
+            class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                var tvGroup = itemView.tvGroup
+                var rvTeams = itemView.rvTeams
             }
+
+            var viewPool: RecyclerView.RecycledViewPool =
+                RecyclerView.RecycledViewPool()
+
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+                var inflater = LayoutInflater.from(context)
+                var view = inflater.inflate(R.layout.list_view_groups_item, parent, false)
+                return ItemViewHolder(view)
+            }
+
+            override fun getItemCount(): Int {
+                return groups.size
+            }
+
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
+                var currentGroup = groups[position]
+                holder.tvGroup.text = context.getString(R.string.group_x, currentGroup.group.toString())
+                holder.rvTeams.adapter = RecycleTeamPoints(context, currentGroup.teams)
+                holder.rvTeams.layoutManager = LinearLayoutManager(context)
+
+            }
+
 
         }
 
-        class TeamPoints(context: Context, objects: ArrayList<Tournament.RegisteredTeam>) :
-            ArrayAdapter<Tournament.RegisteredTeam>(context, R.layout.team_points_item, objects) {
+        class RecycleTeamPoints(var context: Context, var teams: ArrayList<Tournament.RegisteredTeam>) :
+            RecyclerView.Adapter<RecycleTeamPoints.ItemViewHolder>() {
 
-            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                var imgIcon = itemView.findViewById<ImageView>(R.id.imgIcon)
+                var tvTeamName = itemView.tvTeamName
+                var tvMatches = itemView.tvMatches
+                var tvPoints = itemView.tvPoints
+                var tvGoalsScored = itemView.tvGoalsScored
+                var tvGoalsConceded = itemView.tvGoalsConceded
+                var tvGoalsDifference = itemView.tvGoalsDifference
+            }
 
-                // get recycled view
-                var view = convertView
+            override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ItemViewHolder {
+                var inflater = LayoutInflater.from(context)
+                var view = inflater.inflate(R.layout.team_points_item, parent, false)
+                return RecycleTeamPoints.ItemViewHolder(view)
+            }
 
-                // Check if the existing view is being reused
-                if (view == null) {
-                    // otherwise inflate the view
-                    view = LayoutInflater.from(context).inflate(
-                        R.layout.team_points_item, parent, false
-                    )
-                }
+            override fun getItemCount(): Int {
+                return teams.size
+            }
 
-                // get item
-                var currentTeam = getItem(position)!!
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
-                // region populate the view
-                view!!
+                // get current team
+                var currentTeam = teams[position]
 
-                var imgIcon = view.findViewById<ImageView>(R.id.imgIcon)
-                imgIcon.setImageIcon(currentTeam.team.icon)
-                view.tvTeamName.text = currentTeam.team.name
+                //region populate the view
 
-                view.tvMatches.text = currentTeam.matches.toString()
-                view.tvPoints.text = currentTeam.points.toString()
-                view.tvGoalsScored.text = currentTeam.goalsScored.toString()
-                view.tvGoalsConceded.text = currentTeam.goalsConceded.toString()
-                view.tvGoalsDifference.text = currentTeam.goalsDifference().toString()
+                holder.imgIcon.setImageIcon(currentTeam.team.icon)
+                holder.tvTeamName.text = currentTeam.team.name
 
-                var background = view.tvGoalsDifference.background
+                holder.tvMatches.text = currentTeam.matches.toString()
+                holder.tvPoints.text = currentTeam.points.toString()
+                holder.tvGoalsScored.text = currentTeam.goalsScored.toString()
+                holder.tvGoalsConceded.text = currentTeam.goalsConceded.toString()
+                holder.tvGoalsDifference.text = currentTeam.goalsDifference().toString()
 
-                view.tvGoalsDifference.setPadding(5,0,5,0)
+
+                holder.tvGoalsDifference.setPadding(5,0,5,0)
 
                 //endregion
 
-                if ( currentTeam.goalsDifference() > 0 ) {
+                //region set goalsDifference background color
 
-                    background.setTint(context.getColor(R.color.colorPrimary))
-                    view.tvGoalsDifference.background = background
+                if ( currentTeam.goalsDifference() > 0 ) {
+                    holder.tvGoalsDifference.background = context.getDrawable(R.drawable.circle_text_background_green)
 
                 } else if (currentTeam.goalsDifference() < 0) {
-
-                    background.setTint(context.getColor(R.color.error))
-                    view.tvGoalsDifference.background = background
+                    holder.tvGoalsDifference.background = context.getDrawable(R.drawable.circle_text_background_red)
 
                 } else if (currentTeam.goalsDifference() == 0)  {
-
-                    background.setTint(context.getColor(R.color.tie))
-                    view.tvGoalsDifference.background = background
-
+                    holder.tvGoalsDifference.background = context.getDrawable(R.drawable.circle_text_background_yellow)
                 }
 
-                return view
+                //endregion
 
             }
 
@@ -297,7 +301,6 @@ class KicklyTools {
 
         companion object {
 
-            @RequiresApi(Build.VERSION_CODES.O)
             fun tournamentList(context: Context): ArrayList<Tournament> {
                 var tournamentList = ArrayList<Tournament>()
                 var teams = ArrayList<Team>()
@@ -423,7 +426,7 @@ class KicklyTools {
 
                 tournamentList[0].registeredTeams[0].matches = 2
                 tournamentList[0].registeredTeams[0].points = 5
-                tournamentList[0].registeredTeams[0].goalsScored = 8
+                tournamentList[0].registeredTeams[0].goalsScored = 5
                 tournamentList[0].registeredTeams[0].goalsConceded = 5
 
                 tournamentList[0].registeredTeams.add(
@@ -470,6 +473,7 @@ class KicklyTools {
                 tournamentList[0].registeredTeams[3].points = 5
                 tournamentList[0].registeredTeams[3].goalsScored = 4
                 tournamentList[0].registeredTeams[3].goalsConceded = 5
+
 
 
                 tournamentList[0].registeredTeams.add(
@@ -540,6 +544,8 @@ class KicklyTools {
                 tournamentList[0].registeredTeams[7].points = 14
                 tournamentList[0].registeredTeams[7].goalsScored = 16
                 tournamentList[0].registeredTeams[7].goalsConceded = 12
+
+
 
 
                 //endregion

@@ -3,7 +3,10 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp"
+        android:baselineAligned="false"
+    >
 
         <LinearLayout
             android:layout_width="0dp"
@@ -21,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:text="Drunk Fighters"
                 android:textColor="@color/onSurface"
                 android:textSize="12sp" />
@@ -78,9 +81,7 @@
                 android:text="0"
                 android:textColor="@color/onSurface"
                 android:textSize="14sp"
-                android:background="@drawable/rounded_corners_background"
-                android:backgroundTint="@color/colorPrimary"
-                android:paddingHorizontal="5dp"/>
+                />
         </FrameLayout>
 
         <FrameLayout
@@ -88,6 +89,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
+            android:paddingHorizontal="5dp"
             <TextView
                 android:id="@+id/tvGoalsConceded"
                 android:layout_width="wrap_content"
@@ -98,9 +100,7 @@
                 android:text="0"
                 android:textColor="@color/onSurface"
                 android:textSize="14sp"
-                android:background="@drawable/rounded_corners_background"
-                android:backgroundTint="@color/error"
-                android:paddingHorizontal="5dp"/>
+                />
         </FrameLayout>
 
         <FrameLayout
@@ -118,9 +118,8 @@
                 android:text="0"
                 android:textColor="@color/onSurface"
                 android:textSize="14sp"
-                android:background="@drawable/rounded_corners_background"
-                android:backgroundTint="@color/tie"
-                android:paddingHorizontal="5dp"/>
+                android:background="@drawable/circle_text_background_yellow"
+                />
         </FrameLayout>
     </LinearLayout>
 

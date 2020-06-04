@@ -57,6 +57,8 @@
     <ListView
         android:id="@+id/lvTournament"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:divider="#ffffff00"
+        />
 
 </LinearLayout>
