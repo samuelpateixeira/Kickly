@@ -19,7 +19,7 @@ class TeamsActivity : AppCompatActivity() {
 
         var tournamentList = KicklyTools.Generate.tournamentList(this)
 
-        lvGroups.adapter = KicklyTools.Adapters.RecycleGroupsTeams(this, tournamentList[tournamentID].groupsArray())
+        lvGroups.adapter = KicklyTools.Adapters.GroupsTeams(this, tournamentList[tournamentID].groupsArray())
         lvGroups.layoutManager = LinearLayoutManager(this)
     }
 }

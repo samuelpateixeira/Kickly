@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,40 +15,50 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kickly.Activities.WatchingActivities.TournamentActivity
+import com.example.kickly.Classes.Location
 import com.example.kickly.Classes.Stage
 import kotlinx.android.synthetic.main.activity_main_list_item.view.*
-import kotlinx.android.synthetic.main.activity_teams.*
 import kotlinx.android.synthetic.main.list_view_groups_item.view.*
+import kotlinx.android.synthetic.main.match.view.*
 import kotlinx.android.synthetic.main.team_points_item.view.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
-import java.time.Month
 import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 
 class KicklyTools {
 
     companion object {
 
+        // returns a Long with the time difference from time A to time B (timeB - timeA)
+        // if timeB is greater, number is positive.
+        fun timeDifference(timeA: LocalDateTime ,timeB: LocalDateTime): Long {
+
+            // get times and the times in EpochMilli (milliseconds since 1970)
+            var timeAMilli = timeA.toInstant(ZoneOffset.UTC).toEpochMilli()
+            var timeBMilli = timeB.toInstant(ZoneOffset.UTC).toEpochMilli()
+            var differenceMilli = timeBMilli - timeAMilli
+
+            return differenceMilli
+
+        }
+
         // returns a string with the time left to the input date
         // example: in 5 days / in 3 hours / in 46 minutes / now
-        fun timeLeft(futureTime: LocalDateTime, context: Context): String {
+        fun timeLeftString(futureTime: LocalDateTime, context: Context): String {
 // Make sure we're running on Honeycomb or higher to use ActionBar APIs
 
             var timeLeftString: String?
 
-            // get times and the times in EpochMilli (milliseconds since 1970)
-            var currentTime = LocalDateTime.now()
-            var futureTimeMilli = futureTime.toInstant(ZoneOffset.UTC).toEpochMilli()
-            var currentTimeMilli = currentTime.toInstant(ZoneOffset.UTC).toEpochMilli()
-            var differenceMilli = futureTimeMilli - currentTimeMilli
-
             // get total amount of remaining seconds, minutes, hours and days (27 hours instead of 3 hours and 1 day)
-            val totalSeconds = differenceMilli / 1000
+            val totalSeconds = timeDifference(LocalDateTime.now() ,futureTime) / 1000
             val totalMinutes = totalSeconds / 60
             val totalHours = totalMinutes / 60
             val totalDays = totalHours / 24
 
             // get remaining time (3 hours and one day instead of 27 hours)
-            val seconds = totalSeconds - (totalMinutes * 60)
+            //val seconds = totalSeconds - (totalMinutes * 60)
             val minutes = totalMinutes - (totalHours * 60)
             val hours = totalHours - (totalDays * 24)
             val days = totalDays
@@ -119,28 +130,28 @@ class KicklyTools {
                 tvTournamentName.text = currentTournament.name
                 tvCurrentStage.text = currentTournament.currentStage!!.toString(context)
                 tvPreviousMatchResults.text =
-                    currentTournament.previousMatch!!.team1Score.toString() + " - " + currentTournament.previousMatch!!.team2Score.toString()
+                    currentTournament.previousMatch()!!.team1Score.toString() + " - " + currentTournament.previousMatch()!!.team2Score.toString()
                 imgPreviousMatchTeam1Icon.background =
-                    currentTournament.previousMatch!!.team1!!.icon.loadDrawable(context)
+                    currentTournament.previousMatch()!!.team1!!.team.icon.loadDrawable(context)
                 imgPreviousMatchTeam2Icon.background =
-                    currentTournament.previousMatch!!.team2!!.icon.loadDrawable(context)
-                imgNextMatchTeam1Icon.setImageIcon(currentTournament.nextMatch!!.team1!!.icon)
-                imgNextMatchTeam2Icon.setImageIcon(currentTournament.nextMatch!!.team2!!.icon)
+                    currentTournament.previousMatch()!!.team2!!.team.icon.loadDrawable(context)
+                imgNextMatchTeam1Icon.setImageIcon(currentTournament.nextMatch()!!.team1!!.team.icon)
+                imgNextMatchTeam2Icon.setImageIcon(currentTournament.nextMatch()!!.team2!!.team.icon)
                 tvNextMatchTimeLeft.text =
-                    timeLeft(currentTournament.nextMatch!!.dateTime!!, context)
+                    timeLeftString(currentTournament.nextMatch()!!.dateTime!!, context)
 
                 //set strokes according to winner/looser or tie
                 // tie
-                if (currentTournament.previousMatch!!.isTie()!!) {
+                if (currentTournament.previousMatch()!!.isTie()!!) {
                     imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
                     imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
                 } else
                 // team 1 winner
-                    if (currentTournament.previousMatch!!.winner() == currentTournament.previousMatch!!.team1) {
+                    if (currentTournament.previousMatch()!!.winner() == currentTournament.previousMatch()!!.team1) {
                         imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_green))
                         imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_red))
                         // team 2 winner
-                    } else if (currentTournament.previousMatch!!.winner() == currentTournament.previousMatch!!.team2) {
+                    } else if (currentTournament.previousMatch()!!.winner() == currentTournament.previousMatch()!!.team2) {
                         imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_red))
                         imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_green))
                     } else {
@@ -202,15 +213,13 @@ class KicklyTools {
         }
 
 
-        class RecycleGroupsTeams(var context: Context, var groups: ArrayList<Tournament.Group>) : RecyclerView.Adapter<RecycleGroupsTeams.ItemViewHolder>() {
+        class GroupsTeams(var context: Context, var groups: ArrayList<Tournament.Group>) : RecyclerView.Adapter<GroupsTeams.ItemViewHolder>() {
 
             class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 var tvGroup = itemView.tvGroup
                 var rvTeams = itemView.rvTeams
             }
 
-            var viewPool: RecyclerView.RecycledViewPool =
-                RecyclerView.RecycledViewPool()
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
                 var inflater = LayoutInflater.from(context)
@@ -226,7 +235,7 @@ class KicklyTools {
 
                 var currentGroup = groups[position]
                 holder.tvGroup.text = context.getString(R.string.group_x, currentGroup.group.toString())
-                holder.rvTeams.adapter = RecycleTeamPoints(context, currentGroup.teams)
+                holder.rvTeams.adapter = TeamPoints(context, currentGroup.teams)
                 holder.rvTeams.layoutManager = LinearLayoutManager(context)
 
             }
@@ -234,8 +243,8 @@ class KicklyTools {
 
         }
 
-        class RecycleTeamPoints(var context: Context, var teams: ArrayList<Tournament.RegisteredTeam>) :
-            RecyclerView.Adapter<RecycleTeamPoints.ItemViewHolder>() {
+        class TeamPoints(var context: Context, var teams: ArrayList<Tournament.RegisteredTeam>) :
+            RecyclerView.Adapter<TeamPoints.ItemViewHolder>() {
 
             class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 var imgIcon = itemView.findViewById<ImageView>(R.id.imgIcon)
@@ -250,7 +259,7 @@ class KicklyTools {
             override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ItemViewHolder {
                 var inflater = LayoutInflater.from(context)
                 var view = inflater.inflate(R.layout.team_points_item, parent, false)
-                return RecycleTeamPoints.ItemViewHolder(view)
+                return ItemViewHolder(view)
             }
 
             override fun getItemCount(): Int {
@@ -296,7 +305,86 @@ class KicklyTools {
 
         }
 
+
+        class Matches(var context: Context, var matches: ArrayList<Match>) :
+            RecyclerView.Adapter<Matches.ItemViewHolder>() {
+
+            class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                var finished = itemView.finished
+                var imgTeam1Icon = itemView.imgTeam1Icon
+                var tvTeam1Name = itemView.tvTeam1Name
+                var tvMatchResults = itemView.tvMatchResults
+                var tvTeam2Name = itemView.tvTeam2Name
+                var imgTeam2Icon = itemView.imgTeam2Icon
+                var date = itemView.date
+                var stage = itemView.stage
+                var location = itemView.location
+                var button =  itemView.button
+            }
+
+            override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ItemViewHolder {
+                var inflater = LayoutInflater.from(context)
+                var view = inflater.inflate(R.layout.match, parent, false)
+                return ItemViewHolder(view)
+            }
+
+            override fun getItemCount(): Int {
+                return matches.size
+            }
+
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
+                // get current match
+                var currentMatch = matches[position]
+
+                //region populate the view
+
+                holder.imgTeam1Icon.background = currentMatch.team1!!.team.icon.loadDrawable(context)
+                holder.imgTeam2Icon.background = currentMatch.team2!!.team.icon.loadDrawable(context)
+
+                holder.tvTeam1Name.text = currentMatch.team1.team.name
+                holder.tvTeam2Name.text = currentMatch.team2.team.name
+
+                holder.stage.text = currentMatch.team1.group.toString()
+                holder.location.text = currentMatch.location.name
+
+                if (currentMatch.isFinished) {
+                    holder.finished.visibility = View.VISIBLE
+
+                    holder.tvMatchResults.text = currentMatch.team1Score.toString() + " - " + currentMatch.team2Score.toString()
+                    holder.button.text = context.getString(R.string.stats)
+
+                    if (currentMatch.isTie()!!) {
+                        holder.imgTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
+                        holder.imgTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
+                    } else if (currentMatch.winner() == currentMatch.team1) {
+                        holder.imgTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_green))
+                        holder.imgTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_red))
+                    } else if (currentMatch.winner() == currentMatch.team2) {
+                        holder.imgTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_green))
+                        holder.imgTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_red))
+                    }
+
+                    holder.date.text = currentMatch.dateTime.format(DateTimeFormatter.ISO_DATE)
+                    //Log.e("date", "today is " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE))
+
+
+                } else {
+                    holder.finished.visibility = View.GONE
+                    holder.button.text = context.getString(R.string.prognosis)
+                    holder.date.text = timeLeftString(currentMatch.dateTime, context)
+
+                }
+
+                //endregion
+
+
+            }
+
+        }
+
     }
+
     class Generate {
 
         companion object {
@@ -396,22 +484,9 @@ class KicklyTools {
                     Tournament(
                         Icon.createWithResource(context, R.drawable.futebol),
                         "Kickly 2020",
-                        Stage.GROUPSTAGE,
-                        Match(
-                            teams[0],
-                            teams[1],
-                            LocalDateTime.of(2020, Month.MAY, 18, 20, 45, 0, 0)
-                        ),
-                        Match(
-                            teams[2],
-                            teams[3],
-                            LocalDateTime.of(2020, Month.MAY, 27, 19, 45, 0, 0)
-                        )
+                        Stage.GROUPSTAGE
                     )
                 )
-
-                // finish the previous match
-                tournamentList[0].previousMatch!!.finish(1, 3)
 
                 //region add registered teams
                 tournamentList[0].registeredTeams.add(
@@ -545,12 +620,112 @@ class KicklyTools {
                 tournamentList[0].registeredTeams[7].goalsScored = 16
                 tournamentList[0].registeredTeams[7].goalsConceded = 12
 
+                for (registeredTeam in tournamentList[0].registeredTeams) {
+                    registeredTeam.team.location = Location( registeredTeam.team.name + " stadium")
+                }
+
+                tournamentList[0].matches.add(
+                    Match(
+                        tournamentList[0].registeredTeams[0],
+                        tournamentList[0].registeredTeams[3],
+                        LocalDateTime.of(2022, 6, 7, 20, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[0].matches.add(
+                    Match(
+                        tournamentList[0].registeredTeams[0],
+                        tournamentList[0].registeredTeams[3],
+                        LocalDateTime.of(2025, 6, 7, 20, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[0].matches.add(
+                    Match(
+                        tournamentList[0].registeredTeams[0],
+                        tournamentList[0].registeredTeams[3],
+                        LocalDateTime.of(2023, 6, 7, 20, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[0].matches.add(
+                    Match(
+                        tournamentList[0].registeredTeams[0],
+                        tournamentList[0].registeredTeams[3],
+                        LocalDateTime.of(2021, 6, 7, 20, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[0].matches.add(
+                    Match(
+                        tournamentList[0].registeredTeams[0],
+                        tournamentList[0].registeredTeams[3],
+                        LocalDateTime.of(2024, 6, 7, 20, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[0].matches.add(
+                    Match(
+                        tournamentList[0].registeredTeams[0],
+                        tournamentList[0].registeredTeams[1],
+                        LocalDateTime.of(2020, 5, 28, 20, 30),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[0].matches.last().finish(3,2)
+
+                tournamentList[0].matches.add(
+                    Match(
+                        tournamentList[0].registeredTeams[1],
+                        tournamentList[0].registeredTeams[0],
+                        LocalDateTime.of(2020, 5, 30, 20, 45),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[0].matches.last().finish(2,2)
+
+
+                tournamentList[0].matches.add(
+                    Match(
+                        tournamentList[0].registeredTeams[0],
+                        tournamentList[0].registeredTeams[2],
+                        LocalDateTime.of(2020, 6, 2, 21, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[0].matches.last().finish(2,1)
+
+                tournamentList[0].matches.add(
+                    Match(
+                        tournamentList[0].registeredTeams[2],
+                        tournamentList[0].registeredTeams[0],
+                        LocalDateTime.of(2020, 6, 5, 20, 0),
+                        Location("location")
+                    )
+                )
+
+                for (match in tournamentList[0].matches) {
+                    match.location = match.team1.team.location!!
+                }
+
+
+
 
 
 
                 //endregion
 
                 //endregion
+
+                /*
 
                 //region create tournament Knight Tournament
 
@@ -561,22 +736,10 @@ class KicklyTools {
                             context, R.drawable.knight_tournament
                         ),
                         "Knight Tournament",
-                        Stage.KNOCKOUTSTAGE,
-                        Match(
-                            teams[4],
-                            teams[5],
-                            LocalDateTime.of(2020, Month.MAY, 1, 21, 45, 0, 0)
-                        ),
-                        Match(
-                            teams[6],
-                            teams[7],
-                            LocalDateTime.of(2020, Month.MAY, 23, 22, 30, 0, 0)
-                        )
+                        Stage.KNOCKOUTSTAGE
                     )
                 )
 
-                // finish the previous match
-                tournamentList[1].previousMatch!!.finish(4, 2)
 
                 //endregion
 
@@ -587,24 +750,13 @@ class KicklyTools {
                     Tournament(
                         Icon.createWithResource(context, R.drawable.medal_of_honor),
                         "Medal of Honor",
-                        Stage.GROUPSTAGE,
-                        Match(
-                            teams[2],
-                            teams[3],
-                            LocalDateTime.of(2020, Month.MAY, 2, 21, 45, 0, 0)
-                        ),
-                        Match(
-                            teams[7],
-                            teams[4],
-                            LocalDateTime.of(2020, Month.MAY, 23, 20, 42, 0, 0)
-                        )
+                        Stage.GROUPSTAGE
                     )
                 )
 
-                // finish the previous match
-                tournamentList[2].previousMatch!!.finish(0, 0)
-
                 //endregion
+
+                 */
 
                 return tournamentList
             }

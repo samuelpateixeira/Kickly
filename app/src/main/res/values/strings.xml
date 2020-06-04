@@ -16,5 +16,7 @@
     <string name="group_stage">group stage</string>
     <string name="knockout_stage">knockout stage</string>
     <string name="group_x">Group %1$s</string>
+    <string name="stats">stats</string>
+    <string name="prognosis">prognosis</string>
 
 </resources>

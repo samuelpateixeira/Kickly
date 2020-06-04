@@ -12,6 +12,7 @@
     <color name="onError">#FFFFFF</color>
     <color name="onSurface">#FFFFFF</color>
     <color name="onBackground">#FFFFFF</color>
+    <color name="onTie">#FFFFFF</color>
     <color name="onBackground2">#999999 </color>
     <color name="tie">#C6CD00</color>
 

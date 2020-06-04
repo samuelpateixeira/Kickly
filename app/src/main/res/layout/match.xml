@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corners_background"
+    android:backgroundTint="@color/surface"
+    android:orientation="vertical"
+    android:layout_marginBottom="16dp">
+
+    <TextView
+        android:id="@+id/finished"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/tie"
+        android:background="@drawable/rounded_top_corners_background"
+        android:text="finished"
+        android:textAlignment="center"
+        android:textColor="@color/onTie"
+        android:paddingVertical="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="14sp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        >
+
+        <ImageView
+            android:id="@+id/imgTeam1Icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/paypal"
+            />
+        
+        <TextView
+            android:id="@+id/tvTeam1Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:paddingHorizontal="8dp"
+            android:text="Equipa X"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/onSurface"
+            />
+
+        <TextView
+            android:id="@+id/tvMatchResults"
+            android:layout_width="60dp"
+            android:layout_height="28dp"
+            android:text="VS"
+            android:textColor="@color/onSurface"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeMaxTextSize="21sp"
+            android:fontFamily="sans-serif-black"
+            android:layout_marginHorizontal="16dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:id="@+id/tvTeam2Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:paddingHorizontal="8dp"
+            android:text="Equipa X"
+            android:textAlignment="textEnd"
+            android:textColor="@color/onSurface"
+            android:textSize="12sp"
+            tools:ignore="RtlCompat" />
+
+        <ImageView
+            android:id="@+id/imgTeam2Icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/paypal"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/date"
+                android:text="May the 4th be with you"
+                android:textColor="@color/onSurface"
+                android:drawablePadding="8dp"
+                android:layout_marginEnd="16dp"
+                />
+
+            <TextView
+                android:id="@+id/stage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/groups"
+                android:text="A"
+                android:textColor="@color/onSurface"
+                android:drawablePadding="8dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/location"
+            android:text="Moe's"
+            android:textColor="@color/onSurface"
+            android:drawablePadding="8dp"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/background">
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="stats"
+        android:textColor="@color/onBackground"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-medium"
+        />
+    </FrameLayout>
+
+</LinearLayout>

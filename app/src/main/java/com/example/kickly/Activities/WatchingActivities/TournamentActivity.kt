@@ -55,7 +55,7 @@ class TournamentActivity : AppCompatActivity() {
             IconTextActivity(
                 Icon.createWithResource(
                     this, R.drawable.match), getResources().getString(R.string.matches).capitalize(),
-                Intent(this, MatchesActivity::class.java)
+                Intent(this, MatchesActivity::class.java).putExtra("tournamentID", tournamentID)
             )
         )
         //endregion

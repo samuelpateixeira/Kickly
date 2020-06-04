@@ -1,14 +1,16 @@
 package com.example.kickly
 
+import com.example.kickly.Classes.Location
 import java.time.LocalDateTime
 import java.util.*
 
-class Match(team1: Team, team2 : Team, dateTime: LocalDateTime) {
+class Match(team1: Tournament.RegisteredTeam, team2 : Tournament.RegisteredTeam, dateTime: LocalDateTime, location : Location) {
 
     //region properties
-    var team1 : Team? = team1
-    var team2 : Team? = team2
-    var dateTime : LocalDateTime? = dateTime
+    var team1 : Tournament.RegisteredTeam = team1
+    var team2 : Tournament.RegisteredTeam = team2
+    var dateTime : LocalDateTime = dateTime
+    var location = location
     var isFinished : Boolean = false // if the game has been played and finished
     private var _team1Score : Int? = null
     var team1Score : Int? = null
@@ -39,8 +41,8 @@ class Match(team1: Team, team2 : Team, dateTime: LocalDateTime) {
     }
 
     // to know which team is the winner
-    fun winner() : Team? {
-        var winner : Team? = null
+    fun winner() : Tournament.RegisteredTeam? {
+        var winner : Tournament.RegisteredTeam? = null
 
         //if the game isn't finished
         if (!isFinished) { throw(Exception("game isn't finished. It's expected to happen on " + dateTime.toString())) }
@@ -55,8 +57,8 @@ class Match(team1: Team, team2 : Team, dateTime: LocalDateTime) {
     }
 
     // to know which team is the looser
-    fun looser() : Team? {
-        var looser : Team? = null
+    fun looser() : Tournament.RegisteredTeam? {
+        var looser : Tournament.RegisteredTeam? = null
 
         //if the game isn't finished
         if (isFinished) { throw(Exception("game isn't finished. It's expected to happen on " + dateTime.toString())) }
