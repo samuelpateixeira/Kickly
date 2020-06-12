@@ -4,7 +4,7 @@ import android.graphics.drawable.Icon
 import com.example.kickly.Classes.Stage
 import java.time.LocalDateTime
 
-class Tournament(icon : Icon, name: String, currentStage : Stage ) {
+class Tournament( icon : Icon, name: String, currentStage : Stage ) {
 
     //region properties
     var icon : Icon? = icon
@@ -16,6 +16,7 @@ class Tournament(icon : Icon, name: String, currentStage : Stage ) {
     //endregion
 
     // registered team class
+    // Team + information about this team participation
     class RegisteredTeam( var team : Team, var group : Char ) {
 
         var active : Boolean = true
@@ -46,6 +47,7 @@ class Tournament(icon : Icon, name: String, currentStage : Stage ) {
         }
 
         return previousMatches
+
     }
 
     fun nextMatches() : ArrayList<Match> {
@@ -123,41 +125,16 @@ class Tournament(icon : Icon, name: String, currentStage : Stage ) {
 
     fun orderMatches() {
 
+        var orderedMatches : List<Match> =
+            matches.sortedBy { KicklyTools.timeDifference( LocalDateTime.now(), it.dateTime ) }
 
-        /*
-        var matchesPool = matches
+        var orderedMatchesArrayList : ArrayList<Match> = ArrayList<Match>()
 
-        var orderedMatches = ArrayList<Match>()
+        for (match in orderedMatches) {
+            orderedMatchesArrayList.add(match)
+        }
 
-        var timeDifferece = Long.MAX_VALUE
-
-        while (matchesPool.size > 0) {
-
-            var i = 0
-            var pos = 0
-
-            while (i < matchesPool.size) {
-
-                if (KicklyTools.timeDifference( LocalDateTime.now(), matchesPool[i].dateTime ) < timeDifferece ) {
-                    pos = i
-                }
-
-                i++
-
-            }
-
-            orderedMatches.add(matchesPool[pos])
-            matchesPool.removeAt(pos)
-
-            }
-
-        matches = orderedMatches
-        */
-
-
-        var orderedMatches : ArrayList<Match> =
-            matches.sortBy { KicklyTools.timeDifference( LocalDateTime.now(), it.dateTime ) } as ArrayList<Match>
-        matches = orderedMatches
+        matches = orderedMatchesArrayList
 
     }
 

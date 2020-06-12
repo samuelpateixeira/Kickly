@@ -14,6 +14,8 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kickly.Activities.WatchingActivities.TournamentActivities.MatchPrognosis
+import com.example.kickly.Activities.WatchingActivities.TournamentActivities.MatchStats
 import com.example.kickly.Activities.WatchingActivities.TournamentActivity
 import com.example.kickly.Classes.Location
 import com.example.kickly.Classes.Stage
@@ -348,11 +350,15 @@ class KicklyTools {
                 holder.stage.text = currentMatch.team1.group.toString()
                 holder.location.text = currentMatch.location.name
 
+                var buttonIntent = Intent()
+
                 if (currentMatch.isFinished) {
                     holder.finished.visibility = View.VISIBLE
 
                     holder.tvMatchResults.text = currentMatch.team1Score.toString() + " - " + currentMatch.team2Score.toString()
                     holder.button.text = context.getString(R.string.stats)
+                    buttonIntent = Intent(context, MatchStats::class.java)
+
 
                     if (currentMatch.isTie()!!) {
                         holder.imgTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
@@ -372,9 +378,14 @@ class KicklyTools {
                 } else {
                     holder.finished.visibility = View.GONE
                     holder.button.text = context.getString(R.string.prognosis)
+                    buttonIntent = Intent(context, MatchPrognosis::class.java)
                     holder.date.text = timeLeftString(currentMatch.dateTime, context)
+                    holder.imgTeam1Icon.setImageDrawable(null)
+                    holder.imgTeam2Icon.setImageDrawable(null)
 
                 }
+
+                holder.button.setOnClickListener { context.startActivity(buttonIntent) }
 
                 //endregion
 
@@ -499,11 +510,6 @@ class KicklyTools {
                     )
                 )
 
-                tournamentList[0].registeredTeams[0].matches = 2
-                tournamentList[0].registeredTeams[0].points = 5
-                tournamentList[0].registeredTeams[0].goalsScored = 5
-                tournamentList[0].registeredTeams[0].goalsConceded = 5
-
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
                         Team(
@@ -513,11 +519,6 @@ class KicklyTools {
                         ), 'A'
                     )
                 )
-
-                tournamentList[0].registeredTeams[1].matches = 3
-                tournamentList[0].registeredTeams[1].points = 6
-                tournamentList[0].registeredTeams[1].goalsScored = 10
-                tournamentList[0].registeredTeams[1].goalsConceded = 5
 
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
@@ -529,11 +530,6 @@ class KicklyTools {
                     )
                 )
 
-                tournamentList[0].registeredTeams[2].matches = 3
-                tournamentList[0].registeredTeams[2].points = 4
-                tournamentList[0].registeredTeams[2].goalsScored = 2
-                tournamentList[0].registeredTeams[2].goalsConceded = 5
-
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
                         Team(
@@ -543,13 +539,6 @@ class KicklyTools {
                         ), 'A'
                     )
                 )
-
-                tournamentList[0].registeredTeams[3].matches = 2
-                tournamentList[0].registeredTeams[3].points = 5
-                tournamentList[0].registeredTeams[3].goalsScored = 4
-                tournamentList[0].registeredTeams[3].goalsConceded = 5
-
-
 
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
@@ -561,12 +550,6 @@ class KicklyTools {
                     )
                 )
 
-                tournamentList[0].registeredTeams[4].matches = 2
-                tournamentList[0].registeredTeams[4].points = 7
-                tournamentList[0].registeredTeams[4].goalsScored = 5
-                tournamentList[0].registeredTeams[4].goalsConceded = 7
-
-
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
                         Team(
@@ -576,14 +559,6 @@ class KicklyTools {
                         ), 'B'
                     )
                 )
-
-
-                tournamentList[0].registeredTeams[5].matches = 4
-                tournamentList[0].registeredTeams[5].points = 12
-                tournamentList[0].registeredTeams[5].goalsScored = 9
-                tournamentList[0].registeredTeams[5].goalsConceded = 13
-
-
 
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
@@ -595,15 +570,6 @@ class KicklyTools {
                     )
                 )
 
-
-
-                tournamentList[0].registeredTeams[6].matches = 4
-                tournamentList[0].registeredTeams[6].points = 11
-                tournamentList[0].registeredTeams[6].goalsScored = 10
-                tournamentList[0].registeredTeams[6].goalsConceded = 12
-
-
-
                 tournamentList[0].registeredTeams.add(
                     Tournament.RegisteredTeam(
                         Team(
@@ -613,12 +579,6 @@ class KicklyTools {
                         ), 'B'
                     )
                 )
-
-
-                tournamentList[0].registeredTeams[7].matches = 4
-                tournamentList[0].registeredTeams[7].points = 14
-                tournamentList[0].registeredTeams[7].goalsScored = 16
-                tournamentList[0].registeredTeams[7].goalsConceded = 12
 
                 for (registeredTeam in tournamentList[0].registeredTeams) {
                     registeredTeam.team.location = Location( registeredTeam.team.name + " stadium")
@@ -713,6 +673,204 @@ class KicklyTools {
                 )
 
                 for (match in tournamentList[0].matches) {
+                    match.location = match.team1.team.location!!
+                }
+
+
+
+
+
+
+                //endregion
+
+                //endregion
+
+                //region create tournament Kotlin World Championship
+
+                // create the tournament
+                tournamentList.add(
+                    Tournament(
+                        Icon.createWithResource(context, R.drawable.spotify),
+                        "Kotlin World Championship",
+                        Stage.GROUPSTAGE
+                    )
+                )
+
+                //region add registered teams
+                tournamentList[1].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.haiti
+                            ), "Haiti"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[1].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.hungary
+                            ), "Hungary"
+                        ), 'A'
+                    )
+                )
+
+
+                tournamentList[1].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.guernsey
+                            ), "Guernsey"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[1].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.honduras
+                            ), "Honduras"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[1].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.indonesia
+                            ), "Indonesia"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[1].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.israel
+                            ), "Israel"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[1].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.guam
+                            ), "Guam"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[1].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.gibraltar
+                            ), "Gibraltar"
+                        ), 'B'
+                    )
+                )
+
+                for (registeredTeam in tournamentList[1].registeredTeams) {
+                    registeredTeam.team.location = Location( registeredTeam.team.name + " stadium")
+                }
+
+                tournamentList[1].matches.add(
+                    Match(
+                        tournamentList[1].registeredTeams[0],
+                        tournamentList[1].registeredTeams[3],
+                        LocalDateTime.of(2020, 6, 27, 20, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[1].matches.add(
+                    Match(
+                        tournamentList[1].registeredTeams[3],
+                        tournamentList[1].registeredTeams[0],
+                        LocalDateTime.of(2020, 6, 9, 20, 30),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[1].matches.add(
+                    Match(
+                        tournamentList[1].registeredTeams[0],
+                        tournamentList[1].registeredTeams[2],
+                        LocalDateTime.of(2020, 7, 7, 21, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[1].matches.add(
+                    Match(
+                        tournamentList[1].registeredTeams[2],
+                        tournamentList[1].registeredTeams[0],
+                        LocalDateTime.of(2020, 7, 7, 19, 30),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[1].matches.add(
+                    Match(
+                        tournamentList[1].registeredTeams[0],
+                        tournamentList[1].registeredTeams[1],
+                        LocalDateTime.of(2020, 8, 7, 20, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[1].matches.add(
+                    Match(
+                        tournamentList[1].registeredTeams[1],
+                        tournamentList[1].registeredTeams[0],
+                        LocalDateTime.of(2020, 3, 28, 20, 30),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[1].matches.last().finish(2,2)
+
+                tournamentList[1].matches.add(
+                    Match(
+                        tournamentList[1].registeredTeams[0],
+                        tournamentList[1].registeredTeams[1],
+                        LocalDateTime.of(2020, 2, 10, 20, 45),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[1].matches.last().finish(3,2)
+
+
+                tournamentList[1].matches.add(
+                    Match(
+                        tournamentList[1].registeredTeams[0],
+                        tournamentList[1].registeredTeams[4],
+                        LocalDateTime.of(2020, 1, 2, 21, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[1].matches.last().finish(1,3)
+
+                tournamentList[1].matches.add(
+                    Match(
+                        tournamentList[1].registeredTeams[4],
+                        tournamentList[1].registeredTeams[0],
+                        LocalDateTime.of(2020, 9, 5, 20, 0),
+                        Location("location")
+                    )
+                )
+
+                for (match in tournamentList[1].matches) {
                     match.location = match.team1.team.location!!
                 }
 

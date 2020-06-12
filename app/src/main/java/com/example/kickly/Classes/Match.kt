@@ -12,15 +12,15 @@ class Match(team1: Tournament.RegisteredTeam, team2 : Tournament.RegisteredTeam,
     var dateTime : LocalDateTime = dateTime
     var location = location
     var isFinished : Boolean = false // if the game has been played and finished
-    private var _team1Score : Int? = null
-    var team1Score : Int? = null
+    private var _team1Score = 0
+    var team1Score = 0
         get() {
             // throw exception if the game isn't finished
             if (isFinished) {return _team1Score}
             else throw(Exception("game isn't finished. It's expected to happen on " + dateTime.toString()))
         }
-    private var _team2Score : Int? = null
-    var team2Score : Int? = null
+    private var _team2Score  = 0
+    var team2Score = 0
         get() {
             // throw exception if the game isn't finished
             if (isFinished) {return _team2Score}
@@ -74,9 +74,36 @@ class Match(team1: Tournament.RegisteredTeam, team2 : Tournament.RegisteredTeam,
 
     // to finish a match and set scores
     fun finish(team1Score : Int, team2Score : Int){
+
         isFinished = true
+
+        // scores
         this._team1Score = team1Score
         this._team2Score = team2Score
+
+        // increment team matches
+        this.team1.matches++
+        this.team2.matches++
+
+        // increase team points
+        if (isTie() == true) {
+            this.team1.points += 1
+            this.team2.points += 1
+
+        } else if (winner() == this.team1) {
+            this.team1.points += 3
+        }
+
+        else if (winner() == this.team2) {
+            this.team2.points += 3
+        }
+
+        // increase goals scored and conceded
+        this.team1.goalsScored = this.team1Score
+        this.team2.goalsScored = this.team2Score
+        this.team1.goalsConceded = this.team2Score
+        this.team2.goalsConceded = this.team1Score
+
     }
 
 }

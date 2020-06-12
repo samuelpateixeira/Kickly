@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.WatchingActivities.TournamentActivities.MatchesActivity"></activity>
+        <activity android:name=".Activities.WatchingActivities.TournamentActivities.MatchPrognosis"></activity>
+        <activity android:name=".Activities.WatchingActivities.TournamentActivities.MatchStats" />
+        <activity android:name=".Activities.WatchingActivities.TournamentActivities.MatchesActivity" />
         <activity android:name=".Activities.WatchingActivities.TournamentActivities.TeamsActivity" />
         <activity android:name=".Activities.WatchingActivities.TournamentActivity" />
         <activity android:name=".MainMenuActivity" />
