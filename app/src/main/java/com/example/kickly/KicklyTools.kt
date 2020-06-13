@@ -4,16 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kickly.Activities.ManageActivities.EditLocation
 import com.example.kickly.Activities.WatchingActivities.TournamentActivities.MatchPrognosis
 import com.example.kickly.Activities.WatchingActivities.TournamentActivities.MatchStats
 import com.example.kickly.Activities.WatchingActivities.TournamentActivity
@@ -23,8 +24,8 @@ import kotlinx.android.synthetic.main.activity_main_list_item.view.*
 import kotlinx.android.synthetic.main.list_view_groups_item.view.*
 import kotlinx.android.synthetic.main.match.view.*
 import kotlinx.android.synthetic.main.team_points_item.view.*
-import java.text.DateFormat
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.tournament_summary.view.*
+import kotlinx.android.synthetic.main.venue.view.*
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -112,18 +113,28 @@ class KicklyTools {
                     tournamentSummaryView.findViewById<TextView>(R.id.tvTournamentName)
                 var tvCurrentStage =
                     tournamentSummaryView.findViewById<TextView>(R.id.tvCurrentStage)
+
+                //previous match
+                var previousMatchView = tournamentSummaryView.findViewById<LinearLayout>(R.id.previous_match)
                 var tvPreviousMatchResults =
                     tournamentSummaryView.findViewById<TextView>(R.id.tvPreviousMatchResults)
                 var imgPreviousMatchTeam1Icon =
                     tournamentSummaryView.findViewById<ImageView>(R.id.imgPreviousMatchTeam1Icon)
                 var imgPreviousMatchTeam2Icon =
                     tournamentSummaryView.findViewById<ImageView>(R.id.imgPreviousMatchTeam2Icon)
+
+                //next match
+                var nextMatchView = tournamentSummaryView.findViewById<LinearLayout>(R.id.next_match)
                 var imgNextMatchTeam1Icon =
                     tournamentSummaryView.findViewById<ImageView>(R.id.imgNextMatchTeam1Icon)
                 var imgNextMatchTeam2Icon =
                     tournamentSummaryView.findViewById<ImageView>(R.id.imgNextMatchTeam2Icon)
                 var tvNextMatchTimeLeft =
                     tournamentSummaryView.findViewById<TextView>(R.id.tvNextMatchTimeLeft)
+
+                //no matches
+                var tvNoMatchesScheduled = tournamentSummaryView.tvNoMatchesScheduled
+
                 //endregion
 
                 //region populate the views
@@ -131,34 +142,65 @@ class KicklyTools {
                 imgTournamentIcon.setImageIcon(currentTournament!!.icon)
                 tvTournamentName.text = currentTournament.name
                 tvCurrentStage.text = currentTournament.currentStage!!.toString(context)
-                tvPreviousMatchResults.text =
-                    currentTournament.previousMatch()!!.team1Score.toString() + " - " + currentTournament.previousMatch()!!.team2Score.toString()
-                imgPreviousMatchTeam1Icon.background =
-                    currentTournament.previousMatch()!!.team1!!.team.icon.loadDrawable(context)
-                imgPreviousMatchTeam2Icon.background =
-                    currentTournament.previousMatch()!!.team2!!.team.icon.loadDrawable(context)
-                imgNextMatchTeam1Icon.setImageIcon(currentTournament.nextMatch()!!.team1!!.team.icon)
-                imgNextMatchTeam2Icon.setImageIcon(currentTournament.nextMatch()!!.team2!!.team.icon)
-                tvNextMatchTimeLeft.text =
-                    timeLeftString(currentTournament.nextMatch()!!.dateTime!!, context)
 
-                //set strokes according to winner/looser or tie
-                // tie
-                if (currentTournament.previousMatch()!!.isTie()!!) {
-                    imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
-                    imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
-                } else
-                // team 1 winner
-                    if (currentTournament.previousMatch()!!.winner() == currentTournament.previousMatch()!!.team1) {
-                        imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_green))
-                        imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_red))
-                        // team 2 winner
-                    } else if (currentTournament.previousMatch()!!.winner() == currentTournament.previousMatch()!!.team2) {
-                        imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_red))
-                        imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_green))
-                    } else {
-                        throw(Exception("nothing makes sense. There is no tie and no winner."))
-                    }
+                //previous match
+                if (currentTournament.previousMatch() != null) {
+
+                    tvPreviousMatchResults.text =
+                        currentTournament.previousMatch()!!.team1Score.toString() + " - " + currentTournament.previousMatch()!!.team2Score.toString()
+                    imgPreviousMatchTeam1Icon.background =
+                        currentTournament.previousMatch()!!.team1!!.team.icon.loadDrawable(context)
+                    imgPreviousMatchTeam2Icon.background =
+                        currentTournament.previousMatch()!!.team2!!.team.icon.loadDrawable(context)
+
+                    //set strokes according to winner/looser or tie
+                    // tie
+                    if (currentTournament.previousMatch()!!.isTie()!!) {
+                        imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
+                        imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_yellow))
+                    } else
+                    // team 1 winner
+                        if (currentTournament.previousMatch()!!.winner() == currentTournament.previousMatch()!!.team1) {
+                            imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_green))
+                            imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_red))
+                            // team 2 winner
+                        } else if (currentTournament.previousMatch()!!.winner() == currentTournament.previousMatch()!!.team2) {
+                            imgPreviousMatchTeam1Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_red))
+                            imgPreviousMatchTeam2Icon.setImageDrawable(context.getDrawable(R.drawable.stroke_green))
+                        } else {
+                            throw(Exception("nothing makes sense. There is no tie and no winner."))
+                        }
+
+                    previousMatchView.visibility = View.VISIBLE
+
+                } else {
+                    previousMatchView.visibility = View.GONE
+                }
+
+                //next match
+                if (currentTournament.nextMatch() != null) {
+
+                    imgNextMatchTeam1Icon.setImageIcon(currentTournament.nextMatch()!!.team1!!.team.icon)
+                    imgNextMatchTeam2Icon.setImageIcon(currentTournament.nextMatch()!!.team2!!.team.icon)
+                    tvNextMatchTimeLeft.text =
+                        timeLeftString(currentTournament.nextMatch()!!.dateTime!!, context)
+
+                    nextMatchView.visibility = View.VISIBLE
+
+                } else {
+                    nextMatchView.visibility = View.GONE
+                }
+
+                //if there are no matches
+                if (currentTournament.nextMatch() == null && currentTournament.previousMatch() == null) {
+                    tvNoMatchesScheduled.visibility = View.VISIBLE
+                } else {
+                    tvNoMatchesScheduled.visibility = View.GONE
+                }
+
+
+
+
 
                 //endregion
 
@@ -174,7 +216,6 @@ class KicklyTools {
                 return tournamentSummaryView
 
             }
-
 
         }
 
@@ -307,8 +348,7 @@ class KicklyTools {
 
         }
 
-
-        class Matches(var context: Context, var matches: ArrayList<Match>) :
+        class Matches(var context: Context, var matches: ArrayList<Match>, var tournamentID : Int) :
             RecyclerView.Adapter<Matches.ItemViewHolder>() {
 
             class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -385,9 +425,50 @@ class KicklyTools {
 
                 }
 
+                buttonIntent.putExtra("tournamentID", tournamentID )
+                buttonIntent.putExtra("matchID", position)
+
+
                 holder.button.setOnClickListener { context.startActivity(buttonIntent) }
 
                 //endregion
+
+
+            }
+
+        }
+
+        class Venues(var context: Context, var locations: ArrayList<Location>, var tournamentID : Int) :
+            RecyclerView.Adapter<Venues.ItemViewHolder>() {
+
+            class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                var tvVenueName = itemView.tvVenueName
+                var imgEdit = itemView.imgEdit
+            }
+
+            override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ItemViewHolder {
+                var inflater = LayoutInflater.from(context)
+                var view = inflater.inflate(R.layout.venue, parent, false)
+                return ItemViewHolder(view)
+            }
+
+            override fun getItemCount(): Int {
+                return locations.size
+            }
+
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
+                // get current match
+                var venue = locations[position]
+
+                //populate the view
+                holder.tvVenueName.text = venue.name
+
+                //set click listener
+                var clickIntent = Intent(context, EditLocation::class.java)
+                clickIntent.putExtra("venueID", position)
+
+                //holder.imgEdit.setOnClickListener { startActivityForResult(clickIntent) }
 
 
             }
@@ -638,7 +719,17 @@ class KicklyTools {
                     )
                 )
 
-                tournamentList[0].matches.last().finish(3,2)
+                tournamentList[0].matches.last().finish(3,2,
+                    Stats(54,52,
+                        63,54,
+                        1,2,
+                        3,2,
+                        1,1,
+                        3,4,
+                        3,1,
+                        48)
+
+                )
 
                 tournamentList[0].matches.add(
                     Match(
@@ -649,7 +740,17 @@ class KicklyTools {
                     )
                 )
 
-                tournamentList[0].matches.last().finish(2,2)
+                tournamentList[0].matches.last().finish(2,2,
+                    Stats(65,47,
+                        40,72,
+                        4,3,
+                        3,0,
+                        0,2,
+                        3,5,
+                        2,1,
+                        52)
+
+                )
 
 
                 tournamentList[0].matches.add(
@@ -661,7 +762,17 @@ class KicklyTools {
                     )
                 )
 
-                tournamentList[0].matches.last().finish(2,1)
+                tournamentList[0].matches.last().finish(2,1,
+                    Stats(57,65,
+                        44,47,
+                        1,3,
+                        4,1,
+                        1,1,
+                        1,2,
+                        4,3,
+                        57)
+
+                )
 
                 tournamentList[0].matches.add(
                     Match(
@@ -836,8 +947,6 @@ class KicklyTools {
                     )
                 )
 
-                tournamentList[1].matches.last().finish(2,2)
-
                 tournamentList[1].matches.add(
                     Match(
                         tournamentList[1].registeredTeams[0],
@@ -847,9 +956,6 @@ class KicklyTools {
                     )
                 )
 
-                tournamentList[1].matches.last().finish(3,2)
-
-
                 tournamentList[1].matches.add(
                     Match(
                         tournamentList[1].registeredTeams[0],
@@ -858,8 +964,6 @@ class KicklyTools {
                         Location("location")
                     )
                 )
-
-                tournamentList[1].matches.last().finish(1,3)
 
                 tournamentList[1].matches.add(
                     Match(
@@ -883,38 +987,295 @@ class KicklyTools {
 
                 //endregion
 
-                /*
-
-                //region create tournament Knight Tournament
+                //region create tournament Basic Win
 
                 // create the tournament
                 tournamentList.add(
                     Tournament(
-                        Icon.createWithResource(
-                            context, R.drawable.knight_tournament
-                        ),
-                        "Knight Tournament",
-                        Stage.KNOCKOUTSTAGE
-                    )
-                )
-
-
-                //endregion
-
-                //region create Medal of Honor tournament
-
-                // create the tournament
-                tournamentList.add(
-                    Tournament(
-                        Icon.createWithResource(context, R.drawable.medal_of_honor),
-                        "Medal of Honor",
+                        Icon.createWithResource(context, R.drawable.icon_profile_black),
+                        "Basic Win",
                         Stage.GROUPSTAGE
                     )
                 )
 
+                //region add registered teams
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.hungary
+                            ), "hungary"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.gibraltar
+                            ), "Gibraltar"
+                        ), 'A'
+                    )
+                )
+
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.guyana
+                            ), "Guyana"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.haiti
+                            ), "Haiti"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.honduras
+                            ), "Honduras"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.greenland
+                            ), "Greenland"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.iran
+                            ), "Iran"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.greece
+                            ), "Greece"
+                        ), 'B'
+                    )
+                )
+
+                for (registeredTeam in tournamentList[2].registeredTeams) {
+                    registeredTeam.team.location = Location( registeredTeam.team.name + " stadium")
+                }
+
+                tournamentList[2].matches.add(
+                    Match(
+                        tournamentList[2].registeredTeams[1],
+                        tournamentList[2].registeredTeams[0],
+                        LocalDateTime.of(2020, 3, 28, 20, 30),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[2].matches.last().finish(2,2,
+                    Stats(69,42,
+                        32,68,
+                        3,4,
+                        2,1,
+                        1,0,
+                        3,4,
+                        3,5,
+                        65)
+
+                )
+
+                tournamentList[2].matches.add(
+                    Match(
+                        tournamentList[2].registeredTeams[0],
+                        tournamentList[2].registeredTeams[1],
+                        LocalDateTime.of(2020, 2, 10, 20, 45),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[2].matches.last().finish(3,2,
+                    Stats(65,45,
+                        36,27,
+                        3,3,
+                        2,0,
+                        0,1,
+                        2,2,
+                        3,7,
+                        33)
+
+                )
+
+
+                tournamentList[2].matches.add(
+                    Match(
+                        tournamentList[2].registeredTeams[0],
+                        tournamentList[2].registeredTeams[4],
+                        LocalDateTime.of(2020, 1, 2, 21, 0),
+                        Location("location")
+                    )
+                )
+
+                tournamentList[2].matches.last().finish(1,3,
+                    Stats(79,52,
+                        42,78,
+                        2,3,
+                        4,0,
+                        0,1,
+                        2,4,
+                        3,7,
+                        44)
+                )
+
+                for (match in tournamentList[2].matches) {
+                    match.location = match.team1.team.location!!
+                }
+
+
+
+
+
+
                 //endregion
 
-                 */
+                //endregion
+
+                //region create tournament No Matches
+
+                // create the tournament
+                tournamentList.add(
+                    Tournament(
+                        Icon.createWithResource(context, R.drawable.youtube),
+                        "No Matches",
+                        Stage.GROUPSTAGE
+                    )
+                )
+
+                //region add registered teams
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.hungary
+                            ), "hungary"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.gibraltar
+                            ), "Gibraltar"
+                        ), 'A'
+                    )
+                )
+
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.guyana
+                            ), "Guyana"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.haiti
+                            ), "Haiti"
+                        ), 'A'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.honduras
+                            ), "Honduras"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.greenland
+                            ), "Greenland"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.iran
+                            ), "Iran"
+                        ), 'B'
+                    )
+                )
+
+                tournamentList[2].registeredTeams.add(
+                    Tournament.RegisteredTeam(
+                        Team(
+                            Icon.createWithResource(
+                                context, R.drawable.greece
+                            ), "Greece"
+                        ), 'B'
+                    )
+                )
+
+                for (registeredTeam in tournamentList[2].registeredTeams) {
+                    registeredTeam.team.location = Location( registeredTeam.team.name + " stadium")
+                }
+
+                for (match in tournamentList[2].matches) {
+                    match.location = match.team1.team.location!!
+                }
+
+
+
+
+
+
+                //endregion
+
+                //endregion
+
+
+
+
+                for (tournament in tournamentList) {
+                    tournament.orderMatches()
+                }
 
                 return tournamentList
             }

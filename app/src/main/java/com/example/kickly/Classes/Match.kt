@@ -2,7 +2,6 @@ package com.example.kickly
 
 import com.example.kickly.Classes.Location
 import java.time.LocalDateTime
-import java.util.*
 
 class Match(team1: Tournament.RegisteredTeam, team2 : Tournament.RegisteredTeam, dateTime: LocalDateTime, location : Location) {
 
@@ -26,6 +25,11 @@ class Match(team1: Tournament.RegisteredTeam, team2 : Tournament.RegisteredTeam,
             if (isFinished) {return _team2Score}
             else throw(Exception("game isn't finished. It's expected to happen on " + dateTime.toString()))
         }
+
+
+
+    var stats : Stats? = null
+
     //endregion
 
     // check if the game is a tie
@@ -73,7 +77,7 @@ class Match(team1: Tournament.RegisteredTeam, team2 : Tournament.RegisteredTeam,
     }
 
     // to finish a match and set scores
-    fun finish(team1Score : Int, team2Score : Int){
+    fun finish(team1Score : Int, team2Score : Int, stats: Stats){
 
         isFinished = true
 
@@ -104,6 +108,50 @@ class Match(team1: Tournament.RegisteredTeam, team2 : Tournament.RegisteredTeam,
         this.team1.goalsConceded = this.team2Score
         this.team2.goalsConceded = this.team1Score
 
+        this.stats = stats
+
     }
+
+}
+
+class Stats (    team1TotalAttempts : Int,
+                 team2TotalAttempts : Int,
+                 team1AttemptsOnTarget : Int,
+                 team2AttemptsOnTarget : Int,
+                 team1FoulsCommited : Int,
+                 team2FoulsCommited : Int,
+                 team1YellowCards : Int,
+                 team2YellowCards : Int,
+                 team1RedCards : Int,
+                 team2RedCards : Int,
+                 team1Offsides : Int,
+                 team2Offsides : Int,
+                 team1Corners : Int,
+                 team2Corners : Int,
+                 team1Possession : Int
+) {
+
+
+    var team1TotalAttempts = team1TotalAttempts
+    var team2TotalAttempts = team2TotalAttempts
+    var team1AttemptsOnTarget = team1AttemptsOnTarget
+    var team2AttemptsOnTarget = team2AttemptsOnTarget
+    var team1FoulsCommited = team1FoulsCommited
+    var team2FoulsCommited = team2FoulsCommited
+    var team1YellowCards = team1YellowCards
+    var team2YellowCards = team2YellowCards
+    var team1RedCards = team1RedCards
+    var team2RedCards = team2RedCards
+    var team1Offsides = team1Offsides
+    var team2Offsides = team2Offsides
+    var team1Corners = team1Corners
+    var team2Corners = team2Corners
+    var team1Possession = if (team1Possession > 100) {100} else if (team1Possession < 0) {0} else {team1Possession}
+        set(value) {if (value > 100) {field = 100} else if (value < 0) {field = 0}}
+    var team2Possession = 100 - team1Possession
+        private set
+        get() {field = 100 - team1Possession; return field
+        }
+
 
 }

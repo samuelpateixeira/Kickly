@@ -15,4 +15,26 @@
     <string name="group_stage">fase de grupos</string>
     <string name="knockout_stage">fase eliminatória</string>
     <string name="group_x">Grupo %1$s</string>
+    <string name="stats">estatísticas</string>
+    <string name="prognosis">prognóstico</string>
+    <string name="total_attempts">remates</string>
+    <string name="attempts_on_target">remates à baliza</string>
+    <string name="possession">posse de bola</string>
+    <string name="fouls_commited">faltas</string>
+    <string name="yellow_cards">cartões amarelos</string>
+    <string name="red_cards">cartões vermelhos</string>
+    <string name="offsides">foras de jogo</string>
+    <string name="corners">cantos</string>
+    <string name="big_stats">Estatísticas</string>
+    <string name="details">Detalhes</string>
+    <string name="finished">terminado</string>
+    <string name="teams_capitalized">Equipas</string>
+    <string name="stats_capitalized">Estatísticas</string>
+    <string name="no_matches_scheduled">sem partidas marcadas</string>
+    <string name="no_teams_registered">sem equipas registadas</string>
+    <string name="tournaments">Torneios</string>
+    <string name="locations">Locais</string>
+    <string name="manage_locations">Gerir Locais</string>
+    <string name="manage_teams">Gerir Equipas</string>
+    <string name="manage_tournaments">Gerir Torneios</string>
 </resources>

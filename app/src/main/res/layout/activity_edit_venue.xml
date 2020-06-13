@@ -4,17 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WatchingActivity">
-
-
-    <ListView
-        android:id="@+id/lvTournaments"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="8dp"
-        android:dividerHeight="8dp"
-        android:divider="#00ffffff"
-        android:paddingTop="8dp"
-        />
+    tools:context=".Activities.ManageActivities.EditLocation">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

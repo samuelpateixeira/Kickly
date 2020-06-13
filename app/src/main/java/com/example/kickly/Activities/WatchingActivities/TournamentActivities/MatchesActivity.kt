@@ -2,6 +2,7 @@ package com.example.kickly.Activities.WatchingActivities.TournamentActivities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
@@ -20,8 +21,19 @@ class MatchesActivity : AppCompatActivity() {
 
         tournamentList[tournamentID].orderMatches()
 
-        recyclerView.adapter = KicklyTools.Adapters.Matches(this, tournamentList[tournamentID].matches)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        if (tournamentList[tournamentID].matches.isNotEmpty()) {
 
+            recyclerView.adapter = KicklyTools.Adapters.Matches(
+                this,
+                tournamentList[tournamentID].matches,
+                tournamentID
+            )
+
+            recyclerView.layoutManager = LinearLayoutManager(this)
+
+        } else {
+            recyclerView.visibility = View.GONE
+            llNoMatchesScheduled.visibility = View.VISIBLE
+        }
     }
 }

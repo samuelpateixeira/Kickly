@@ -2,6 +2,7 @@ package com.example.kickly.Activities.WatchingActivities.TournamentActivities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kickly.KicklyTools
@@ -19,7 +20,15 @@ class TeamsActivity : AppCompatActivity() {
 
         var tournamentList = KicklyTools.Generate.tournamentList(this)
 
-        lvGroups.adapter = KicklyTools.Adapters.GroupsTeams(this, tournamentList[tournamentID].groupsArray())
-        lvGroups.layoutManager = LinearLayoutManager(this)
+        if (tournamentList[tournamentID].registeredTeams.isNotEmpty()) {
+
+            lvGroups.adapter =
+                KicklyTools.Adapters.GroupsTeams(this, tournamentList[tournamentID].groupsArray())
+            lvGroups.layoutManager = LinearLayoutManager(this)
+
+        } else {
+            lvGroups.visibility = View.GONE
+            llNoTeamsRegistered.visibility = View.VISIBLE
+        }
     }
 }

@@ -13,10 +13,30 @@
     <string name="matches">matches</string>
     <string name="now">now</string>
     <string name="teams">teams</string>
+    <string name="teams_capitalized">Teams</string>
     <string name="group_stage">group stage</string>
     <string name="knockout_stage">knockout stage</string>
     <string name="group_x">Group %1$s</string>
     <string name="stats">stats</string>
     <string name="prognosis">prognosis</string>
+    <string name="total_attempts">total attempts</string>
+    <string name="attempts_on_target">attempts on target</string>
+    <string name="fouls_commited">fouls commited</string>
+    <string name="yellow_cards">yellow cards</string>
+    <string name="red_cards">red cards</string>
+    <string name="offsides">offsides</string>
+    <string name="corners">corners</string>
+    <string name="possession">possession</string>
+    <string name="stats_capitalized">Stats</string>
+    <string name="details">Details</string>
+    <string name="finished">finished</string>
+    <string name="no_matches_scheduled">no matches scheduled</string>
+    <string name="no_teams_registered">no teams registered</string>
+    <string name="locations">Locations</string>
+    <string name="tournaments">Tournaments</string>
+    <string name="manage_tournaments">Manage Tournaments</string>
+    <string name="manage_teams">Manage Teams</string>
+    <string name="manage_locations">Manage Locations</string>
+    <string name="big_stats">Stats</string>
 
 </resources>

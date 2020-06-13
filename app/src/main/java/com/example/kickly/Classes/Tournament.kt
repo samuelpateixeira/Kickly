@@ -36,55 +36,90 @@ class Tournament( icon : Icon, name: String, currentStage : Stage ) {
 
     fun byGroup(): Map<Char, List<RegisteredTeam>> {return registeredTeams.groupBy { it.group  } }
 
-    fun previousMatches() : ArrayList<Match> {
+    fun previousMatches() : ArrayList<Match>? {
 
-        var previousMatches = ArrayList<Match>()
+        var previousMatches : ArrayList<Match>? = null
 
-        for (match in matches) {
-            if (match.isFinished) {
-                previousMatches.add(match)
+        matches?.let {
+
+            orderMatches()
+
+            previousMatches = ArrayList<Match>()
+
+            for (match in matches) {
+                if (match.isFinished) {
+                    previousMatches!!.add(match)
+                }
             }
         }
-
-        return previousMatches
-
-    }
-
-    fun nextMatches() : ArrayList<Match> {
-
-        var previousMatches = ArrayList<Match>()
-
-        for (match in matches) {
-            if (!match.isFinished) {
-                previousMatches.add(match)
-            }
-        }
-
         return previousMatches
     }
 
-    fun previousMatch() : Match {
+    fun nextMatches() : ArrayList<Match>? {
 
-        var previousMatch = previousMatches().last()
+        var nextMatches : ArrayList<Match>? = null
 
-        for (match in previousMatches()) {
+        matches?.let {
 
-            if (KicklyTools.timeDifference(previousMatch.dateTime!! ,match.dateTime!!) > 0)
-                previousMatch = match
+            orderMatches()
+
+            nextMatches = ArrayList<Match>()
+
+            for (match in matches) {
+                if (!match.isFinished) {
+                    nextMatches!!.add(match)
+                }
+            }
+        }
+
+        return nextMatches
+    }
+
+    fun previousMatch() : Match? {
+
+        var previousMatch : Match? = null
+
+        previousMatches()?.let {
+
+            if (!it.isEmpty()) {
+
+                previousMatch = it.last()
+
+                for (match in it) {
+
+                    if (KicklyTools.timeDifference(
+                            previousMatch!!.dateTime!!,
+                            match.dateTime!!
+                        ) > 0
+                    )
+                        previousMatch = match
+                }
+
+            }
         }
 
         return previousMatch
 
     }
 
-    fun nextMatch() : Match {
+    fun nextMatch() : Match? {
 
-        var nextMatch = nextMatches().last()
+        var nextMatch : Match? = null
+        nextMatches()?.let {
+            if (!it.isEmpty()) {
 
-        for (match in nextMatches()) {
+                nextMatch = it.last()
 
-            if (KicklyTools.timeDifference(nextMatch.dateTime!! ,match.dateTime!!) < 0)
-                nextMatch = match
+
+
+                for (match in it) {
+
+                    if (KicklyTools.timeDifference(nextMatch!!.dateTime!!, match.dateTime!!) < 0)
+                        nextMatch = match
+                }
+
+            }
+
         }
 
         return nextMatch
@@ -125,16 +160,27 @@ class Tournament( icon : Icon, name: String, currentStage : Stage ) {
 
     fun orderMatches() {
 
-        var orderedMatches : List<Match> =
-            matches.sortedBy { KicklyTools.timeDifference( LocalDateTime.now(), it.dateTime ) }
+        matches?.let {
+            if (!it.isEmpty()) {
 
-        var orderedMatchesArrayList : ArrayList<Match> = ArrayList<Match>()
+                var orderedMatches: List<Match> =
+                    matches.sortedBy {
+                        KicklyTools.timeDifference(
+                            LocalDateTime.now(),
+                            it.dateTime
+                        )
+                    }
 
-        for (match in orderedMatches) {
-            orderedMatchesArrayList.add(match)
+                var orderedMatchesArrayList: ArrayList<Match> = ArrayList<Match>()
+
+                for (match in orderedMatches) {
+                    orderedMatchesArrayList.add(match)
+                }
+
+                matches = orderedMatchesArrayList
+
+            }
         }
-
-        matches = orderedMatchesArrayList
 
     }
 

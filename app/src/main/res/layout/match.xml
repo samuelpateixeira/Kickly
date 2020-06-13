@@ -7,7 +7,7 @@
     android:background="@drawable/rounded_corners_background"
     android:backgroundTint="@color/surface"
     android:orientation="vertical"
-    android:layout_marginBottom="16dp">
+    android:layout_marginTop="8dp">
 
     <TextView
         android:id="@+id/finished"
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/tie"
         android:background="@drawable/rounded_top_corners_background"
-        android:text="finished"
+        android:text="@string/finished"
         android:textAlignment="center"
         android:textColor="@color/onTie"
         android:paddingVertical="4dp"
@@ -107,7 +107,7 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/date"
+                android:drawableStart="@drawable/date"
                 android:text="May the 4th be with you"
                 android:textColor="@color/onSurface"
                 android:drawablePadding="8dp"
@@ -118,7 +118,7 @@
                 android:id="@+id/stage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/groups"
+                android:drawableStart="@drawable/groups"
                 android:text="A"
                 android:textColor="@color/onSurface"
                 android:drawablePadding="8dp"
@@ -130,7 +130,7 @@
             android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/location"
+            android:drawableStart="@drawable/location"
             android:text="Moe's"
             android:textColor="@color/onSurface"
             android:drawablePadding="8dp"
