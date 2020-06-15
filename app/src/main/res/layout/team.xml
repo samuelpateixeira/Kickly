@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp"
+        android:baselineAligned="false"
+    >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@drawable/rounded_corners_background"
+            android:backgroundTint="@color/surface"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:id="@+id/imgIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/drunk_fighters"
+                android:layout_gravity="center"
+                />
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
+
+                <TextView
+                    android:id="@+id/tvTeamName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="Drunk Fighters"
+                    android:textColor="@color/onSurface"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvLocationName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="Location Name"
+                    android:textColor="@color/onSurface"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgEdit"
+                android:layout_gravity="center"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="7dp"
+                android:src="@drawable/icon_edit"
+                android:tint="@color/onBackground2"
+                android:background="?android:attr/selectableItemBackground"
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+

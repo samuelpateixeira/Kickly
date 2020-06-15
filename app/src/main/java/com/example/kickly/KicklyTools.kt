@@ -1,5 +1,6 @@
 package com.example.kickly
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -7,25 +8,32 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kickly.Activities.ManageActivities.EditLocation
+import com.example.kickly.Activities.ManageActivities.ManageLocation
+import com.example.kickly.Activities.ManageActivities.ManageTeam
+import com.example.kickly.Activities.ManageActivities.TeamImagePicker
 import com.example.kickly.Activities.WatchingActivities.TournamentActivities.MatchPrognosis
 import com.example.kickly.Activities.WatchingActivities.TournamentActivities.MatchStats
 import com.example.kickly.Activities.WatchingActivities.TournamentActivity
+import com.example.kickly.Activities.editCode
 import com.example.kickly.Classes.Location
 import com.example.kickly.Classes.Stage
 import kotlinx.android.synthetic.main.activity_main_list_item.view.*
+import kotlinx.android.synthetic.main.activity_manage_team.view.*
+import kotlinx.android.synthetic.main.icon.view.*
 import kotlinx.android.synthetic.main.list_view_groups_item.view.*
 import kotlinx.android.synthetic.main.match.view.*
 import kotlinx.android.synthetic.main.team_points_item.view.*
 import kotlinx.android.synthetic.main.tournament_summary.view.*
-import kotlinx.android.synthetic.main.venue.view.*
+import kotlinx.android.synthetic.main.location.view.*
+import kotlinx.android.synthetic.main.location.view.imgEdit
+import kotlinx.android.synthetic.main.location.view.tvLocationName
+import kotlinx.android.synthetic.main.match.view.button
+import kotlinx.android.synthetic.main.team.view.*
+import kotlinx.android.synthetic.main.team_points_item.view.tvTeamName
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -438,17 +446,19 @@ class KicklyTools {
 
         }
 
-        class Venues(var context: Context, var locations: ArrayList<Location>, var tournamentID : Int) :
-            RecyclerView.Adapter<Venues.ItemViewHolder>() {
+        class Locations(var context: Context, var locations: ArrayList<Location>) :
+            RecyclerView.Adapter<Locations.ItemViewHolder>() {
 
             class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-                var tvVenueName = itemView.tvVenueName
+                var tvLocationName: TextView = itemView.tvLocationName
                 var imgEdit = itemView.imgEdit
+                var createCode = 1
+                var editCode = 2
             }
 
             override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ItemViewHolder {
                 var inflater = LayoutInflater.from(context)
-                var view = inflater.inflate(R.layout.venue, parent, false)
+                var view = inflater.inflate(R.layout.location, parent, false)
                 return ItemViewHolder(view)
             }
 
@@ -459,21 +469,109 @@ class KicklyTools {
             override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
                 // get current match
-                var venue = locations[position]
+                var location = locations[position]
 
                 //populate the view
-                holder.tvVenueName.text = venue.name
+                holder.tvLocationName.text = location.name
 
                 //set click listener
-                var clickIntent = Intent(context, EditLocation::class.java)
-                clickIntent.putExtra("venueID", position)
+                var clickIntent = Intent(context, ManageLocation::class.java)
+                clickIntent.putExtra("locationID", position)
+                clickIntent.putExtra("requestCode", editCode)
 
-                //holder.imgEdit.setOnClickListener { startActivityForResult(clickIntent) }
+                holder.imgEdit.setOnClickListener { (context as Activity).startActivityForResult(clickIntent, holder.editCode) }
 
 
             }
 
         }
+
+
+        class Teams(var context: Context, var teams: ArrayList<Team>) :
+            RecyclerView.Adapter<Teams.ItemViewHolder>() {
+
+            class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                var imgIcon = itemView.findViewById<ImageView>(R.id.imgIcon)
+                var tvLocationName: TextView = itemView.tvLocationName
+                var tvTeamName = itemView.tvTeamName
+                var imgEdit = itemView.imgEdit
+                var createCode = 1
+                var editCode = 2
+            }
+
+            override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ItemViewHolder {
+                var inflater = LayoutInflater.from(context)
+                var view = inflater.inflate(R.layout.team, parent, false)
+                return ItemViewHolder(view)
+            }
+
+            override fun getItemCount(): Int {
+                return teams.size
+            }
+
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
+                // get current match
+                var team = teams[position]
+
+                //populate the view
+                holder.tvTeamName.text = team.name
+                holder.tvLocationName.text = team.location!!.name
+                holder.imgIcon.setImageIcon(team.icon)
+
+                //set click listener
+                var clickIntent = Intent(context, ManageTeam::class.java)
+                clickIntent.putExtra("teamID", position)
+                clickIntent.putExtra("requestCode", editCode)
+
+                holder.imgEdit.setOnClickListener { (context as Activity).startActivityForResult(clickIntent, holder.editCode) }
+
+            }
+
+        }
+
+        class IconPicker(var context: Context, var icons: ArrayList<Icon>) :
+            RecyclerView.Adapter<IconPicker.ItemViewHolder>() {
+
+            class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                var img = itemView.img
+                var selectCode = 3
+            }
+
+            override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ItemViewHolder {
+                var inflater = LayoutInflater.from(context)
+                var view = inflater.inflate(R.layout.icon, parent, false)
+                return ItemViewHolder(view)
+            }
+
+            override fun getItemCount(): Int {
+                return icons.size
+            }
+
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
+                var resultIntent = Intent()
+
+                var icon = icons[position]
+
+                //set click listener
+                resultIntent.putExtra("iconID", position)
+                resultIntent.putExtra("requestCode", holder.selectCode)
+
+                holder.img.setImageIcon(icon)
+
+                holder.img.setOnClickListener {
+
+                    (context as Activity).setResult(Activity.RESULT_OK, resultIntent)
+                    (context as Activity).finish()
+
+                }
+
+            }
+
+        }
+
+
 
     }
 
@@ -1280,7 +1378,22 @@ class KicklyTools {
                 return tournamentList
             }
 
-            fun teams(context: Context): ArrayList<Team> {
+            fun locationList(context: Context) : ArrayList<Location> {
+
+                var locations = ArrayList<Location>()
+
+                locations.add(Location("Stadium of Liberty"))
+                locations.add(Location("Eiffel Stadium"))
+                locations.add(Location("International Stadium of the Android Developers"))
+                locations.add(Location("Googleplex"))
+                locations.add(Location("Stadium of love affairs"))
+                locations.add(Location("Stadium of laughter"))
+
+                return locations
+
+            }
+
+            fun teamList(context: Context): ArrayList<Team> {
                 var teams = ArrayList<Team>()
 
                 //region adding teams
@@ -1488,6 +1601,50 @@ class KicklyTools {
                 //endregion
 
                 return teams
+            }
+
+            fun iconList(context: Context) : ArrayList<Icon> {
+
+                var iconList = ArrayList<Icon>()
+
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.gabon
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.greenland
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.greece
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.guyana
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.iran
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.hungary
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.haiti
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.drunk_fighters
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.apple
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.spotify
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.android
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.kissers
+                ))
+
+                return iconList
             }
         }
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ManageActivities.ManageTeam"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:padding="32dp"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <ImageView
+        android:id="@+id/img_teamImage"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:src="@drawable/android"
+        android:layout_gravity="center"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Team Name"
+        android:textColor="@color/onBackground"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:id="@+id/edit_text_team_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Insert Name"
+        android:textColor="@color/onSurface"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/surface"
+        android:textColorHint="@color/onBackground2"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:layout_marginBottom="32dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textColor="@color/onBackground"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        />
+
+    <Spinner
+        android:id="@+id/spinner_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/onSurface"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/surface"
+        android:textColorHint="@color/onBackground2"
+        android:textSize="16sp"
+        android:layout_marginBottom="32dp"
+        />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="create"
+        android:textColor="@color/onPrimary"/>
+
+</LinearLayout>

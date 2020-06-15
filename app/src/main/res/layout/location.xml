@@ -6,14 +6,16 @@
     android:backgroundTint="@color/surface"
     android:padding="16dp"
     android:orientation="horizontal"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="8dp"
     >
 
     <TextView
-        android:id="@+id/tvVenueName"
+        android:id="@+id/tvLocationName"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="Venue Name"
+        android:text="@string/location_name"
         android:textColor="@color/onSurface"
         android:layout_gravity="center"
         />

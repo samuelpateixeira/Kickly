@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    tools:context=".Activities.ManageActivities.ManageLocation"
+    android:padding="32dp"
+    >
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/location_name"
+        android:textColor="@color/onBackground"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:id="@+id/edit_text_location_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Insert Name"
+        android:textColor="@color/onSurface"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/surface"
+        android:textColorHint="@color/onBackground2"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:layout_marginBottom="32dp"
+        />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="create"
+        android:textColor="@color/onPrimary"/>
+
+</LinearLayout>

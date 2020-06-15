@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.kickly.Activities.WatchingActivities.TournamentActivities.MatchesActivity
 import com.example.kickly.Activities.WatchingActivities.TournamentActivities.TeamsActivity
+import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.IconTextActivity
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
@@ -17,19 +18,12 @@ class TournamentActivity : AppCompatActivity() {
     //create a list of buttons (IconTextIntent)
     var buttonList = ArrayList<IconTextActivity>()
 
-    //create a list of Tournament
-    var tournamentList = ArrayList<Tournament>()
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tournament)
 
         // get intent extras
         var tournamentID = intent.extras!!.getInt("tournamentID")
-
-        // generate dummy tournaments
-        tournamentList = KicklyTools.Generate.tournamentList(this)
 
         // get current tournament
         var currentTournament = tournamentList[tournamentID]

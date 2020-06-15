@@ -3,6 +3,7 @@ package com.example.kickly.Activities.WatchingActivities.TournamentActivities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
 import kotlinx.android.synthetic.main.activity_match_stats.*
@@ -18,7 +19,6 @@ class MatchStats : AppCompatActivity() {
         var tournamentID = intent.extras!!.getInt("tournamentID")
         var matchID = intent.extras!!.getInt("matchID")
 
-        var tournamentList = KicklyTools.Generate.tournamentList(this)
         var match = tournamentList[tournamentID].matches[matchID]
 
         imgTeam1Icon.background = match.team1.team.icon.loadDrawable(this)

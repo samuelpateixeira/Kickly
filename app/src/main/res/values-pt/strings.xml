@@ -37,4 +37,5 @@
     <string name="manage_locations">Gerir Locais</string>
     <string name="manage_teams">Gerir Equipas</string>
     <string name="manage_tournaments">Gerir Torneios</string>
+    <string name="location_name">Nome do Local</string>
 </resources>

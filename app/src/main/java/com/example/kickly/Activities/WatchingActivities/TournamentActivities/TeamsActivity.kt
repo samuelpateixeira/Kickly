@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
 import kotlinx.android.synthetic.main.activity_teams.*
@@ -17,8 +18,6 @@ class TeamsActivity : AppCompatActivity() {
         title = getString(R.string.teams).capitalize()
 
         var tournamentID = intent.extras!!.getInt("tournamentID")
-
-        var tournamentList = KicklyTools.Generate.tournamentList(this)
 
         if (tournamentList[tournamentID].registeredTeams.isNotEmpty()) {
 

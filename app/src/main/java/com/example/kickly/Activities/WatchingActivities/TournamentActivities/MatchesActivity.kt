@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
 import kotlinx.android.synthetic.main.activity_matches.*
@@ -17,7 +19,6 @@ class MatchesActivity : AppCompatActivity() {
         title = getString(R.string.matches).capitalize()
 
         var tournamentID = intent.extras!!.getInt("tournamentID")
-        var tournamentList = KicklyTools.Generate.tournamentList(this)
 
         tournamentList[tournamentID].orderMatches()
 

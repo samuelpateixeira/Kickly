@@ -38,5 +38,8 @@
     <string name="manage_teams">Manage Teams</string>
     <string name="manage_locations">Manage Locations</string>
     <string name="big_stats">Stats</string>
+    <string name="location_name">Location Name</string>
+    <string name="finish">finish</string>
+    <string name="create">create</string>
 
 </resources>

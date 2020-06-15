@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.ManageLocations">
-
     <RelativeLayout
+        android:translationZ="2dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <FrameLayout
             android:id="@+id/btnCreate"
@@ -16,26 +17,37 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:padding="16dp"
-            android:background="@drawable/circle_text_background_green"
+            android:background="@drawable/circle_background"
             android:backgroundTint="@color/colorPrimary"
             android:layout_margin="32dp"
             >
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
 
+                >
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/icon_plus"
-                android:background="?android:attr/selectableItemBackground"
                 />
 
+        </FrameLayout>
         </FrameLayout>
 
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:translationZ="1dp"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
 </FrameLayout >
+
+
+
+
+
