@@ -232,7 +232,7 @@ class KicklyTools {
             objects: ArrayList<com.example.kickly.IconTextActivity>
         ) : ArrayAdapter<com.example.kickly.IconTextActivity>(
             context,
-            R.layout.activity_main_list_item,
+            R.layout.activity_main_bigger_list_item,
             objects
         ) {
 
@@ -241,7 +241,7 @@ class KicklyTools {
                 // inflate the view
                 var thisButton =
                     LayoutInflater.from(context)
-                        .inflate(R.layout.activity_main_list_item, parent, false)
+                        .inflate(R.layout.activity_main_bigger_list_item, parent, false)
 
                 // get current list item
                 var currentIconTextActivity = getItem(position)!!
@@ -599,7 +599,7 @@ class KicklyTools {
                 teams.add(
                     Team(
                         Icon.createWithResource(
-                            context, R.drawable.kissers
+                            context, R.drawable.icon_kiss
                         ),
                         "Kissers"
                     )
@@ -683,7 +683,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.gabon
+                                context, R.drawable.icon_airplane
                             ), "Gabon"
                         ), 'A'
                     )
@@ -693,7 +693,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.gambia
+                                context, R.drawable.icon_battery
                             ), "Gambia"
                         ), 'A'
                     )
@@ -703,7 +703,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.georgia
+                                context, R.drawable.icon_bed
                             ), "Georgia"
                         ), 'A'
                     )
@@ -713,7 +713,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.germany
+                                context, R.drawable.icon_building
                             ), "Germany"
                         ), 'A'
                     )
@@ -723,7 +723,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.ghana
+                                context, R.drawable.icon_case
                             ), "Ghana"
                         ), 'B'
                     )
@@ -733,7 +733,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.gibraltar
+                                context, R.drawable.icon_center
                             ), "Gibraltar"
                         ), 'B'
                     )
@@ -743,7 +743,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.greece
+                                context, R.drawable.icon_climb
                             ), "Greece"
                         ), 'B'
                     )
@@ -753,7 +753,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.greenland
+                                context, R.drawable.icon_clip
                             ), "Greenland"
                         ), 'B'
                     )
@@ -910,7 +910,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.haiti
+                                context, R.drawable.icon_compass
                             ), "Haiti"
                         ), 'A'
                     )
@@ -920,7 +920,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.hungary
+                                context, R.drawable.icon_devices
                             ), "Hungary"
                         ), 'A'
                     )
@@ -931,7 +931,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.guernsey
+                                context, R.drawable.icon_drinks
                             ), "Guernsey"
                         ), 'A'
                     )
@@ -941,7 +941,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.honduras
+                                context, R.drawable.icon_eye
                             ), "Honduras"
                         ), 'A'
                     )
@@ -951,7 +951,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.indonesia
+                                context, R.drawable.icon_eye_glasses
                             ), "Indonesia"
                         ), 'B'
                     )
@@ -961,7 +961,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.israel
+                                context, R.drawable.icon_glasses
                             ), "Israel"
                         ), 'B'
                     )
@@ -971,7 +971,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.guam
+                                context, R.drawable.icon_helicopter
                             ), "Guam"
                         ), 'B'
                     )
@@ -981,7 +981,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.gibraltar
+                                context, R.drawable.icon_hot
                             ), "Gibraltar"
                         ), 'B'
                     )
@@ -1101,7 +1101,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.hungary
+                                context, R.drawable.icon_kiss
                             ), "hungary"
                         ), 'A'
                     )
@@ -1111,7 +1111,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.gibraltar
+                                context, R.drawable.icon_light
                             ), "Gibraltar"
                         ), 'A'
                     )
@@ -1122,7 +1122,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.guyana
+                                context, R.drawable.icon_lightning
                             ), "Guyana"
                         ), 'A'
                     )
@@ -1132,7 +1132,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.haiti
+                                context, R.drawable.icon_money
                             ), "Haiti"
                         ), 'A'
                     )
@@ -1142,7 +1142,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.honduras
+                                context, R.drawable.icon_nature_person
                             ), "Honduras"
                         ), 'B'
                     )
@@ -1152,7 +1152,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.greenland
+                                context, R.drawable.icon_pizza
                             ), "Greenland"
                         ), 'B'
                     )
@@ -1162,7 +1162,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.iran
+                                context, R.drawable.icon_reading
                             ), "Iran"
                         ), 'B'
                     )
@@ -1172,7 +1172,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.greece
+                                context, R.drawable.icon_eye_glasses
                             ), "Greece"
                         ), 'B'
                     )
@@ -1274,7 +1274,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.hungary
+                                context, R.drawable.icon_sail
                             ), "hungary"
                         ), 'A'
                     )
@@ -1284,7 +1284,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.gibraltar
+                                context, R.drawable.icon_sattelite
                             ), "Gibraltar"
                         ), 'A'
                     )
@@ -1295,7 +1295,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.guyana
+                                context, R.drawable.icon_save
                             ), "Guyana"
                         ), 'A'
                     )
@@ -1305,7 +1305,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.haiti
+                                context, R.drawable.icon_server
                             ), "Haiti"
                         ), 'A'
                     )
@@ -1315,7 +1315,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.honduras
+                                context, R.drawable.icon_server_stack
                             ), "Honduras"
                         ), 'B'
                     )
@@ -1325,7 +1325,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.greenland
+                                context, R.drawable.icon_stick_man
                             ), "Greenland"
                         ), 'B'
                     )
@@ -1335,7 +1335,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.iran
+                                context, R.drawable.icon_time_start
                             ), "Iran"
                         ), 'B'
                     )
@@ -1345,7 +1345,7 @@ class KicklyTools {
                     Tournament.RegisteredTeam(
                         Team(
                             Icon.createWithResource(
-                                context, R.drawable.greece
+                                context, R.drawable.icon_toast
                             ), "Greece"
                         ), 'B'
                     )
@@ -1393,6 +1393,8 @@ class KicklyTools {
 
             }
 
+
+            /*
             fun teamList(context: Context): ArrayList<Team> {
                 var teams = ArrayList<Team>()
 
@@ -1602,32 +1604,12 @@ class KicklyTools {
 
                 return teams
             }
+*/
 
             fun iconList(context: Context) : ArrayList<Icon> {
 
                 var iconList = ArrayList<Icon>()
 
-                iconList.add(Icon.createWithResource( context,
-                    R.drawable.gabon
-                ))
-                iconList.add(Icon.createWithResource( context,
-                    R.drawable.greenland
-                ))
-                iconList.add(Icon.createWithResource( context,
-                    R.drawable.greece
-                ))
-                iconList.add(Icon.createWithResource( context,
-                    R.drawable.guyana
-                ))
-                iconList.add(Icon.createWithResource( context,
-                    R.drawable.iran
-                ))
-                iconList.add(Icon.createWithResource( context,
-                    R.drawable.hungary
-                ))
-                iconList.add(Icon.createWithResource( context,
-                    R.drawable.haiti
-                ))
                 iconList.add(Icon.createWithResource( context,
                     R.drawable.drunk_fighters
                 ))
@@ -1641,7 +1623,121 @@ class KicklyTools {
                     R.drawable.android
                 ))
                 iconList.add(Icon.createWithResource( context,
-                    R.drawable.kissers
+                    R.drawable.microsoft_windows
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.paypal
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.youtube
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_airplane
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_battery
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_bed
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_building
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_case
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_center
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_climb
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_clip
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_compass
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_devices
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_drinks
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_eye
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_eye_glasses
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_glasses
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_helicopter
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_hot
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_kiss
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_light
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_lightning
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_money
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_nature_person
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_pizza
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_reading
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_sail
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_sattelite
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_save
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_server
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_server_stack
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_stick_man
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_time_start
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_toast
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_trash
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_university
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_wave
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_wifi
+                ))
+                iconList.add(Icon.createWithResource( context,
+                    R.drawable.icon_world
                 ))
 
                 return iconList

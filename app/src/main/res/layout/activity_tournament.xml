@@ -30,7 +30,7 @@
                 android:id="@+id/tvTournamentName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tournament name"
+                android:text="@string/tournament_name"
                 android:textColor="@color/onSurface"
                 android:textSize="24sp"
                 android:fontFamily="sans-serif-medium"

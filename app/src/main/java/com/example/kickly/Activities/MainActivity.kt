@@ -4,13 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kickly.*
 import com.example.kickly.Classes.Kickly.Companion.iconList
 import com.example.kickly.Classes.Kickly.Companion.locationList
 import com.example.kickly.Classes.Kickly.Companion.teamList
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
-import com.example.kickly.IconTextActivity
-import com.example.kickly.KicklyTools
-import com.example.kickly.MainMenuActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,16 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         context = applicationContext
 
-        tournamentList = KicklyTools.Generate.tournamentList(this)
-        locationList = KicklyTools.Generate.locationList(this)
-        teamList = KicklyTools.Generate.teamList(this)
-        iconList = KicklyTools.Generate.iconList(this)
-
-
-        for (i in 0 until (teamList.size)){
-            teamList[i].location = locationList[i % (locationList.size)]
-        }
-
+        generate()
 
         // create intent for Main Menu
         var mainMenu = Intent(this, MainMenuActivity::class.java)
@@ -40,13 +29,53 @@ class MainActivity : AppCompatActivity() {
         // start first page
         startActivity(mainMenu)
 
+    }
 
+    override fun onResume() {
+        super.onResume()
+
+        // create intent for Main Menu
+        var mainMenu = Intent(this, MainMenuActivity::class.java)
+
+        // start first page
+        startActivity(mainMenu)
 
     }
 
     companion object {
         var context : Context? = null
             private set
+    }
+
+    fun generate () {
+
+        tournamentList = KicklyTools.Generate.tournamentList(this)
+        locationList = KicklyTools.Generate.locationList(this)
+        iconList = KicklyTools.Generate.iconList(this)
+        //teamList = KicklyTools.Generate.teamList(this)
+
+        var teamNames = resources.getStringArray(R.array.teamNames)
+
+        var i = 0
+        var j = 0
+
+        while( i < teamNames.size ) {
+
+            if (j >= iconList.size) { j = 0 }
+
+            teamList.add( Team( iconList[j], teamNames[i] ))
+
+            i++
+            j++
+        }
+
+
+
+        for (i in 0 until (teamList.size)){
+            teamList[i].location = locationList[i % (locationList.size)]
+        }
+
+
     }
 }
 

@@ -12,9 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="8dp"
-        android:dividerHeight="8dp"
+        android:dividerHeight="0dp"
         android:divider="#00ffffff"
-        android:paddingTop="8dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,7 +31,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Team Name"
+        android:text="@string/team_name"
         android:textColor="@color/onBackground"
         android:layout_marginBottom="8dp"
         android:textSize="16sp"
@@ -41,7 +41,7 @@
         android:id="@+id/edit_text_team_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Insert Name"
+        android:hint="@string/insert_name"
         android:textColor="@color/onSurface"
         android:background="@drawable/rounded_corners_background"
         android:backgroundTint="@color/surface"
@@ -54,7 +54,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Location"
+        android:text="@string/location"
         android:textColor="@color/onBackground"
         android:layout_marginBottom="8dp"
         android:textSize="16sp"
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_background"
         android:backgroundTint="@color/colorPrimary"
-        android:text="create"
+        android:text="@string/create"
         android:textColor="@color/onPrimary"/>
 
 </LinearLayout>

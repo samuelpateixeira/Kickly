@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
-                    android:text="Drunk Fighters"
+                    android:text="@string/team_name"
                     android:textColor="@color/onSurface"
                     android:textSize="16sp" />
 
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
-                    android:text="Location Name"
+                    android:text="@string/location_name"
                     android:textColor="@color/onSurface"
                     android:textSize="12sp" />
 

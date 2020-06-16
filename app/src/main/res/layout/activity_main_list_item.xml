@@ -14,7 +14,7 @@
         android:src="@drawable/icon_eye_white"
         android:scaleType="centerInside"
         android:tint="@color/onBackground2"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center"
 
         />
 
@@ -28,7 +28,6 @@
         android:layout_gravity="center_vertical"
         android:textSize="14sp"
         android:fontFamily="sans-serif"
-
         />
 
 </LinearLayout>

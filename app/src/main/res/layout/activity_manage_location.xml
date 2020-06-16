@@ -25,7 +25,7 @@
         android:id="@+id/edit_text_location_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Insert Name"
+        android:hint="@string/insert_name"
         android:textColor="@color/onSurface"
         android:background="@drawable/rounded_corners_background"
         android:backgroundTint="@color/surface"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_background"
         android:backgroundTint="@color/colorPrimary"
-        android:text="create"
+        android:text="@string/create"
         android:textColor="@color/onPrimary"/>
 
 </LinearLayout>

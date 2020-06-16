@@ -24,7 +24,6 @@ class TeamImagePicker : AppCompatActivity() {
             recyclerView.adapter = KicklyTools.Adapters.IconPicker(this, iconList)
             recyclerView.layoutManager = GridLayoutManager(this, 4)
 
-
         }
     }
 }

@@ -38,4 +38,18 @@
     <string name="manage_teams">Gerir Equipas</string>
     <string name="manage_tournaments">Gerir Torneios</string>
     <string name="location_name">Nome do Local</string>
+    <string name="finish">terminar</string>
+    <string name="create">criar</string>
+    <string name="please_choose_an_icon">por favor escolha um ícone</string>
+    <string name="please_choose_a_team_name">por favor escolha um nome de equipa</string>
+    <string name="please_choose_a_location_name">por favor escolha um nome de local</string>
+    <string name="team_name">nome da equipa</string>
+    <string name="insert_name">Inserir Nome</string>
+    <string name="location">Local</string>
+    <string name="tournament_name">Nome do torneio</string>
+    <string name="m_for_matches">J</string>
+    <string name="pts_for_points">Pts</string>
+    <string name="gs_for_goals_scored">GM</string>
+    <string name="gc_for_goals_conceded">GS</string>
+    <string name="dif_for_difference">Dif</string>
 </resources>

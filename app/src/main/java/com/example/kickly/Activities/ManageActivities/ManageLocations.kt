@@ -37,24 +37,6 @@ class ManageLocations : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        var locationName : String? = null
-
-        if (requestCode == editCode) {
-            if (resultCode == Activity.RESULT_OK) {
-
-                locationName = data!!.extras!!.getString("locationName")
-                var locationID = data.extras!!.getInt("locationID")
-
-                locationList[locationID].name = locationName!!
-            }
-        } else if (requestCode == createCode) {
-            if (resultCode == Activity.RESULT_OK) {
-
-                locationName = data!!.extras!!.getString("locationName")
-                locationList.add(com.example.kickly.Classes.Location(locationName!!))
-            }
-        }
-
         recyclerView.adapter!!.notifyDataSetChanged()
     }
 }

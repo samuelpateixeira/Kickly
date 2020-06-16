@@ -29,7 +29,7 @@ class ManageTeams : AppCompatActivity() {
 
 
         var intentCreate = Intent(this, ManageTeam::class.java)
-        intentCreate.putExtra("teamID", Kickly.teamList.size)
+        intentCreate.putExtra("teamID", teamList.size)
         intentCreate.putExtra("requestCode", createCode)
 
         btnCreate.setOnClickListener {

@@ -1,205 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/rounded_corners_background"
-    android:backgroundTint="@color/surface">
+    android:layout_width="match_parent"
+    >
 
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="?android:attr/selectableItemBackground"
-        >
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/surface"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp">
 
         <LinearLayout
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="?android:attr/selectableItemBackground"
             >
-
-            <ImageView
-                android:id="@+id/imgTournamentIcon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/icon_user_circle_gray"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
-
-                <TextView
-                    android:id="@+id/tvTournamentName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Tournament name"
-                    android:textColor="@color/onSurface"
-                    android:textSize="20sp"
-                    android:fontFamily="sans-serif-medium"
-                    />
-
-                <TextView
-                    android:id="@+id/tvCurrentStage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="current stage"
-                    android:textColor="@color/onSurface"
-                    android:textSize="14sp"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/matches"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/rounded_corners_background"
-            android:backgroundTint="@color/background"
-            android:layout_marginTop="16dp"
-            android:paddingVertical="8dp"
-            android:paddingHorizontal="16dp"
-            >
-
-            <LinearLayout
-                android:id="@+id/previous_match"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/previous_match"
-                    android:textColor="@color/onBackground"
-                    android:textSize="14sp"
-                    android:fontFamily="sans-serif"
-                    android:layout_gravity="center"
-                    />
+                <ImageView
+                    android:id="@+id/imgTournamentIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_user_circle_gray"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
-                    android:layout_gravity="center">
-
-                        <ImageView
-                            android:id="@+id/imgPreviousMatchTeam1Icon"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/stroke_green"
-                            android:background="@drawable/paypal"
-                            />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
 
                     <TextView
-                        android:id="@+id/tvPreviousMatchResults"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvTournamentName"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="0 - 0"
-                        android:textColor="@color/onBackground2"
-                        android:textSize="14sp"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_gravity="center"/>
-
-                    <ImageView
-                        android:id="@+id/imgPreviousMatchTeam2Icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/paypal"/>
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_gravity="center"
-                android:id="@+id/next_match"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/next_match"
-                    android:textColor="@color/onBackground"
-                    android:textSize="14sp"
-                    android:fontFamily="sans-serif"
-                    android:layout_gravity="center"
-                    />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_gravity="center"
-                    >
-
-                    <ImageView
-                        android:id="@+id/imgNextMatchTeam1Icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/paypal"
+                        android:text="@string/tournament_name"
+                        android:textColor="@color/onSurface"
+                        android:textSize="20sp"
+                        android:fontFamily="sans-serif-medium"
                         />
 
                     <TextView
+                        android:id="@+id/tvCurrentStage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="current stage"
+                        android:textColor="@color/onSurface"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/matches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_corners_background"
+                android:backgroundTint="@color/background"
+                android:layout_marginTop="16dp"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="16dp"
+                >
+
+                <LinearLayout
+                    android:id="@+id/previous_match"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="8dp"
+                    >
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="VS"
-                        android:textColor="@color/onBackground2"
+                        android:text="@string/previous_match"
+                        android:textColor="@color/onBackground"
                         android:textSize="14sp"
                         android:fontFamily="sans-serif"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        />
 
-                    <ImageView
-                        android:id="@+id/imgNextMatchTeam2Icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/paypal"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="center">
 
+                            <ImageView
+                                android:id="@+id/imgPreviousMatchTeam1Icon"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/stroke_green"
+                                android:background="@drawable/paypal"
+                                />
+
+                        <TextView
+                            android:id="@+id/tvPreviousMatchResults"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 - 0"
+                            android:textColor="@color/onBackground2"
+                            android:textSize="14sp"
+                            android:fontFamily="sans-serif"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_gravity="center"/>
+
+                        <ImageView
+                            android:id="@+id/imgPreviousMatchTeam2Icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/paypal"/>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:id="@+id/next_match"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/next_match"
+                        android:textColor="@color/onBackground"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif"
+                        android:layout_gravity="center"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_gravity="center"
+                        >
+
+                        <ImageView
+                            android:id="@+id/imgNextMatchTeam1Icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/paypal"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="VS"
+                            android:textColor="@color/onBackground2"
+                            android:textSize="14sp"
+                            android:fontFamily="sans-serif"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_gravity="center"/>
+
+                        <ImageView
+                            android:id="@+id/imgNextMatchTeam2Icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/paypal"/>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvNextMatchTimeLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/next_match"
+                        android:textColor="@color/onBackground2"
+                        android:textSize="10sp"
+                        android:fontFamily="sans-serif"
+                        android:layout_gravity="center"
+                        />
 
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tvNextMatchTimeLeft"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/next_match"
-                    android:textColor="@color/onBackground2"
-                    android:textSize="10sp"
-                    android:fontFamily="sans-serif"
+                    android:visibility="gone"
+                    android:id="@+id/tvNoMatchesScheduled"
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
                     android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_matches_scheduled"
+                    android:textColor="@color/onBackground"
                     />
 
             </LinearLayout>
 
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/tvNoMatchesScheduled"
-                android:layout_width="match_parent"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:text="@string/no_matches_scheduled"
-                android:textColor="@color/onBackground"
-                />
-
         </LinearLayout>
-
     </LinearLayout>
-</LinearLayout>
+
+</FrameLayout>

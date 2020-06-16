@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kickly.Classes.Kickly.Companion.iconList
 import com.example.kickly.Classes.Kickly.Companion.locationList
@@ -57,9 +58,33 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         if (intent.extras!!.getInt("requestCode") == editCode) {
 
+            teamList[teamID].icon
+
+            // find teams iconID from iconList index
+            iconID = null
+            var i = 0
+            var team = teamList[teamID]
+            while (iconID == null && i < iconList.size) {
+                if (team.icon == iconList[i]) { iconID = i }
+                i++
+            }
+
+
             img_teamImage.setImageIcon(teamList[teamID].icon)
             edit_text_team_name.setText(teamList[teamID].name)
             button.text = getString(R.string.finish).toUpperCase(Locale.ROOT)
+
+
+            // find team location locationID from locationList index
+            locationID == null
+            i = 0
+
+            while (locationID == null && i < locationList.size) {
+                if (teamList[teamID].location == locationList[i]) { locationID = i }
+                i++
+            }
+
+            spinner_location.setSelection(locationID!!)
 
         } else if (intent.extras!!.getInt("requestCode") == createCode) {
 
@@ -80,19 +105,31 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         button.setOnClickListener {
 
-            teamName = edit_text_team_name.text.toString()
+            if ( edit_text_team_name.text.toString() == "" ) {
+                Toast.makeText(this, getString(R.string.please_choose_a_team_name), Toast.LENGTH_SHORT).show()
+            } else if ( iconID == null ) {
+                Toast.makeText(this, getString(R.string.please_choose_an_icon), Toast.LENGTH_SHORT).show()
+            } else {
 
-            teamList.add(Team(iconList[iconID!!], teamName!!))
-            teamList.last().location = locationList[locationID!!]
+                teamName = edit_text_team_name.text.toString()
 
-            resultIntent.putExtra("teamName", teamName)
-            resultIntent.putExtra("teamID", teamID)
-            resultIntent.putExtra("locationID", locationID!!)
-            resultIntent.putExtra("iconID", iconID!!)
+                if (intent.extras!!.getInt("requestCode") == createCode) {
 
-            setResult(Activity.RESULT_OK, resultIntent)
-            finish()
+                    teamList.add(Team(iconList[iconID!!], teamName!!))
+                    teamList.last().location = locationList[locationID!!]
 
+                }
+
+                resultIntent.putExtra("teamName", teamName)
+                resultIntent.putExtra("teamID", teamID)
+                resultIntent.putExtra("locationID", locationID!!)
+
+                resultIntent.putExtra("iconID", iconID!!)
+
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
+
+            }
         }
 
 

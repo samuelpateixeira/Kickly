@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="8dp"
-                android:text="Drunk Fighters"
+                android:text="@string/team_name"
                 android:textColor="@color/onSurface"
                 android:textSize="12sp" />
 
@@ -42,7 +42,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
                 android:textColor="@color/onSurface"
@@ -59,7 +58,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
                 android:textColor="@color/onSurface"
@@ -76,7 +74,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
                 android:textColor="@color/onSurface"
@@ -89,13 +86,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            android:paddingHorizontal="5dp"
             <TextView
                 android:id="@+id/tvGoalsConceded"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
                 android:textColor="@color/onSurface"
@@ -113,7 +108,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
                 android:textColor="@color/onSurface"
