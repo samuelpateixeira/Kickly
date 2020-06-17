@@ -13,6 +13,7 @@ import com.example.kickly.Classes.Kickly
 import com.example.kickly.Classes.Kickly.Companion.iconList
 import com.example.kickly.Classes.Kickly.Companion.locationList
 import com.example.kickly.Classes.Kickly.Companion.teamList
+import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
 import com.example.kickly.Team
@@ -29,15 +30,13 @@ class ManageTeams : AppCompatActivity() {
 
 
         var intentCreate = Intent(this, ManageTeam::class.java)
-        intentCreate.putExtra("teamID", teamList.size)
         intentCreate.putExtra("requestCode", createCode)
 
         btnCreate.setOnClickListener {
             startActivityForResult(intentCreate, createCode) }
 
-        recyclerView.adapter = KicklyTools.Adapters.Teams(this, teamList)
+        recyclerView.adapter = KicklyTools.Adapters.TeamsEdit(this, teamList)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
 
     }
 

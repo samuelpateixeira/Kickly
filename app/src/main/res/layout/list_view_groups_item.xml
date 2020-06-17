@@ -27,6 +27,7 @@
 
 
         <TextView
+            android:id="@+id/text_view_m"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -36,6 +37,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/text_view_pts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -45,6 +47,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/text_view_gs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -54,6 +57,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/text_view_gc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -63,6 +67,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/text_view_dif"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

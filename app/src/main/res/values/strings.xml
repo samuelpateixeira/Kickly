@@ -53,6 +53,7 @@
     <string name="gs_for_goals_scored">GS</string>
     <string name="gc_for_goals_conceded">GC</string>
     <string name="dif_for_difference">Dif</string>
+    <string name="manage_matches">Manage Matches</string>
 
 
     <array name="teamNames">
@@ -71,7 +72,7 @@
         <item>El Magic Honkers</item>
         <item>Sunday Tundra Godzillas</item>
         <item>The Prawns</item>
-        <item>Furious Sky </item>
+        <item>Furious Sky</item>
         <item>Foul Cloud Flashers</item>
         <item>Final Streak Wankers</item>
         <item>Raw Idiots</item>

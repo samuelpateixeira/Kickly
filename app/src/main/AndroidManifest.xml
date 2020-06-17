@@ -10,7 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ManageActivities.TeamImagePicker"/>
+        <activity android:name=".Activities.ManageActivities.ManageTournamentsActivities.ManageTournamentActivities.ManageTournamentTeamsActivities.SelectGroup"></activity>
+        <activity android:name=".Activities.ManageActivities.ManageTournamentTeam" />
+        <activity android:name=".Activities.ManageActivities.ManageTournamentMatches" />
+        <activity android:name=".Activities.ManageActivities.ManageTournamentTeams" />
+        <activity android:name=".Activities.ManageActivities.ManageTournament" />
+        <activity android:name=".Activities.ManageActivities.TeamImagePicker" />
         <activity android:name=".Activities.ManageActivities.ManageTeam" />
         <activity android:name=".Activities.ManageActivities.ManageLocation" />
         <activity android:name=".Activities.ManageTournaments" />

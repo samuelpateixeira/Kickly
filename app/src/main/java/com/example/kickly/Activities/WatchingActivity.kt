@@ -19,9 +19,8 @@ class WatchingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_watching)
         title = resources.getString(R.string.watching)
 
-
         // set Tournament Summary Adapter
-        lvTournaments.adapter =  KicklyTools.Adapters.TournamentSummary(this, tournamentList)
+        lvTournaments.adapter = KicklyTools.Adapters.TournamentSummary(this, tournamentList)
 
     }
 

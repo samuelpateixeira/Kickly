@@ -114,7 +114,8 @@ class Match(team1: Tournament.RegisteredTeam, team2 : Tournament.RegisteredTeam,
 
 }
 
-class Stats (    team1TotalAttempts : Int,
+class Stats (
+                 team1TotalAttempts : Int,
                  team2TotalAttempts : Int,
                  team1AttemptsOnTarget : Int,
                  team2AttemptsOnTarget : Int,

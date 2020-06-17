@@ -1,15 +1,17 @@
 package com.example.kickly
 
 import android.graphics.drawable.Icon
+import com.example.kickly.Classes.Kickly
 import com.example.kickly.Classes.Stage
+import java.lang.Exception
 import java.time.LocalDateTime
 
-class Tournament( icon : Icon, name: String, currentStage : Stage ) {
+class Tournament( icon : Icon, name: String/*, currentStage : Stage*/ ) {
 
     //region properties
     var icon : Icon? = icon
     var name : String? = name
-    var currentStage : Stage? = currentStage
+    var currentStage : Stage? = Stage.GROUPSTAGE
     //var nextMatch : Match? = nextMatch
     var registeredTeams = ArrayList<RegisteredTeam>()
     var matches = ArrayList<Match>()
@@ -17,7 +19,7 @@ class Tournament( icon : Icon, name: String, currentStage : Stage ) {
 
     // registered team class
     // Team + information about this team participation
-    class RegisteredTeam( var team : Team, var group : Char ) {
+    class RegisteredTeam( var team : Team, var group : Char? ) {
 
         var active : Boolean = true
         var matches = 0
@@ -26,15 +28,13 @@ class Tournament( icon : Icon, name: String, currentStage : Stage ) {
         var goalsConceded = 0
         fun goalsDifference() : Int { return goalsScored - goalsConceded }
 
-
-
     }
 
     class Group( var teams : ArrayList<RegisteredTeam>, var group : Char ) {
 
     }
 
-    fun byGroup(): Map<Char, List<RegisteredTeam>> {return registeredTeams.groupBy { it.group  } }
+    fun byGroup(): Map<Char, List<RegisteredTeam>> {return registeredTeams.groupBy { it.group!!  } }
 
     fun previousMatches() : ArrayList<Match>? {
 
@@ -135,10 +135,10 @@ class Tournament( icon : Icon, name: String, currentStage : Stage ) {
         var keys = byGroup.keys
         var groups = ArrayList<Group>()
 
+        var teams = ArrayList<RegisteredTeam>()
+
         // for each key
         for (key in keys) {
-
-            var teams = ArrayList<RegisteredTeam>()
 
             // for each team of the key (group)
             for ( team in byGroup.get(key)!! ) {
@@ -155,8 +155,6 @@ class Tournament( icon : Icon, name: String, currentStage : Stage ) {
         return groups
 
     }
-
-
 
     fun orderMatches() {
 
@@ -181,6 +179,86 @@ class Tournament( icon : Icon, name: String, currentStage : Stage ) {
 
             }
         }
+
+    }
+
+    fun otherTeams() : ArrayList<Team> {
+
+        // get non registered teams
+        var otherTeams = ArrayList<Team>()
+        var isRegistered = false
+        for (team in Kickly.teamList) {
+
+            isRegistered = false
+
+            for (tournamentTeam in this.registeredTeams) {
+                if (team == tournamentTeam.team) { isRegistered = true }
+            }
+
+            if (!isRegistered) {
+                otherTeams.add(team)
+            }
+        }
+
+        return otherTeams
+
+    }
+
+    fun getGroups() : ArrayList<Char> {
+        var groupsArray = groupsArray()
+
+        var groupsCharArray = ArrayList<Char>()
+
+        for (group in groupsArray) {
+            groupsCharArray.add(group.group)
+        }
+
+        return groupsCharArray
+
+    }
+
+    fun getGroupsString() : ArrayList<String> {
+
+        var groupsArray = groupsArray()
+
+        var groupsStringArray = ArrayList<String>()
+
+        for (group in groupsArray) {
+            groupsStringArray.add(group.group.toString())
+        }
+
+        return groupsStringArray
+
+    }
+
+
+
+    fun nextGroup() : Char {
+
+        var groups = getGroups()
+
+        var nextGroup : Char? = null
+
+        when (groups.last()) {
+            'A' -> nextGroup = 'B'
+            'B' -> nextGroup = 'C'
+            'C' -> nextGroup = 'D'
+            'D' -> nextGroup = 'E'
+            'E' -> nextGroup = 'F'
+            'F' -> nextGroup = 'G'
+            'G' -> nextGroup = 'H'
+            'H' -> nextGroup = 'I'
+            'I' -> nextGroup = 'J'
+            'J' -> nextGroup = 'K'
+            'K' -> nextGroup = 'L'
+            'L' -> nextGroup = 'M'
+
+            else -> { // Note the block
+                throw (Exception("too many groups"))
+            }
+        }
+
+        return nextGroup
 
     }
 

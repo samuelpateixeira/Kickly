@@ -14,21 +14,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kickly.Activities.ManageActivities.ManageLocation
 import com.example.kickly.Activities.ManageActivities.ManageTeam
-import com.example.kickly.Activities.ManageActivities.TeamImagePicker
+import com.example.kickly.Activities.ManageActivities.ManageTournament
+import com.example.kickly.Activities.ManageActivities.ManageTournamentsActivities.ManageTournamentActivities.ManageTournamentTeamsActivities.SelectGroup
 import com.example.kickly.Activities.WatchingActivities.TournamentActivities.MatchPrognosis
 import com.example.kickly.Activities.WatchingActivities.TournamentActivities.MatchStats
 import com.example.kickly.Activities.WatchingActivities.TournamentActivity
 import com.example.kickly.Activities.editCode
+import com.example.kickly.Classes.Kickly.Companion.createCode
+import com.example.kickly.Classes.Kickly.Companion.teamList
+import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.Classes.Location
 import com.example.kickly.Classes.Stage
 import kotlinx.android.synthetic.main.activity_main_list_item.view.*
-import kotlinx.android.synthetic.main.activity_manage_team.view.*
 import kotlinx.android.synthetic.main.icon.view.*
 import kotlinx.android.synthetic.main.list_view_groups_item.view.*
 import kotlinx.android.synthetic.main.match.view.*
 import kotlinx.android.synthetic.main.team_points_item.view.*
 import kotlinx.android.synthetic.main.tournament_summary.view.*
-import kotlinx.android.synthetic.main.location.view.*
 import kotlinx.android.synthetic.main.location.view.imgEdit
 import kotlinx.android.synthetic.main.location.view.tvLocationName
 import kotlinx.android.synthetic.main.match.view.button
@@ -93,10 +95,9 @@ class KicklyTools {
 
     class Adapters {
 
-        class TournamentSummary(context: Context, objects: ArrayList<Tournament>) :
+        open class TournamentSummary(context: Context, objects: ArrayList<Tournament>) :
             ArrayAdapter<Tournament>(context, R.layout.tournament_summary, objects) {
 
-            @RequiresApi(Build.VERSION_CODES.O)
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
                 // get recycled view
@@ -227,6 +228,25 @@ class KicklyTools {
 
         }
 
+        class ManageTournamentsRV(context: Context, objects: ArrayList<Tournament>) :
+            TournamentSummary(context, objects) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                var view = super.getView(position, convertView, parent)
+
+                view.imgEdit.visibility = View.VISIBLE
+
+                //set click listener
+                var clickIntent = Intent(context, ManageTournament::class.java)
+                clickIntent.putExtra("tournamentID", position)
+                clickIntent.putExtra("requestCode", editCode)
+
+                //view.imgEdit.setOnClickListener { (context as Activity).startActivity(clickIntent) }
+                view.setOnClickListener { (context as Activity).startActivity(clickIntent) }
+
+                return view
+            }
+        }
+
         class IconTextActivity(
             context: Context,
             objects: ArrayList<com.example.kickly.IconTextActivity>
@@ -270,7 +290,6 @@ class KicklyTools {
                 var tvGroup = itemView.tvGroup
                 var rvTeams = itemView.rvTeams
             }
-
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
                 var inflater = LayoutInflater.from(context)
@@ -351,6 +370,100 @@ class KicklyTools {
                 }
 
                 //endregion
+
+            }
+
+        }
+
+        class ManageTournamentTeams(var context: Context, var groups: ArrayList<Tournament.Group>) : RecyclerView.Adapter<ManageTournamentTeams.ItemViewHolder>() {
+
+            class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                var tvGroup = itemView.tvGroup
+                var rvTeams = itemView.rvTeams
+                var text_view_m = itemView.text_view_m
+                var text_view_pts = itemView.text_view_pts
+                var text_view_gs = itemView.text_view_gs
+                var text_view_gc = itemView.text_view_gc
+                var text_view_dif = itemView.text_view_dif
+            }
+
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+                var inflater = LayoutInflater.from(context)
+                var view = inflater.inflate(R.layout.list_view_groups_item, parent, false)
+                return ItemViewHolder(view)
+            }
+
+            override fun getItemCount(): Int {
+                return groups.size
+            }
+
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
+                var currentGroup = groups[position]
+                holder.tvGroup.text = context.getString(R.string.group_x, currentGroup.group.toString())
+
+                holder.text_view_m.visibility = View.GONE
+                holder.text_view_pts.visibility = View.GONE
+                holder.text_view_gs.visibility = View.GONE
+                holder.text_view_gc.visibility = View.GONE
+                holder.text_view_dif.visibility = View.GONE
+
+                holder.rvTeams.adapter = ManageTournamentTeam(context, currentGroup.teams)
+                holder.rvTeams.layoutManager = LinearLayoutManager(context)
+
+            }
+
+        }
+
+        class ManageTournamentTeam(var context: Context, var teams: ArrayList<Tournament.RegisteredTeam>) :
+            RecyclerView.Adapter<ManageTournamentTeam.ItemViewHolder>() {
+
+            class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+                var imgIcon = itemView.findViewById<ImageView>(R.id.imgIcon)
+                var tvTeamName = itemView.tvTeamName
+                var tvMatches = itemView.tvMatches
+                var tvPoints = itemView.tvPoints
+                var tvGoalsScored = itemView.tvGoalsScored
+                var tvGoalsConceded = itemView.tvGoalsConceded
+                var tvGoalsDifference = itemView.tvGoalsDifference
+                var imgEdit = itemView.imgEdit
+
+            }
+
+            override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ItemViewHolder {
+
+                var inflater = LayoutInflater.from(context)
+                var view = inflater.inflate(R.layout.team_points_item, parent, false)
+                return ItemViewHolder(view)
+
+            }
+
+            override fun getItemCount(): Int {
+                return teams.size
+            }
+
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
+                // get current team
+                var currentTeam = teams[position]
+
+                //region populate the view
+
+                holder.imgIcon.setImageIcon(currentTeam.team.icon)
+                holder.tvTeamName.text = currentTeam.team.name
+
+                holder.tvMatches.visibility = View.GONE
+                holder.tvPoints.visibility = View.GONE
+                holder.tvGoalsScored.visibility = View.GONE
+                holder.tvGoalsConceded.visibility = View.GONE
+                holder.tvGoalsDifference.visibility = View.GONE
+
+                //endregion
+
+                //holder.imgEdit.visibility = View.VISIBLE
+
+                //holder.imgEdit.setOnClickListener {  }
 
             }
 
@@ -487,14 +600,15 @@ class KicklyTools {
         }
 
 
-        class Teams(var context: Context, var teams: ArrayList<Team>) :
-            RecyclerView.Adapter<Teams.ItemViewHolder>() {
+        open class TeamsEdit(var context: Context, var teams: ArrayList<Team>) :
+            RecyclerView.Adapter<TeamsEdit.ItemViewHolder>() {
 
             class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 var imgIcon = itemView.findViewById<ImageView>(R.id.imgIcon)
                 var tvLocationName: TextView = itemView.tvLocationName
                 var tvTeamName = itemView.tvTeamName
                 var imgEdit = itemView.imgEdit
+                var parentView = itemView.parentView
                 var createCode = 1
                 var editCode = 2
             }
@@ -521,10 +635,103 @@ class KicklyTools {
 
                 //set click listener
                 var clickIntent = Intent(context, ManageTeam::class.java)
-                clickIntent.putExtra("teamID", position)
+                clickIntent.putExtra("tournamentID", position)
                 clickIntent.putExtra("requestCode", editCode)
 
-                holder.imgEdit.setOnClickListener { (context as Activity).startActivityForResult(clickIntent, holder.editCode) }
+                holder.imgEdit.setOnClickListener { (context as Activity).startActivityForResult(clickIntent, editCode) }
+
+            }
+
+        }
+
+        class Teams(var context: Context, var teams: ArrayList<Team>): RecyclerView.Adapter<Teams.ItemViewHolder>() {
+
+            class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                var imgIcon = itemView.findViewById<ImageView>(R.id.imgIcon)
+                var tvLocationName: TextView = itemView.tvLocationName
+                var tvTeamName = itemView.tvTeamName
+                var imgEdit = itemView.imgEdit
+                var parentView = itemView.parentView
+                var createCode = 1
+                var editCode = 2
+            }
+
+            override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ItemViewHolder {
+                var inflater = LayoutInflater.from(context)
+                var view = inflater.inflate(R.layout.team, parent, false)
+                return ItemViewHolder(view)
+            }
+
+            override fun getItemCount(): Int {
+                return teams.size
+            }
+
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
+                // get current match
+                var team = teams[position]
+
+                //populate the view
+                holder.tvTeamName.text = team.name
+                holder.tvLocationName.text = team.location!!.name
+                holder.imgIcon.setImageIcon(team.icon)
+
+                holder.imgEdit.visibility = View.GONE
+
+                var intentCreate = Intent(context, SelectGroup::class.java)
+                var tournamentID = (context as Activity).intent.extras!!.getInt("tournamentID")
+                intentCreate.putExtra("tournamentID", tournamentID)
+                intentCreate.putExtra("otherTeamsID", position)
+
+                holder.parentView.setOnClickListener { (context as Activity).startActivityForResult(intentCreate, createCode) }
+
+            }
+
+        }
+
+        class GroupsSelect(var context: Context, var groups: ArrayList<String>) :
+            RecyclerView.Adapter<GroupsSelect.ItemViewHolder>() {
+
+            class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                var tvGroup = itemView.tvGroup
+                var parentView = itemView.parentView
+            }
+
+            override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ItemViewHolder {
+                var inflater = LayoutInflater.from(context)
+                var view = inflater.inflate(R.layout.group, parent, false)
+                return ItemViewHolder(view)
+            }
+
+            override fun getItemCount(): Int {
+                return groups.size
+            }
+
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
+                // get current match
+                var groups = groups[position]
+
+                holder.tvGroup.text = groups[position].toString()
+
+                //set click listener
+                var resultIntent = Intent()
+
+                var tournamentID = (context as Activity).intent.extras!!.getInt("tournamentID")
+                var otherTeamsID = (context as Activity).intent.extras!!.getInt("otherTeamsID")
+                (context as Activity).intent.extras!!.getInt("requestCode")
+
+                resultIntent.putExtra("tournamentID", tournamentID)
+                resultIntent.putExtra("otherTeamsID", otherTeamsID)
+                resultIntent.putExtra("group", groups[position].toString())
+
+
+                holder.parentView.setOnClickListener {
+                    (context as Activity).setResult(Activity.RESULT_OK, resultIntent)
+                    (context as Activity).finish()
+                }
+
+
 
             }
 
@@ -571,14 +778,14 @@ class KicklyTools {
 
         }
 
-
-
     }
 
     class Generate {
 
         companion object {
 
+
+            /*
             fun tournamentList(context: Context): ArrayList<Tournament> {
                 var tournamentList = ArrayList<Tournament>()
                 var teams = ArrayList<Team>()
@@ -672,7 +879,7 @@ class KicklyTools {
                 // create the tournament
                 tournamentList.add(
                     Tournament(
-                        Icon.createWithResource(context, R.drawable.futebol),
+                        Icon.createWithResource(context, R.drawable.football),
                         "Kickly 2020",
                         Stage.GROUPSTAGE
                     )
@@ -1377,6 +1584,7 @@ class KicklyTools {
 
                 return tournamentList
             }
+*/
 
             fun locationList(context: Context) : ArrayList<Location> {
 

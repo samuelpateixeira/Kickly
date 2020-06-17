@@ -13,6 +13,8 @@ class Kickly : android.app.Application() {
         var locationList = ArrayList<Location>()
         var iconList = ArrayList<Icon>()
         var teamList = ArrayList<Team>()
+        var createCode = 1
+        var editCode = 2
 
     }
 

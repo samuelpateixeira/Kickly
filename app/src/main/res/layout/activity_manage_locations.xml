@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.ManageLocations">
+
     <RelativeLayout
         android:translationZ="2dp"
         android:layout_width="match_parent"
