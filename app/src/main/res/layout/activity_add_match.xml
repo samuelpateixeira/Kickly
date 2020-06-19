@@ -130,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/date"
-            android:text="Date"
+            android:text="@string/date"
             android:textColor="@color/onSurface"
             android:drawablePadding="8dp"
             android:layout_marginEnd="16dp"
@@ -141,7 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/icon_time"
-            android:text="Time"
+            android:text="@string/time"
             android:textColor="@color/onSurface"
             android:drawablePadding="8dp"
             android:layout_marginEnd="16dp"
@@ -183,7 +183,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/rounded_corners_background"
         android:backgroundTint="@color/colorPrimary"
-        android:text="@string/finish"
+        android:text="@string/create"
         android:textColor="@color/onPrimary"
         />
 

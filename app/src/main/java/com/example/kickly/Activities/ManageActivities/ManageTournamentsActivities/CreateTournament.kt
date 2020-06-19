@@ -29,6 +29,8 @@ class CreateTournament : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_tournament)
 
+        title = getString(R.string.create_tournament)
+
         image.setImageIcon(Icon.createWithResource(this, R.drawable.image))
 
         var selectIconIntent = Intent(this, TeamImagePicker::class.java)

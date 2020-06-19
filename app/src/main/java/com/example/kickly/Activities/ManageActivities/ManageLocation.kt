@@ -29,11 +29,15 @@ class ManageLocation : AppCompatActivity() {
 
         if (intent.extras!!.getInt("requestCode") == editCode) {
 
+            title = getString(R.string.edit_location)
+
 
             edit_text_location_name.setText(locationList[locationID].name)
             button.text = getString(R.string.finish).toUpperCase(Locale.ROOT)
 
         } else if (intent.extras!!.getInt("requestCode") == createCode) {
+
+            title = getString(R.string.create_location)
 
             button.text = getString(R.string.create).toUpperCase(Locale.ROOT)
 

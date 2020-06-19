@@ -71,4 +71,12 @@
     <string name="select_team">Escolher Equipa</string>
     <string name="finish_match">Terminar Jogo</string>
     <string name="fill_all_fields">por favor, preenche todos os campos</string>
+    <string name="edit_location">Editar Local</string>
+    <string name="create_location">Criar Local</string>
+    <string name="edit_team">Editar Equipa</string>
+    <string name="create_team">Criar Equipa</string>
+    <string name="create_tournament">Criar Torneio</string>
+    <string name="select_icon">Escolher Icon</string>
+    <string name="date">Data</string>
+    <string name="time">Hora</string>
 </resources>

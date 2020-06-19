@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.activity_manage_locations.*
 class ManageTournamentTeam : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        title = getString(R.string.select_team)
+
         var otherTeams = ArrayList<Team>()
 
         super.onCreate(savedInstanceState)

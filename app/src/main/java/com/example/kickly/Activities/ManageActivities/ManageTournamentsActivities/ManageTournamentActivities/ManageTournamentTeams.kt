@@ -23,6 +23,8 @@ class ManageTournamentTeams : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_locations)
 
+        title = getString(R.string.manage_teams)
+
         if (tournamentList.isEmpty()) {
             MainActivity.generate(this)
         }

@@ -22,11 +22,14 @@ class TournamentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tournament)
 
+
         // get intent extras
         var tournamentID = intent.extras!!.getInt("tournamentID")
 
         // get current tournament
         var currentTournament = tournamentList[tournamentID]
+
+        title = currentTournament.name
 
         // populate the views
         imgTournamentIcon.setImageIcon(currentTournament.icon)

@@ -66,6 +66,8 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         if (requestCode == editCode) {
 
+            title = getString(R.string.edit_team)
+
             teamList[teamID].icon
 
             // find teams iconID from iconList index
@@ -95,6 +97,8 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             spinner_location.setSelection(locationID!!)
 
         } else if (requestCode == createCode) {
+
+            title = getString(R.string.create_team)
 
             img_teamImage.setImageIcon(Icon.createWithResource(this, R.drawable.image))
             button.text = getString(R.string.create).toUpperCase(Locale.ROOT)

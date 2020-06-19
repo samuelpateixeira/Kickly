@@ -76,6 +76,8 @@ class AddMatch : AppCompatActivity(), AdapterView.OnItemSelectedListener, DatePi
         var teamSelect = Intent(this, AddMatchSelectTeam::class.java)
         teamSelect.putExtra("group", group)
 
+        teamSelect.putExtra("tournamentID", tournamentID)
+
         team1ID?.let {
             teamSelect.putExtra("team1ID", it)
         }

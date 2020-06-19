@@ -20,6 +20,8 @@ class TeamImagePicker : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_team_image_picker)
 
+            title = getString(R.string.select_icon)
+
             recyclerView.adapter = KicklyTools.Adapters.IconPicker(this, iconList)
             recyclerView.layoutManager = GridLayoutManager(this, 4)
 

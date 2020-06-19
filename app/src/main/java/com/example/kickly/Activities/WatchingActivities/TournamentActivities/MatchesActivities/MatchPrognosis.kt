@@ -9,7 +9,7 @@ class MatchPrognosis : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match_prognosis)
 
-        title = "Prognosis"
+        title = getString(R.string.prognosis).capitalize()
 
     }
 }

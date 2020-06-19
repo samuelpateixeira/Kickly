@@ -72,6 +72,14 @@
     <string name="select_team">Select Team</string>
     <string name="finish_match">Finish Match</string>
     <string name="fill_all_fields">please fill all fields</string>
+    <string name="edit_location">Edit Location</string>
+    <string name="create_location">Create Location</string>
+    <string name="edit_team">Edit Team</string>
+    <string name="create_team">Create Team</string>
+    <string name="create_tournament">Create Tournament</string>
+    <string name="select_icon">Select Icon</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
 
 
     <array name="teamNames">

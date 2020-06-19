@@ -537,6 +537,8 @@ class KicklyTools {
 
                 } else {
 
+                    holder.button.visibility = View.GONE
+
                     holder.tvMatchResults.text = "VS"
                     holder.finished.visibility = View.GONE
                     holder.button.text = context.getString(R.string.prognosis)
