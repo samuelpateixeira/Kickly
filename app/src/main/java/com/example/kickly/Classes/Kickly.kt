@@ -1,5 +1,6 @@
 package com.example.kickly.Classes
 
+import android.content.Context
 import android.graphics.drawable.Icon
 import com.example.kickly.R
 import com.example.kickly.Team
@@ -15,6 +16,12 @@ class Kickly : android.app.Application() {
         var teamList = ArrayList<Team>()
         var createCode = 1
         var editCode = 2
+        var finishCode = 3
+        var selectCode = 4
+        var selectTeam1Code = 5
+        var selectTeam2Code = 6
+        var context : Context? = null
+
 
     }
 

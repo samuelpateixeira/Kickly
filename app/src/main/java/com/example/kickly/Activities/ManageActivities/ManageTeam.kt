@@ -34,10 +34,18 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var selectCode = 3
     var resultIntent = Intent()
     var iconID: Int? = null
+    var requestCode: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_team)
+
+        requestCode = createCode
+        intent.extras!!.getInt("requestCode")?.let {
+            if (it == editCode || it == createCode) {
+                requestCode = it
+            }
+        }
 
         var locationNames = ArrayList<String>()
 
@@ -56,7 +64,7 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         var teamID = intent.extras!!.getInt("teamID")
 
-        if (intent.extras!!.getInt("requestCode") == editCode) {
+        if (requestCode == editCode) {
 
             teamList[teamID].icon
 
@@ -86,7 +94,7 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
             spinner_location.setSelection(locationID!!)
 
-        } else if (intent.extras!!.getInt("requestCode") == createCode) {
+        } else if (requestCode == createCode) {
 
             img_teamImage.setImageIcon(Icon.createWithResource(this, R.drawable.image))
             button.text = getString(R.string.create).toUpperCase(Locale.ROOT)
@@ -113,7 +121,7 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
                 teamName = edit_text_team_name.text.toString()
 
-                if (intent.extras!!.getInt("requestCode") == createCode) {
+                if (requestCode == createCode) {
 
                     teamList.add(Team(iconList[iconID!!], teamName!!))
                     teamList.last().location = locationList[locationID!!]

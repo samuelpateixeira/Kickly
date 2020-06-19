@@ -6,6 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".Activities.ManageLocations">
 
+    <LinearLayout
+        android:id="@+id/llNoMatchesScheduled"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/message_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_locations_yet"
+            android:textColor="@color/onBackground"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
     <RelativeLayout
         android:translationZ="2dp"
         android:layout_width="match_parent"

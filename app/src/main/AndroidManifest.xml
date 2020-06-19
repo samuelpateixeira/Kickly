@@ -10,7 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ManageActivities.ManageTournamentsActivities.ManageTournamentActivities.ManageTournamentTeamsActivities.SelectGroup"></activity>
+        <activity android:name=".Activities.ManageActivities.ManageTournamentsActivities.CreateTournament"></activity>
+        <activity android:name=".Activities.ManageActivities.ManageTournamentsActivities.ManageTournamentActivities.ManageTournamentMatchesActivities.AddMatchSelectGroup" />
+        <activity android:name=".Activities.ManageActivities.ManageTournamentsActivities.ManageTournamentActivities.ManageTournamentMatchesActivities.AddMatchSelectTeam" />
+        <activity android:name=".Activities.ManageActivities.ManageTournamentsActivities.ManageTournamentActivities.ManageTournamentMatchesActivities.AddMatch" />
+        <activity android:name=".Activities.ManageActivities.ManageTournamentsActivities.ManageTournamentActivities.ManageTournamentMatchesActivities.MatchFinish" />
+        <activity android:name=".Activities.ManageActivities.ManageTournamentsActivities.ManageTournamentActivities.ManageTournamentTeamsActivities.SelectGroup" />
         <activity android:name=".Activities.ManageActivities.ManageTournamentTeam" />
         <activity android:name=".Activities.ManageActivities.ManageTournamentMatches" />
         <activity android:name=".Activities.ManageActivities.ManageTournamentTeams" />

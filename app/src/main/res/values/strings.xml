@@ -21,7 +21,7 @@
     <string name="prognosis">prognosis</string>
     <string name="total_attempts">total attempts</string>
     <string name="attempts_on_target">attempts on target</string>
-    <string name="fouls_commited">fouls commited</string>
+    <string name="fouls_commited">fouls committed</string>
     <string name="yellow_cards">yellow cards</string>
     <string name="red_cards">red cards</string>
     <string name="offsides">offsides</string>
@@ -47,13 +47,31 @@
     <string name="team_name">team name</string>
     <string name="insert_name">Insert Name</string>
     <string name="location">Location</string>
-    <string name="tournament_name">Tournament name</string>
+    <string name="big_tournament_name">Tournament name</string>
+    <string name="tournament_name">tournament name</string>
     <string name="m_for_matches">M</string>
     <string name="pts_for_points">Pts</string>
     <string name="gs_for_goals_scored">GS</string>
     <string name="gc_for_goals_conceded">GC</string>
     <string name="dif_for_difference">Dif</string>
     <string name="manage_matches">Manage Matches</string>
+    <string name="score">score</string>
+    <string name="possessionPercent">possession (%)</string>
+    <string name="select">SELECT</string>
+    <string name="selectDateAndTime">select date and time</string>
+    <string name="same_team_select">You can\'t select the same team for both sides</string>
+    <string name="please_choose_a_tournament_name">please choose a tournament name</string>
+    <string name="not_watching_tournaments">you are not watching any tournament</string>
+    <string name="no_locations_yet">there are no locations yet</string>
+    <string name="tournament_no_matches_yet">this tournament has no matches yet</string>
+    <string name="tournament_no_teams_yet">this tournament has no teams yet</string>
+    <string name="no_teams_yet">there are no teams yet</string>
+    <string name="no_tournaments_yet">there are no tournaments yet</string>
+    <string name="add_match">Add Match</string>
+    <string name="select_group">Select Group</string>
+    <string name="select_team">Select Team</string>
+    <string name="finish_match">Finish Match</string>
+    <string name="fill_all_fields">please fill all fields</string>
 
 
     <array name="teamNames">

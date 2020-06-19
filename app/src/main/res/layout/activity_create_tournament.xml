@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ManageActivities.ManageTeam"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:padding="32dp"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:maxHeight="256dp"
+        android:layout_height="128dp"
+        android:layout_weight="2"
+        android:src="@drawable/android"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tournament_name"
+        android:textColor="@color/onBackground"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:id="@+id/edit_text_tournament_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/insert_name"
+        android:textColor="@color/onSurface"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/surface"
+        android:textColorHint="@color/onBackground2"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:layout_marginBottom="32dp"
+        />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/create"
+        android:textColor="@color/onPrimary"/>
+
+</LinearLayout>

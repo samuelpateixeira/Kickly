@@ -4,13 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kickly.Activities.ManageActivities.ManageLocation
+import com.example.kickly.Classes.Kickly
 import com.example.kickly.Classes.Kickly.Companion.locationList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
 import kotlinx.android.synthetic.main.activity_manage_locations.*
+import kotlinx.android.synthetic.main.activity_manage_locations.llNoMatchesScheduled
 import kotlinx.android.synthetic.main.activity_matches.recyclerView
+import kotlinx.android.synthetic.main.activity_watching.*
 
 var createCode = 1
 var editCode = 2
@@ -29,14 +33,25 @@ class ManageLocations : AppCompatActivity() {
 
         btnCreate.setOnClickListener { startActivityForResult(intentCreate, createCode) }
 
-        recyclerView.adapter = KicklyTools.Adapters.Locations(this, locationList)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        if (locationList.isNotEmpty()) {
+
+            recyclerView.adapter = KicklyTools.Adapters.Locations(this, locationList)
+            recyclerView.layoutManager = LinearLayoutManager(this)
+
+        } else {
+            recyclerView.visibility = View.GONE
+            llNoMatchesScheduled.visibility = View.VISIBLE
+        }
+
+
 
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        recyclerView.adapter!!.notifyDataSetChanged()
+        finish()
+        startActivity(intent)
+
     }
 }

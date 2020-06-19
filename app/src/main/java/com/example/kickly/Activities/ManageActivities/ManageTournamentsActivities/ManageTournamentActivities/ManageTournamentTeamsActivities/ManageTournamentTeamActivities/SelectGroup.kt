@@ -18,32 +18,31 @@ class SelectGroup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_group)
 
+        title = getString(R.string.select_group)
+
+
         var tournamentID = intent.extras!!.getInt("tournamentID")
 
         var groups = tournamentList[tournamentID].getGroupsString()
 
         setResult(Activity.RESULT_CANCELED)
 
-        tournamentList[tournamentID]
-
         recyclerView.adapter = KicklyTools.Adapters.GroupsSelect(this, groups)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         btnCreate.setOnClickListener {
 
-            var resultIntent = Intent()
-
             var tournamentID = intent.extras!!.getInt("tournamentID")
             var otherTeamsID = intent.extras!!.getInt("otherTeamsID")
             intent.extras!!.getInt("requestCode")
 
-            resultIntent.putExtra("tournamentID", tournamentID)
-            resultIntent.putExtra("otherTeamsID", otherTeamsID)
-
             var nextGroup = tournamentList[tournamentID].nextGroup()
 
+            var resultIntent = Intent()
 
-            resultIntent.putExtra("group", nextGroup)
+            resultIntent.putExtra("tournamentID", tournamentID)
+            resultIntent.putExtra("otherTeamsID", otherTeamsID)
+            resultIntent.putExtra("group", nextGroup.toString())
 
             setResult(Activity.RESULT_OK, resultIntent)
             finish()

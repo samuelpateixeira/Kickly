@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ManageActivities.ManageTournamentsActivities.ManageTournamentActivities.ManageTournamentMatchesActivities.AddMatch"
+    android:paddingVertical="48dp"
+    android:paddingHorizontal="32dp"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/tv_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/group_x"
+        android:layout_gravity="center"
+        android:textColor="@color/onBackground"
+        android:drawableStart="@drawable/groups"
+        android:drawablePadding="8dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/team1Select"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/imgTeam1Icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/paypal"
+                />
+
+            <TextView
+                android:id="@+id/tvTeam1Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingHorizontal="8dp"
+                android:text="@string/select"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/onSurface"
+                />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvMatchResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VS"
+            android:textColor="@color/onSurface"
+            android:textSize="21sp"
+            android:fontFamily="sans-serif-black"
+            android:layout_marginHorizontal="16dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            />
+
+        <LinearLayout
+            android:id="@+id/team2Select"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            >
+
+
+            <TextView
+                android:id="@+id/tvTeam2Name"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingHorizontal="8dp"
+                android:text="@string/select"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/onSurface"
+                android:textAlignment="textEnd"
+                />
+            <ImageView
+                android:id="@+id/imgTeam2Icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/paypal"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_dateAndTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/surface"
+        android:text="@string/selectDateAndTime"
+        android:textColor="@color/onPrimary"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        >
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/date"
+            android:text="Date"
+            android:textColor="@color/onSurface"
+            android:drawablePadding="8dp"
+            android:layout_marginEnd="16dp"
+            />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_time"
+            android:text="Time"
+            android:textColor="@color/onSurface"
+            android:drawablePadding="8dp"
+            android:layout_marginEnd="16dp"
+            />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/location"
+        android:textColor="@color/onBackground"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        />
+
+    <Spinner
+        android:id="@+id/spinner_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/onSurface"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/surface"
+        android:textColorHint="@color/onBackground2"
+        android:textSize="16sp"
+        android:layout_marginBottom="32dp"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/button_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_corners_background"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/finish"
+        android:textColor="@color/onPrimary"
+        />
+
+
+</LinearLayout>

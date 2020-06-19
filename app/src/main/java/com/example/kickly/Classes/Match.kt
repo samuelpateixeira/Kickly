@@ -117,18 +117,25 @@ class Match(team1: Tournament.RegisteredTeam, team2 : Tournament.RegisteredTeam,
 class Stats (
                  team1TotalAttempts : Int,
                  team2TotalAttempts : Int,
+
                  team1AttemptsOnTarget : Int,
                  team2AttemptsOnTarget : Int,
+
                  team1FoulsCommited : Int,
                  team2FoulsCommited : Int,
+
                  team1YellowCards : Int,
                  team2YellowCards : Int,
+
                  team1RedCards : Int,
                  team2RedCards : Int,
+
                  team1Offsides : Int,
                  team2Offsides : Int,
+
                  team1Corners : Int,
                  team2Corners : Int,
+
                  team1Possession : Int
 ) {
 

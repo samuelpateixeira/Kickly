@@ -1,6 +1,7 @@
 package com.example.kickly
 
 import android.graphics.drawable.Icon
+import com.example.kickly.Activities.MainActivity
 import com.example.kickly.Classes.Kickly
 import com.example.kickly.Classes.Stage
 import java.lang.Exception
@@ -16,6 +17,17 @@ class Tournament( icon : Icon, name: String/*, currentStage : Stage*/ ) {
     var registeredTeams = ArrayList<RegisteredTeam>()
     var matches = ArrayList<Match>()
     //endregion
+
+    fun simpleTeams() : ArrayList<Team> {
+
+        var teams = ArrayList<Team>()
+
+        for (registeredTeam in registeredTeams) {
+            teams.add(registeredTeam.team)
+        }
+
+        return teams
+    }
 
     // registered team class
     // Team + information about this team participation
@@ -140,6 +152,8 @@ class Tournament( icon : Icon, name: String/*, currentStage : Stage*/ ) {
         // for each key
         for (key in keys) {
 
+            teams = ArrayList<RegisteredTeam>()
+
             // for each team of the key (group)
             for ( team in byGroup.get(key)!! ) {
                 teams.add(team) // add it to the array
@@ -154,6 +168,18 @@ class Tournament( icon : Icon, name: String/*, currentStage : Stage*/ ) {
 
         return groups
 
+    }
+
+    fun group(groupChar : Char) : ArrayList<RegisteredTeam> {
+
+        var teams = ArrayList<RegisteredTeam>()
+        var byGroup = byGroup()
+
+            for ( team in byGroup.get(groupChar)!! ) {
+                teams.add(team) // add it to the array
+            }
+
+        return teams
     }
 
     fun orderMatches() {
@@ -192,7 +218,9 @@ class Tournament( icon : Icon, name: String/*, currentStage : Stage*/ ) {
             isRegistered = false
 
             for (tournamentTeam in this.registeredTeams) {
-                if (team == tournamentTeam.team) { isRegistered = true }
+                if (team == tournamentTeam.team) {
+                    isRegistered = true
+                }
             }
 
             if (!isRegistered) {
@@ -231,30 +259,37 @@ class Tournament( icon : Icon, name: String/*, currentStage : Stage*/ ) {
 
     }
 
-
-
     fun nextGroup() : Char {
 
         var groups = getGroups()
 
         var nextGroup : Char? = null
 
-        when (groups.last()) {
-            'A' -> nextGroup = 'B'
-            'B' -> nextGroup = 'C'
-            'C' -> nextGroup = 'D'
-            'D' -> nextGroup = 'E'
-            'E' -> nextGroup = 'F'
-            'F' -> nextGroup = 'G'
-            'G' -> nextGroup = 'H'
-            'H' -> nextGroup = 'I'
-            'I' -> nextGroup = 'J'
-            'J' -> nextGroup = 'K'
-            'K' -> nextGroup = 'L'
-            'L' -> nextGroup = 'M'
+        if (groups.isEmpty()) {
 
-            else -> { // Note the block
-                throw (Exception("too many groups"))
+            nextGroup = 'A'
+
+        } else {
+
+            var lastGroup = groups.last()
+
+            when (lastGroup) {
+                'A' -> nextGroup = 'B'
+                'B' -> nextGroup = 'C'
+                'C' -> nextGroup = 'D'
+                'D' -> nextGroup = 'E'
+                'E' -> nextGroup = 'F'
+                'F' -> nextGroup = 'G'
+                'G' -> nextGroup = 'H'
+                'H' -> nextGroup = 'I'
+                'I' -> nextGroup = 'J'
+                'J' -> nextGroup = 'K'
+                'K' -> nextGroup = 'L'
+                'L' -> nextGroup = 'M'
+
+                else -> { // Note the block
+                    throw (Exception("too many groups"))
+                }
             }
         }
 

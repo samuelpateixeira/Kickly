@@ -1,5 +1,6 @@
 package com.example.kickly.Activities.ManageActivities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,11 +20,9 @@ class TeamImagePicker : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_team_image_picker)
 
-        if (intent.extras!!.getInt("requestCode") == selectCode) {
-
             recyclerView.adapter = KicklyTools.Adapters.IconPicker(this, iconList)
             recyclerView.layoutManager = GridLayoutManager(this, 4)
 
-        }
     }
+
 }
