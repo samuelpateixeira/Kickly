@@ -2,7 +2,7 @@
 
 Kickly is a footbal tournaments app for android.
 Watch tournament information or create your own footbal tournaments.
-This app is developed in android studio using the kotlin language
+This app is developed in android studio using the kotlin language.
 
 ## Features
 - Create locations, teams and tournaments
