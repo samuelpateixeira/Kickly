@@ -10,8 +10,11 @@ import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kickly.Classes.Kickly.Companion.checkData
+import com.example.kickly.Classes.Kickly.Companion.getIconID
 import com.example.kickly.Classes.Kickly.Companion.iconList
 import com.example.kickly.Classes.Kickly.Companion.locationList
+import com.example.kickly.Classes.Kickly.Companion.postTeamToAPI
 import com.example.kickly.Classes.Kickly.Companion.teamList
 import com.example.kickly.R
 import com.example.kickly.Team
@@ -40,6 +43,8 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_team)
 
+        checkData()
+
         requestCode = createCode
         intent.extras!!.getInt("requestCode")?.let {
             if (it == editCode || it == createCode) {
@@ -66,16 +71,19 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         if (requestCode == editCode) {
 
-            teamList[teamID].icon
+            //teamList[teamID].icon
 
             // find teams iconID from iconList index
-            iconID = null
+            iconID = getIconID(teamList[teamID].icon)
+
+            /*
             var i = 0
             var team = teamList[teamID]
             while (iconID == null && i < iconList.size) {
                 if (team.icon == iconList[i]) { iconID = i }
                 i++
             }
+            */
 
 
             img_teamImage.setImageIcon(teamList[teamID].icon)
@@ -85,7 +93,7 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
             // find team location locationID from locationList index
             locationID == null
-            i = 0
+            var i = 0
 
             while (locationID == null && i < locationList.size) {
                 if (teamList[teamID].location == locationList[i]) { locationID = i }
@@ -123,8 +131,7 @@ class ManageTeam : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
                 if (requestCode == createCode) {
 
-                    teamList.add(Team(iconList[iconID!!], teamName!!))
-                    teamList.last().location = locationList[locationID!!]
+                    postTeamToAPI(Team(iconList[iconID!!], teamName!!, 0))
 
                 }
 

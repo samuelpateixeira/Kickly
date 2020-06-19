@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
@@ -17,6 +18,8 @@ class SelectGroup : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_group)
+
+        checkData()
 
         title = getString(R.string.select_group)
 

@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kickly.Activities.ManageActivities.ManageLocation
 import com.example.kickly.Activities.ManageActivities.ManageTeam
 import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.iconList
 import com.example.kickly.Classes.Kickly.Companion.locationList
+import com.example.kickly.Classes.Kickly.Companion.putTeamToAPI
 import com.example.kickly.Classes.Kickly.Companion.teamList
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.KicklyTools
@@ -28,6 +30,8 @@ class ManageTeams : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_locations)
+
+        checkData()
 
         title = getString(R.string.manage_teams)
 
@@ -74,6 +78,8 @@ class ManageTeams : AppCompatActivity() {
                 teamList[teamID].name = teamName!!
                 teamList[teamID].icon = iconList[iconID]
                 teamList[teamID].location = locationList[locationID]
+
+                putTeamToAPI(teamList[teamID])
 
             }
         } else if (requestCode == createCode) {

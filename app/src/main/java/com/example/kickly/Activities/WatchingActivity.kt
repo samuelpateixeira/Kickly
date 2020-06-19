@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import kotlinx.android.synthetic.main.activity_matches.*
 import kotlinx.android.synthetic.main.activity_watching.*
@@ -21,6 +22,8 @@ class WatchingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watching)
         title = resources.getString(R.string.watching)
+
+        checkData()
 
         if (tournamentList.isNotEmpty()) {
 

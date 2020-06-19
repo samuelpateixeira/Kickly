@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.R
 import com.example.kickly.Stats
@@ -22,6 +23,8 @@ class MatchFinish : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match_finish)
+
+        checkData()
 
         title = getString(R.string.finish_match)
 

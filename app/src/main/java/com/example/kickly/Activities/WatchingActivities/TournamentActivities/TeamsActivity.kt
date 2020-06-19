@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
@@ -16,6 +17,8 @@ class TeamsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teams)
         title = getString(R.string.teams).capitalize()
+
+        checkData()
 
         var tournamentID = intent.extras!!.getInt("tournamentID")
 

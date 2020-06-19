@@ -9,6 +9,7 @@ import com.example.kickly.Activities.MainActivity
 import com.example.kickly.Activities.createCode
 import com.example.kickly.Activities.editCode
 import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
@@ -23,8 +24,10 @@ class ManageTournamentTeams : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_locations)
 
+        checkData()
+
         if (tournamentList.isEmpty()) {
-            MainActivity.generate(this)
+            //MainActivity.generate(this)
         }
 
 

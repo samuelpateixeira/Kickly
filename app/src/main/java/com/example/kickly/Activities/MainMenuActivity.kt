@@ -4,7 +4,11 @@ import android.content.Intent
 import android.graphics.drawable.Icon
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.checkData
+import com.example.kickly.Classes.Kickly.Companion.locationList
 import kotlinx.android.synthetic.main.activity_main_menu.*
+import kotlinx.android.synthetic.main.activity_match_stats.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -17,9 +21,13 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
 
+        checkData()
+
+
+
         //region add the buttons to the list
 
-        // Watching
+            // Watching
         buttonList.add(IconTextActivity(
             Icon.createWithResource(
             this, R.drawable.icon_eye_white), resources.getString(R.string.watching).capitalize(),

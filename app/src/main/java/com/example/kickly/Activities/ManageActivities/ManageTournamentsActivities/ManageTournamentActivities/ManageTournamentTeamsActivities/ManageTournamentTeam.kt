@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
@@ -15,6 +16,8 @@ import kotlinx.android.synthetic.main.activity_manage_locations.*
 
 class ManageTournamentTeam : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        checkData()
 
         var otherTeams = ArrayList<Team>()
 

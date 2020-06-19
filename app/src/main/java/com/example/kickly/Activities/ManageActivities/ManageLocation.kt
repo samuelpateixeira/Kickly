@@ -4,8 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.LocaleList
 import android.widget.Toast
+import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.locationList
+import com.example.kickly.Classes.Kickly.Companion.putLocationToAPI
+import com.example.kickly.Classes.Location
 import com.example.kickly.R
 import kotlinx.android.synthetic.main.activity_manage_location.*
 import java.lang.Exception
@@ -22,6 +27,8 @@ class ManageLocation : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_location)
+
+        checkData()
 
         setResult(Activity.RESULT_CANCELED)
 
@@ -54,10 +61,13 @@ class ManageLocation : AppCompatActivity() {
                 if (intent.extras!!.getInt("requestCode") == editCode) {
 
                     locationList[locationID].name = locationName!!
+                    putLocationToAPI(locationList[locationID])
 
                 } else if (intent.extras!!.getInt("requestCode") == createCode) {
 
-                    locationList.add(com.example.kickly.Classes.Location(locationName!!))
+                    //locationList.add(com.example.kickly.Classes.Location(locationName!!))
+                    Kickly.postLocationToAPI(Location(locationName!!, 0))
+
 
                 }
 

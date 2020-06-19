@@ -9,6 +9,7 @@ import com.example.kickly.Activities.ManageActivities.ManageTeam
 import com.example.kickly.Activities.ManageActivities.ManageTournament
 import com.example.kickly.Activities.ManageActivities.ManageTournamentsActivities.CreateTournament
 import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
 import kotlinx.android.synthetic.main.activity_manage_locations.*
@@ -26,6 +27,8 @@ class ManageTournaments : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_tournaments)
         title = getString(R.string.manage_tournaments)
+
+        checkData()
 
         if (Kickly.tournamentList.isNotEmpty()) {
 

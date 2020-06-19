@@ -1779,6 +1779,7 @@ class KicklyTools {
             }
 */
 
+/*
             fun locationList(context: Context) : ArrayList<Location> {
 
                 var locations = ArrayList<Location>()
@@ -1793,6 +1794,7 @@ class KicklyTools {
                 return locations
 
             }
+*/
 
 
             /*

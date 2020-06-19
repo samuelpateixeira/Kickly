@@ -5,9 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kickly.*
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.context
 import com.example.kickly.Classes.Kickly.Companion.iconList
+import com.example.kickly.Classes.Kickly.Companion.loadLocationsFromAPI
 import com.example.kickly.Classes.Kickly.Companion.locationList
+import com.example.kickly.Classes.Kickly.Companion.postLocationToAPI
 import com.example.kickly.Classes.Kickly.Companion.teamList
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import java.time.LocalDateTime
@@ -19,12 +22,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        checkData()
+
 
         context = applicationContext
 
-        generate(this)
-        //iconList = KicklyTools.Generate.iconList(this)
+        //generate(this)
 
+        //iconList = KicklyTools.Generate.iconList(this)
 
         // create intent for Main Menu
         var mainMenu = Intent(this, MainMenuActivity::class.java)
@@ -49,10 +54,11 @@ class MainActivity : AppCompatActivity() {
     companion object {
 
 
+/*
         fun generate (context: Context) {
 
             //tournamentList = KicklyTools.Generate.tournamentList(this)
-            locationList = KicklyTools.Generate.locationList(context)
+            //locationList = KicklyTools.Generate.locationList(context)
             iconList = KicklyTools.Generate.iconList(context)
             //teamList = KicklyTools.Generate.teamList(this)
 
@@ -201,6 +207,7 @@ class MainActivity : AppCompatActivity() {
             //endregion
 
         }
+*/
 
     }
 }

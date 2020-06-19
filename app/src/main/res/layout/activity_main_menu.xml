@@ -48,11 +48,31 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="192dp"
         android:src="@drawable/football"
         android:layout_marginHorizontal="64dp"
-        android:layout_marginVertical="64dp"
+        android:layout_marginVertical="32dp"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="start kicking with"
+        android:textColor="@color/onBackground"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kickly"
+        android:textColor="@color/colorPrimary"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        android:fontFamily="sans-serif-black"
+    />
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kickly.Activities.ManageActivities.ManageLocation
 import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.locationList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
@@ -24,6 +25,8 @@ class ManageLocations : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_locations)
+
+        checkData()
 
         title = getString(R.string.manage_locations)
 

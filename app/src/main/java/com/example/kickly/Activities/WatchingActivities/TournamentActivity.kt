@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.kickly.Activities.WatchingActivities.TournamentActivities.MatchesActivity
 import com.example.kickly.Activities.WatchingActivities.TournamentActivities.TeamsActivity
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.IconTextActivity
 import com.example.kickly.KicklyTools
@@ -21,6 +22,8 @@ class TournamentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tournament)
+
+        checkData()
 
         // get intent extras
         var tournamentID = intent.extras!!.getInt("tournamentID")

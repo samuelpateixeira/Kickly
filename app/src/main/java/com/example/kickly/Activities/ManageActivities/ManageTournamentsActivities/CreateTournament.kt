@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.kickly.Activities.ManageActivities.TeamImagePicker
 import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.createCode
 import com.example.kickly.Classes.Kickly.Companion.iconList
 import com.example.kickly.Classes.Kickly.Companion.selectCode
@@ -28,6 +29,8 @@ class CreateTournament : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_tournament)
+
+        checkData()
 
         image.setImageIcon(Icon.createWithResource(this, R.drawable.image))
 

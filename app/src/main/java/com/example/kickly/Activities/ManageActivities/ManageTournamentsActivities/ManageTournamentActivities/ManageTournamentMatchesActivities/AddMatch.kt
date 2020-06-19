@@ -9,6 +9,7 @@ import android.text.format.DateFormat
 import android.view.View
 import android.widget.*
 import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.locationList
 import com.example.kickly.Classes.Kickly.Companion.selectCode
 import com.example.kickly.Classes.Kickly.Companion.selectTeam1Code
@@ -62,6 +63,7 @@ class AddMatch : AppCompatActivity(), AdapterView.OnItemSelectedListener, DatePi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_match)
+        checkData()
 
         title = getString(R.string.add_match)
 
@@ -75,6 +77,7 @@ class AddMatch : AppCompatActivity(), AdapterView.OnItemSelectedListener, DatePi
 
         var teamSelect = Intent(this, AddMatchSelectTeam::class.java)
         teamSelect.putExtra("group", group)
+        teamSelect.putExtra("tournamentID", tournamentID)
 
         team1ID?.let {
             teamSelect.putExtra("team1ID", it)

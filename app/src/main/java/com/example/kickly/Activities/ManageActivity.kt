@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.example.kickly.Activities.ManageTeams
 import com.example.kickly.Activities.ManageTournaments
 import com.example.kickly.Activities.ManageLocations
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import kotlinx.android.synthetic.main.activity_manage.*
 
 class ManageActivity : AppCompatActivity() {
@@ -14,6 +15,8 @@ class ManageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage)
         title = resources.getString(R.string.manage)
+
+        checkData()
 
         venues.setOnClickListener { startActivity(Intent(this, ManageLocations::class.java)) }
         teams.setOnClickListener { startActivity(Intent(this, ManageTeams::class.java)) }

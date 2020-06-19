@@ -2,6 +2,7 @@ package com.example.kickly
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.kickly.Classes.Kickly.Companion.checkData
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -9,5 +10,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         title = resources.getString(R.string.profile)
+
+        checkData()
     }
 }

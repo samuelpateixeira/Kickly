@@ -9,6 +9,7 @@ import com.example.kickly.Activities.ManageActivities.ManageTournamentsActivitie
 import com.example.kickly.Activities.ManageActivities.ManageTournamentsActivities.ManageTournamentActivities.ManageTournamentMatchesActivities.AddMatchSelectGroup
 import com.example.kickly.Activities.createCode
 import com.example.kickly.Classes.Kickly
+import com.example.kickly.Classes.Kickly.Companion.checkData
 import com.example.kickly.Classes.Kickly.Companion.tournamentList
 import com.example.kickly.KicklyTools
 import com.example.kickly.R
@@ -25,6 +26,8 @@ class ManageTournamentMatches : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_locations)
+
+        checkData()
 
         title = getString(R.string.manage_matches)
 
