@@ -17,5 +17,5 @@ This app is developed in android studio using the kotlin language.
 - More information regarding locations
 - Import your own icons
 - Create an account and log in.
-- Choose the matches you want to watch
+- Choose the tournaments you want to watch
 - Support e-sports tournaments
