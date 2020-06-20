@@ -19,3 +19,9 @@ This app is developed in android studio using the kotlin language.
 - Create an account and log in.
 - Choose the tournaments you want to watch
 - Support e-sports tournaments
+
+## Import Project
+To import this project you must  [ have android studio installed](https://developer.android.com/studio/install) and configured.
+Select download zip or clone this repo, and then import into Android Studio
+
+
