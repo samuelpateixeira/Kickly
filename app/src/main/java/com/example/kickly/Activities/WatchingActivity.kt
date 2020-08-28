@@ -32,7 +32,6 @@ class WatchingActivity : AppCompatActivity() {
             llNoMatchesScheduled.visibility = View.VISIBLE
         }
 
-
     }
 
 }

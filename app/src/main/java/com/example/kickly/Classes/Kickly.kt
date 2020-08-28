@@ -22,7 +22,6 @@ class Kickly : android.app.Application() {
         var selectTeam2Code = 6
         var context : Context? = null
 
-
     }
 
 }

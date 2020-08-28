@@ -42,7 +42,7 @@
                 android:id="@+id/imgTeam1Icon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/paypal"
+                android:background="@drawable/image"
                 />
 
             <TextView
@@ -99,7 +99,7 @@
                 android:id="@+id/imgTeam2Icon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/paypal"
+                android:background="@drawable/image"
                 />
 
         </LinearLayout>

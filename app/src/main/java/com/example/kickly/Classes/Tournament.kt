@@ -12,7 +12,7 @@ class Tournament( icon : Icon, name: String/*, currentStage : Stage*/ ) {
     //region properties
     var icon : Icon? = icon
     var name : String? = name
-    var currentStage : Stage? = Stage.GROUPSTAGE
+    var currentStage : Stage = Stage.GROUPSTAGE
     //var nextMatch : Match? = nextMatch
     var registeredTeams = ArrayList<RegisteredTeam>()
     var matches = ArrayList<Match>()
@@ -64,6 +64,7 @@ class Tournament( icon : Icon, name: String/*, currentStage : Stage*/ ) {
                 }
             }
         }
+
         return previousMatches
     }
 
@@ -175,7 +176,7 @@ class Tournament( icon : Icon, name: String/*, currentStage : Stage*/ ) {
         var teams = ArrayList<RegisteredTeam>()
         var byGroup = byGroup()
 
-            for ( team in byGroup.get(groupChar)!! ) {
+            for ( team in byGroup[groupChar]!! ) {
                 teams.add(team) // add it to the array
             }
 

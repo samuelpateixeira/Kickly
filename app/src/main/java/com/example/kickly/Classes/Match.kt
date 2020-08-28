@@ -27,7 +27,6 @@ class Match(team1: Tournament.RegisteredTeam, team2 : Tournament.RegisteredTeam,
         }
 
 
-
     var stats : Stats? = null
 
     //endregion
